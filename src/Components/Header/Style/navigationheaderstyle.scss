@@ -1,0 +1,97 @@
+.navigation-header{
+    $color-black: #4d4d4d;
+    border-bottom: 1px solid #eeeeee;;
+    padding: 0;
+    position: relative;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    & .navbar-menu-app{
+        @mixin together-char-icon(){
+            & i.fa{
+                font-size: 25px;
+            }
+        }
+        background: white;
+        border: none;
+        margin-bottom: 0;
+        & .container-fluid{
+            margin: 0;
+            padding: 0;
+            & a{
+                text-transform: uppercase;
+                font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+            }
+            & .navbar-header{
+                & a{
+                    @include together-char-icon();
+                    background: none;
+                    border: none;
+                    color: $color-black;
+                    &.navbar-brand{
+                        padding: 7px 5px;
+                        margin-top: 5px;
+                        & img{
+                            width: 80%;
+                            height: 80%;
+                        }
+                        @media screen and (max-width: 556px) {
+                            padding: 10px 10px;
+                        }
+                    }
+                }
+            }
+            & #myNavbar{
+                @media screen and (max-width: 768px) {
+                    & li{
+                        & a{
+                            border-bottom: 1px solid #eeeeee;
+                            border-top: 1px solid #eeeeee;
+                            & .caret{
+                                float: right;
+                                margin-top: 10px;
+                            }
+                        }
+                        &.active{
+                            border-left: 1px solid $color-black;
+                        }
+                    }
+                }
+                & .navbar-nav{
+                    & li{
+                        padding: 0 5px;
+                        &.active{
+                            & a{
+                                text-decoration: underline $color-black;
+                                background: none;
+                            }
+                        }
+                        & a{
+                            color: $color-black;
+                            &:hover{
+                                text-decoration: underline $color-black;
+                                background: #e7e7e7;
+                            }
+                        }
+                    }
+                    &.navbar-right{
+                        & li{
+                            padding: 0;
+                            & a{
+                                @include together-char-icon();
+                                &:hover{
+                                    background: transparent;
+                                    text-decoration: none;
+                                }
+                            }
+                            @media screen and(max-width: 768px){
+                                &:first-child{
+                                    display: none;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }    
+    }
+}

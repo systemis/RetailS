@@ -1,0 +1,16 @@
+.collpase-shop-tab{
+    min-width: 300px;
+    width: 500px;
+    position: relative;
+    & .show-collapse-shop-item{
+        width: 70%;
+        float: left;
+        position: relative;
+        & .item{
+            position: relative;
+            float: left;
+            width: 33%;
+            height: 100%;
+        }
+    }
+}

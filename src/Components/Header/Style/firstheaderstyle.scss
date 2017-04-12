@@ -1,0 +1,44 @@
+.first-header{
+    background: #222;
+    color: #3a3a3a;
+    padding: 4px 0;
+    & .container{
+        & .row{
+            @mixin togetther-char-font(){
+                color: #afafaf;
+                font-size: 12px;
+                &:hover{
+                    color: white;
+                }
+            }
+            & .dot-khoangcach{
+                color: #afafaf;
+            }
+            & .left{
+                text-align: left;
+                & .show-account-link,
+                & .show-date-now{
+                    @include togetther-char-font();   
+                }
+                & .show-account-link{
+                    text-transform: uppercase;
+                }
+            }
+            & .right{
+                text-align: right;
+                & .show-my-account, 
+                & .show-store-link{
+                    @include togetther-char-font();
+                    padding-left: 10px;
+                }
+            }
+            @media screen and (max-width: 768px) {
+                & .left,
+                & .right{
+                    float: none;
+                    text-align: center;
+                }
+            }
+        }
+    }
+}

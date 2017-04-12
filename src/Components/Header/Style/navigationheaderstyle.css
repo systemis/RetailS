@@ -1,0 +1,62 @@
+.navigation-header {
+  border-bottom: 1px solid #eeeeee;
+  padding: 0;
+  position: relative;
+  padding-top: 2px;
+  padding-bottom: 2px; }
+  .navigation-header .navbar-menu-app {
+    background: white;
+    border: none;
+    margin-bottom: 0; }
+    .navigation-header .navbar-menu-app .container-fluid {
+      margin: 0;
+      padding: 0; }
+      .navigation-header .navbar-menu-app .container-fluid a {
+        text-transform: uppercase;
+        font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif; }
+      .navigation-header .navbar-menu-app .container-fluid .navbar-header a {
+        background: none;
+        border: none;
+        color: #4d4d4d; }
+        .navigation-header .navbar-menu-app .container-fluid .navbar-header a i.fa {
+          font-size: 25px; }
+        .navigation-header .navbar-menu-app .container-fluid .navbar-header a.navbar-brand {
+          padding: 7px 5px;
+          margin-top: 5px; }
+          .navigation-header .navbar-menu-app .container-fluid .navbar-header a.navbar-brand img {
+            width: 80%;
+            height: 80%; }
+          @media screen and (max-width: 556px) {
+            .navigation-header .navbar-menu-app .container-fluid .navbar-header a.navbar-brand {
+              padding: 10px 10px; } }
+      @media screen and (max-width: 768px) {
+        .navigation-header .navbar-menu-app .container-fluid #myNavbar li a {
+          border-bottom: 1px solid #eeeeee;
+          border-top: 1px solid #eeeeee; }
+          .navigation-header .navbar-menu-app .container-fluid #myNavbar li a .caret {
+            float: right;
+            margin-top: 10px; }
+        .navigation-header .navbar-menu-app .container-fluid #myNavbar li.active {
+          border-left: 1px solid #4d4d4d; } }
+      .navigation-header .navbar-menu-app .container-fluid #myNavbar .navbar-nav li {
+        padding: 0 5px; }
+        .navigation-header .navbar-menu-app .container-fluid #myNavbar .navbar-nav li.active a {
+          text-decoration: underline #4d4d4d;
+          background: none; }
+        .navigation-header .navbar-menu-app .container-fluid #myNavbar .navbar-nav li a {
+          color: #4d4d4d; }
+          .navigation-header .navbar-menu-app .container-fluid #myNavbar .navbar-nav li a:hover {
+            text-decoration: underline #4d4d4d;
+            background: #e7e7e7; }
+      .navigation-header .navbar-menu-app .container-fluid #myNavbar .navbar-nav.navbar-right li {
+        padding: 0; }
+        .navigation-header .navbar-menu-app .container-fluid #myNavbar .navbar-nav.navbar-right li a i.fa {
+          font-size: 25px; }
+        .navigation-header .navbar-menu-app .container-fluid #myNavbar .navbar-nav.navbar-right li a:hover {
+          background: transparent;
+          text-decoration: none; }
+        @media screen and (max-width: 768px) {
+          .navigation-header .navbar-menu-app .container-fluid #myNavbar .navbar-nav.navbar-right li:first-child {
+            display: none; } }
+
+/*# sourceMappingURL=navigationheaderstyle.css.map */

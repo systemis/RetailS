@@ -1,0 +1,44 @@
+.home-page-popular-folder-group-item{
+    padding: 0;
+    padding-right: 20px;
+    padding-top: 10px;
+    & .child{
+        border: 1px solid #eeeeee;
+        padding: 5px 15px;
+        & .header-group{
+            & .show-title{
+                padding: 20px 0;
+                color: #222;
+                font-size: 24px;
+                font-weight: 300;
+                border-bottom: 1px solid #EEE;
+                box-shadow: 0 1px 0 #FFF, 0 2px 0 #EEE;
+                margin-bottom: 20px;
+            }
+        }
+        & .show-products{
+            & .product-card-popular-group-item{
+                margin-top: 10px;
+                & .row{
+                    & .show-image{
+                        & img{
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+                    & .show-name-price{
+                        height: 100%;
+
+                        & .show-name{
+
+                        }
+                        & .show-price{
+                            position: relative;
+                            bottom: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

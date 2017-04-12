@@ -1,0 +1,29 @@
+.first-header {
+  background: #222;
+  color: #3a3a3a;
+  padding: 4px 0; }
+  .first-header .container .row .dot-khoangcach {
+    color: #afafaf; }
+  .first-header .container .row .left {
+    text-align: left; }
+    .first-header .container .row .left .show-account-link, .first-header .container .row .left .show-date-now {
+      color: #afafaf;
+      font-size: 12px; }
+      .first-header .container .row .left .show-account-link:hover, .first-header .container .row .left .show-date-now:hover {
+        color: white; }
+    .first-header .container .row .left .show-account-link {
+      text-transform: uppercase; }
+  .first-header .container .row .right {
+    text-align: right; }
+    .first-header .container .row .right .show-my-account, .first-header .container .row .right .show-store-link {
+      color: #afafaf;
+      font-size: 12px;
+      padding-left: 10px; }
+      .first-header .container .row .right .show-my-account:hover, .first-header .container .row .right .show-store-link:hover {
+        color: white; }
+  @media screen and (max-width: 768px) {
+    .first-header .container .row .left, .first-header .container .row .right {
+      float: none;
+      text-align: center; } }
+
+/*# sourceMappingURL=firstheaderstyle.css.map */
