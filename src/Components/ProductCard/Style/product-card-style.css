@@ -25,7 +25,7 @@
         color: black; }
       @media screen and (max-width: 768px) {
         .product-card-item .child .show-image-label span {
-          right: -5px;
+          right: -1px;
           top: -10px; } }
   .product-card-item .child .show-body {
     padding: 5px 10px; }
