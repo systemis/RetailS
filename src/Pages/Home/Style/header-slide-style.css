@@ -14,12 +14,18 @@
       left: 5px; }
   .home-header-slide .header-slide-item {
     position: absolute;
-    display: none;
     height: 100%;
     width: 100%;
-    background: #f5f2f3; }
+    background: #f5f2f3;
+    display: none; }
     .home-header-slide .header-slide-item.show {
       display: block; }
+    .home-header-slide .header-slide-item.s-right {
+      transition: 1s;
+      right: -2000px; }
+    .home-header-slide .header-slide-item.s-left {
+      transition: 1s;
+      left: -2000px; }
     .home-header-slide .header-slide-item.first-item .main-group {
       position: relative;
       height: 100%; }

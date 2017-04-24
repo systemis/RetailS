@@ -1,27 +1,32 @@
 .product-view-page{
+    //padding: 0;
+    @mixin flex(){
+        margin: 0;
+        padding: 0;
+        @media screen and (max-width: 768px) {
+            margin: 5px 5px;
+        }
+    }
+    @mixin together-resonsive(){
+        @media screen and (max-width: 768px) {
+            padding: 10px 5px;
+        }
+    
+    }
+    
     & .product-view-page-simple-product-info-group{
         & .row{
-            @mixin flex(){
-                margin: 0;
-                padding: 0;
-                @media screen and (max-width: 768px) {
-                    margin: 5px 5px;
-                }
-            }
-
-            @mixin together-res(){
-                @media screen and (max-width: 768px) {
-                    padding: 10px 0;
-                }
-            }
             & .show-product-images{
-                @include together-res();
-                @media screen and (max-width: 768px) {
+                @include together-resonsive();
+                @media screen and (max-width: 991px) {
                     display: none;
+                    @media screen and (max-width: 768px) {
+                        display: none;
+                    }
                 }
             }
             & .show-selected-product-image{
-                @include together-res();
+                @include together-resonsive();
                 padding-left: 10px;
                 padding-right: 30px;
                 & .child{
@@ -64,6 +69,7 @@
                     }
                 }
                 & .show-product-category{
+                    @include flex();
                     & a{
                         color: #888;
                         text-decoration: none;
@@ -96,17 +102,61 @@
                     }
                 }
                 & .show-amount-addtocard{
+                    $height: 40px;
                     padding-bottom: 25px;
-                    & .btn.btn-addtocard{
-                        @include flex();
-                        padding: 7px 20px;
-                        background: #eee;
+                    @include flex();
+                    @mixin character(){
+                        padding: 0 10px;
                         font-size: 17px;
+                        background: #eee;
                         text-transform: uppercase;
-                        border-radius: none;
+                        border-radius: 0;
+                        height: $height;
+                        line-height: $height;
+                        @media screen and (max-width: 991px) {
+                            margin: 5px 1px;
+                            @media screen and (max-width: 768px) {
+                                margin: 5px 1px;
+                            }
+                        }
+                    }
+                    & .show-ammount{
+                        margin-right: 20px;
+                        float: left;
+                        & .btn-numberic{
+                            //@include flex();
+                            @include character();
+                            margin-right: 1px;
+                            background: #eee;
+                            border-radius: none;
+                            &:hover{
+                                background: #222;
+                                color: white;
+                            }
+                        }
+                        & #product-page-ammount{
+                            //@include flex();
+                            @include character();
+                            position: relative;
+                            top: 2px;
+                            margin-right: 1px;
+                            width: 100px;  
+                            text-align: center;
+                            border: none;
+                            &:hover{
+                                &::after{
+                                    display: none;
+                                }
+                            }
+                        }
+                    }
+                    & .btn.btn-addtocard{
+                        //@include flex();
+                        @include character();
+                        float: left;
                         &::before{
                             display: inline-block;
-                            font-size: 24px;
+                            font-size: 17px;
                             content: '+';
                             font-family: EntypoRegular;
                             line-height: 0;
@@ -134,8 +184,7 @@
                 }
                 & .show-share-group{
                     @mixin flex-text-here(){
-                        padding: 5px 7px;
-                        margin-right: 5px;
+                        padding: 5px 5px;
                         font-size: 14px;
                     }
                     & p:first-child{
@@ -173,4 +222,97 @@
             }
         }
     }   
+
+    & .product-view-page-product-details-info-group{
+        @include flex();
+        padding-top: 20px;
+        & .tabs-group-details-info{
+            position: relative;
+            right: 0;
+            left: 0;
+            & li{
+                & a{
+                    color: #222;
+                    text-transform: uppercase;
+                }
+            }
+        }
+        & .collapses{
+            position: relative;
+            & .collapse-item{
+                @include flex();
+                right: 0;
+                left: 0;
+                display: none;
+                padding-top: 20px;
+                &.show{
+                    display: block;
+                }
+                & .collaspe-item-show-des{
+                    & p{
+                        font-family: Roboto,sans-serif;
+                        margin: 0 0 10px;
+                    }
+                }
+                & .table-show-product-edditional-info{
+                    width: 100%;
+                    & tr{
+                        width: 100%;
+                        font-family: 'Times New Roman', Times, serif;
+                        color: #222;
+                        font-weight: 100;
+                        text-transform: uppercase;
+                        font-size: 12px;
+                        & th{ 
+                            width: 20%; 
+                            font-family: inherit;
+                            font-weight: bold;     
+                        }
+                        & td, & th{
+                            padding: 5px 5px;
+                        }
+                        &:hover{
+                            background: #eee;
+                        }
+                    }    
+                }
+                & .post-new-review-group{
+                    & #form-add-review-product{
+                        & h3{
+                            font-size: 36px;
+                            margin-top: 40px;
+                            margin-bottom: 20px;
+                        }
+                        & #comment-text{
+                            width: 100%;
+                            background: #eee;
+                            border: none;
+                            padding: 5px;
+                        }
+                        & input[type=submit]{
+                            float: right;
+                            padding: 2px 40px;
+                            background: #222;
+                            color: white;
+                            border: none;
+                            box-shadow: none;
+                        }
+                    }
+                }
+            }   
+        }
+    }
+
+    @media screen and (max-width: 991px) {
+        & {
+            margin: 0;
+            width: 100%;
+            @media screen and (max-width: 768px) {
+                padding: 0 30px;
+                @media screen and (max-width: 550px) {
+                    padding: 0 10px;
+                }
+            }
+        }
+    }      
 }

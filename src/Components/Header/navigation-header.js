@@ -20,18 +20,19 @@ class NavigationHeader extends Component {
                             <a href="#" className="navbar-toggle">
                                 <i className="fa fa-shopping-cart" aria-hidden="true"></i>
                             </a>
-                            <a className="navbar-brand" href="#">
+                            <a className="navbar-brand" href="/">
                                 <img src={Logo1} alt="Logo icon "/>
                             </a>
                         </div>
                         <div className="collapse navbar-collapse" id="myNavbar">
                             <ul className="nav navbar-nav">
-                                <li className="active"><a href="#">Home</a></li>
+                                <li className="active"><a href="/">Home</a></li>
                                 <li className="dropdown">
-                                    <a className="dropdown-toggle" data-toggle="dropdown" href="#">Shop
-                                    <span className="caret"></span></a>
+                                    <a className="dropdown-toggle"         href="/shop">
+                                        Shop 
+                                    </a>
                                 </li>
-                                <li><a href="#">Page 2</a></li> 
+                                <li><a href="/about-us">About Us</a></li> 
                                 <li><a href="#">Page 3</a></li> 
                             </ul>
                             <ul className="nav navbar-nav navbar-right">

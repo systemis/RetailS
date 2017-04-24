@@ -18,13 +18,24 @@
     }
     & .header-slide-item{
         position: absolute;
-        display: none;
         height: 100%;
         width: 100%;
         background: rgb(245, 242, 243);
+        display: none;
         &.show{
             display: block;
         }
+
+
+        &.s-right{
+            transition: 1s;
+            right: -2000px
+        }
+        &.s-left{
+            transition: 1s;
+            left: -2000px;
+        }
+
         &.first-item{
             & .main-group{
                 position: relative;

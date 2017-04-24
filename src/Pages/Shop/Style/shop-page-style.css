@@ -1,0 +1,20 @@
+.shop-page .select-sort-kind-group {
+  margin-left: 0;
+  margin-right: 0; }
+  .shop-page .select-sort-kind-group #shop-choose-kind-sort {
+    float: right;
+    height: 30px;
+    min-width: 123px;
+    border: 1px solid #eeeeee; }
+.shop-page #phan-trang-group {
+  text-align: center;
+  padding: 30px 0 20px 0; }
+  .shop-page #phan-trang-group span {
+    padding: 10px;
+    margin: 0 3px;
+    border: 1px solid #eeeeee; }
+    .shop-page #phan-trang-group span.active, .shop-page #phan-trang-group span:hover {
+      background: #222;
+      color: white; }
+
+/*# sourceMappingURL=shop-page-style.css.map */

@@ -1,4 +1,5 @@
 import React, { Component }  from 'react';
+import Slider                from 'react-slick';
 import $                     from  'jquery';
 import HeaderSlideFirstItem  from './Components/header-slide-first-item';
 import HeaderSlideSecondItem from './Components/header-slide-second-item';
@@ -22,11 +23,8 @@ class HeaderSlide extends Component {
     }
 
     handlingSlideItem(choice){
-        console.log("choice slide: " + choice);
         $(document).ready(() => {
             var SlideItemlist = $(".header-slide-item");
-            console.log(SlideItemlist.length);
-                
             for(var i = 0; i < SlideItemlist.length; i++) {
                 if($(SlideItemlist[i]).hasClass("show")){
                     var indexWill = i + choice;
@@ -35,11 +33,8 @@ class HeaderSlide extends Component {
                     }else if(indexWill < 0){
                         indexWill = SlideItemlist.length - 1;
                     }
-                    SlideItemlist.map((index2, item2) => {
-                        $(item2).removeClass("show");
-                    });
+                    $(SlideItemlist[i]).removeClass("show");
                     $(SlideItemlist[indexWill]).addClass("show");
-                    console.log("Will: " + indexWill);
                     i = 10;
                 }
             }
@@ -47,6 +42,13 @@ class HeaderSlide extends Component {
     }
 
     render() {
+        const settings = {
+            dots: true,
+            infinite: true,
+            speed: 500,
+            slidesToShow: 1,
+            slidesToScroll: 1
+        }
         return (
             <div className="home-header-slide">
                 <HeaderSlideFirstItem  className="show"/>

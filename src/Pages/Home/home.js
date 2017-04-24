@@ -3,7 +3,7 @@ import HeaderSlide          from './header-slide.js';
 import TrendingGroup        from './trending.js';
 import CategoryGroup        from './category-group.js'
 import BestSellerGroup      from './best-sellers.js'
-import PopularFolderGroup   from './popular-folder.js'
+
 
 require('./Style/home-page-style.css');
 
@@ -15,7 +15,6 @@ class HomePage extends Component {
                 <TrendingGroup />
                 <CategoryGroup />
                 <BestSellerGroup />
-                <PopularFolderGroup />
             </div>
         );
     }

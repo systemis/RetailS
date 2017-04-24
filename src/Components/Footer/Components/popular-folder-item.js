@@ -6,7 +6,7 @@ require('../Style/popular-folder-item.css');
 class PopularFolderItem extends Component {
     render() {
         return (
-            <div className="home-page-popular-folder-group-item col-md-3 col-sm-3">
+            <div className="home-page-popular-folder-group-item col-md-3 col-sm-6">
                 <div className="child">
                     <div className="header-group">
                         <p className="show-title">{this.props.Data.Title}</p>

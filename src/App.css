@@ -1,40 +1,49 @@
-.App .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px; }
-.App .App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white; }
-.App .App-intro {
-  font-size: large; }
+html {
+  position: relative;
+  min-height: 100%; }
+  html body {
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Montserrat', Helvetica, sans-serif;
+    font-weight: 400;
+    font-size: 12px; }
+    html body .App .App-logo {
+      animation: App-logo-spin infinite 20s linear;
+      height: 80px; }
+    html body .App .App-header {
+      background-color: #222;
+      height: 150px;
+      padding: 20px;
+      color: white; }
+    html body .App .App-intro {
+      font-size: large; }
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg); }
   to {
     transform: rotate(360deg); } }
-.App .dot-khoangcach {
-  margin: 0 10px; }
-.App .header-group-type-o {
-  margin-top: 10px; }
-  .App .header-group-type-o .title, .App .header-group-type-o .des {
-    font-size: 30px;
-    text-transform: uppercase;
-    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-    font-weight: 40;
-    padding: 0;
-    margin: 0;
-    margin-top: 5px; }
-  .App .header-group-type-o .des {
-    font-size: 16px;
-    font-weight: 300;
-    color: #888; }
-  .App .header-group-type-o .ngan {
-    margin-top: 10px;
-    width: 20px;
-    height: 2px;
-    background: #222; }
-.App a:hover {
-  text-decoration: none; }
+    html body .App .dot-khoangcach {
+      margin: 0 10px; }
+    html body .App .header-group-type-o {
+      margin-top: 10px; }
+      html body .App .header-group-type-o .title, html body .App .header-group-type-o .des {
+        font-size: 30px;
+        text-transform: uppercase;
+        font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+        font-weight: 40;
+        padding: 0;
+        margin: 0;
+        margin-top: 5px; }
+      html body .App .header-group-type-o .des {
+        font-size: 16px;
+        font-weight: 300;
+        color: #888; }
+      html body .App .header-group-type-o .ngan {
+        margin-top: 10px;
+        width: 20px;
+        height: 2px;
+        background: #222; }
+    html body .App a:hover {
+      text-decoration: none; }
 
 /*# sourceMappingURL=App.css.map */

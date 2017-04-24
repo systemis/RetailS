@@ -1,14 +1,35 @@
 import React, { Component } from 'react';
+import $ from 'jquery';
 
-class SimpleProductInfo extends Component {
+class ProductSimpleInfo extends Component {
+    constructor(props) {
+        super(props);
+        
+        this.handlingPlusMinusAmount();
+    }
+
+    handlingPlusMinusAmount(){
+        $(document).ready(() => {
+            $("#numberic-plus").click(function() {
+                $("#product-page-ammount").val(parseInt($("#product-page-ammount").val()) + 1);
+            })
+            
+            $("#numberic-minus").click(function() {
+                if($("#product-page-ammount").val() > 0){
+                    $("#product-page-ammount").val(parseInt($("#product-page-ammount").val()) - 1);
+                }
+            })
+        })
+    }
+
     render() {
         return (
             <div className="product-view-page-simple-product-info-group">
                 <div className="row">
-                    <div className="show-product-images col-md-2 col-sm-2">
+                    <div className="show-product-images col-md-2">
                         
                     </div>
-                    <div className="show-selected-product-image col-md-5 col-sm-5">
+                    <div className="show-selected-product-image col-md-5 col-sm-6">
                         <div className="child">
                             <img src={this.props.Data.productimages} alt="Image about product"/>
                             <span className="status sale">
@@ -16,7 +37,7 @@ class SimpleProductInfo extends Component {
                             </span>
                         </div>
                     </div>
-                    <div className="show-simple-product-info col-md-5 col-sm-5">
+                    <div className="show-simple-product-info col-md-5 col-sm-6">
                         <div className="show-product-name">
                             <h1>{this.props.Data.name}</h1>
                         </div>
@@ -26,7 +47,6 @@ class SimpleProductInfo extends Component {
                             </a>
                         </div>
                         <div className="show-product-ranting">
-                            
                         </div>
                         <div className="show-product-des">
                             <p>{this.props.Data.des}</p>
@@ -34,7 +54,12 @@ class SimpleProductInfo extends Component {
                         <div className="show-product-price">
                             <p>{this.props.Data.price}</p>
                         </div>
-                        <div className="show-amount-addtocard">
+                        <div className="show-amount-addtocard row">
+                            <div className="show-ammount">
+                                <button className="btn btn-numberic" id="numberic-plus">+</button>
+                                <input type="number" id="product-page-ammount" value="0"/>
+                                <button className="btn btn-numberic" id="numberic-minus">-</button>
+                            </div>
                             <button className="btn btn-addtocard">
                                 add to card 
                             </button>
@@ -60,7 +85,7 @@ class SimpleProductInfo extends Component {
                             </p>
                         </div>
                         <div className="show-share-group">
-                            <p>Share this item </p>
+                            <p>Share this item: </p>
                             <ul>
                                 <li className="face"> <a href="Facebook"> Facebook </a> </li>
                                 <li className="twitter"> <a href="Twitter"> Twitter </a> </li>
@@ -74,4 +99,4 @@ class SimpleProductInfo extends Component {
     }
 }
 
-export default SimpleProductInfo;
+export default ProductSimpleInfo;
