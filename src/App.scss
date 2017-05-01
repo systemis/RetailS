@@ -60,6 +60,32 @@ html{
             & a:hover{
                 text-decoration: none;
             }
+
+
+            & .btn-numberic{
+                //@include flex();
+                $height: 40px;
+                padding: 0 10px;
+                font-size: 17px;
+                background: #eee;
+                text-transform: uppercase;
+                border-radius: 0;
+                height: $height;
+                line-height: $height;
+                margin-right: 1px;
+                background: #eee;
+                border-radius: none;
+                &:hover{
+                    background: #222;
+                    color: white;
+                }
+                @media screen and (max-width: 991px) {
+                    margin: 5px 1px;
+                    @media screen and (max-width: 768px) {
+                        margin: 5px 1px;
+                    }
+                }
+            }
         }
     }
 }

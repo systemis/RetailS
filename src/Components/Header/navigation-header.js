@@ -17,7 +17,7 @@ class NavigationHeader extends Component {
                                 <span className="icon-bar"></span>
                                 <span className="icon-bar"></span> 
                             </button>
-                            <a href="#" className="navbar-toggle">
+                            <a href="/view-cart" className="navbar-toggle">
                                 <i className="fa fa-shopping-cart" aria-hidden="true"></i>
                             </a>
                             <a className="navbar-brand" href="/">
@@ -33,11 +33,10 @@ class NavigationHeader extends Component {
                                     </a>
                                 </li>
                                 <li><a href="/about-us">About Us</a></li> 
-                                <li><a href="#">Page 3</a></li> 
                             </ul>
                             <ul className="nav navbar-nav navbar-right">
                                 <li>
-                                    <a href="#">
+                                    <a href="/view-cart">
                                         <i className="fa fa-shopping-cart" aria-hidden="true"></i>
                                     </a>
                                 </li>

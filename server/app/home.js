@@ -1,9 +1,13 @@
-var express = require('express');
-var path    = require('path');
-var router  = express.Router(); 
+module.exports = (router) => {
+    var express = require('express');
+    var path    = require('path');
 
-router.get((req, res) => { 
-    res.sendFile(path.resolve(__dirname, "..", "build/index.html")); 
-})
+    router.get("/", (req, res) => { 
+        console.log(req.isAuthenticated());
+        res.sendFile(path.resolve(__dirname, "../..", "build/index.html")); 
+    })
 
-module.exports = router;
+    router.post('/check', (req, res) => {
+        res.send(req.isAuthenticated());
+    })
+};

@@ -11,6 +11,6 @@ Version 1:
   2. Home page ui .
 
 Run app: type in console .
-  1. Setup framework: npm install .
-  2. Build client ui: npm run build .
-  3. Run app: nodemon server.
+  1. Setup framework: npm install 
+  2. Build client ui: npm run build 
+  3. Run app: nodemon server

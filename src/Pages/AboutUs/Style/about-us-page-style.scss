@@ -1,0 +1,61 @@
+.about-us-page{
+    @mixin together-group-char(){
+        @media screen and (max-width: 768px) {
+            margin-bottom: 50px;
+        }
+    }
+
+    & h3{
+        font-size: 14px;
+        color: #888;
+        font-weight: 300;
+        display: block;
+        padding: 0;
+        margin: 0;
+        margin-bottom: 40px;
+    }
+
+    & .show-get-in-touch{
+        @include together-group-char();
+        & form{
+            @mixin custom-char(){
+                border: none;
+                background: #eee;
+                border: 1px solid #eeeeee;
+            }
+
+            & input[type="text"]{
+                @include custom-char();
+                padding: 10px;
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            & textarea{
+                @include custom-char();
+                width: 100%;
+                padding: 0 10px;
+            }
+
+            & input[type="submit"]{
+                @include custom-char();
+                float: right;
+                padding: 5px 10px;
+                background: #222;
+                color: white;
+                text-transform: uppercase;
+            }
+        }
+    }
+
+    & .show-our-address{
+        @include together-group-char();
+        @media screen and (min-width: 768px) {
+            padding-left: 50px;
+        }
+        & p{
+            font-family: Roboto,sans-serif;
+            font-weight: 300;
+            font-size: 14px;
+        }
+    }
+}

@@ -45,5 +45,25 @@ html {
         background: #222; }
     html body .App a:hover {
       text-decoration: none; }
+    html body .App .btn-numberic {
+      padding: 0 10px;
+      font-size: 17px;
+      background: #eee;
+      text-transform: uppercase;
+      border-radius: 0;
+      height: 40px;
+      line-height: 40px;
+      margin-right: 1px;
+      background: #eee;
+      border-radius: none; }
+      html body .App .btn-numberic:hover {
+        background: #222;
+        color: white; }
+      @media screen and (max-width: 991px) {
+        html body .App .btn-numberic {
+          margin: 5px 1px; } }
+  @media screen and (max-width: 991px) and (max-width: 768px) {
+    html body .App .btn-numberic {
+      margin: 5px 1px; } }
 
 /*# sourceMappingURL=App.css.map */

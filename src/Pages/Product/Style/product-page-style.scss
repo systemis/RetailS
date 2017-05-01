@@ -123,17 +123,6 @@
                     & .show-ammount{
                         margin-right: 20px;
                         float: left;
-                        & .btn-numberic{
-                            //@include flex();
-                            @include character();
-                            margin-right: 1px;
-                            background: #eee;
-                            border-radius: none;
-                            &:hover{
-                                background: #222;
-                                color: white;
-                            }
-                        }
                         & #product-page-ammount{
                             //@include flex();
                             @include character();

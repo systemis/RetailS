@@ -1,29 +1,7 @@
 import React, { Component } from 'react';
-import GoogleMapReact from 'google-map-react';
- 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
- 
-class SimpleMap extends Component {
-  static defaultProps = {
-    center: {lat: 16.01394264, lng: 108.19869429},
-    zoom: 15
-  };
- 
-  render() {
-    return (
-      <GoogleMapReact
-        defaultCenter={this.props.center}
-        defaultZoom={this.props.zoom}
-      >
-        <AnyReactComponent
-          lat={16.01394264}
-          lng={108.19869429}
-          text={'Trường Thịnh Inc'}
-        />
-      </GoogleMapReact>
-    );
-  }
-}
+import SimpleMap from'./maps.js';
+
+require('./Style/about-us-page-style.css');
 
 class AboutUsPage extends Component {
     render() {
@@ -33,6 +11,39 @@ class AboutUsPage extends Component {
                      style={{height: "500px"}}
                 >
                     <SimpleMap />
+                </div>
+                <div className="container">
+                    <div className="row">
+                        <div className="show-get-in-touch col-md-6 col-sm-6">
+                            <h2>Get in touch</h2>
+                            <h3>WRITE US A LETTER</h3>
+                            <form action="/">
+                                <input type="text" name="name"  placeholder="Name*"/>
+                                <br/>
+                                <input type="text" name="email" placeholder="E-mail*"/>
+                                <br/>
+                                <textarea name="messgae" id="get-message" cols="100" rows="10" placeholder="Messgase*">
+                                </textarea>
+                                <br/>
+                                <input type="submit" value="Send message"/>
+                            </form>
+                        </div>
+                        <div className="show-our-address col-md-6 col-sm-6">
+                            <h2>OUR ADDRESS</h2>
+                            <h3>WHERE ARE WE LOCATED</h3>
+                            <p>
+                                407 Cách Mạng Tháng 8,
+                                <br/>
+                                0905210336,
+                                <br/>
+                                Đà Nẵng 
+                                <br/>
+                            </p>
+                            <p>
+                                systemofpeter@gmail.com 
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         );

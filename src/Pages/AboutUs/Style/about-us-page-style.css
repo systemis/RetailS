@@ -1,0 +1,45 @@
+.about-us-page h3 {
+  font-size: 14px;
+  color: #888;
+  font-weight: 300;
+  display: block;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 40px; }
+@media screen and (max-width: 768px) {
+  .about-us-page .show-get-in-touch {
+    margin-bottom: 50px; } }
+.about-us-page .show-get-in-touch form input[type="text"] {
+  border: none;
+  background: #eee;
+  border: 1px solid #eeeeee;
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 10px; }
+.about-us-page .show-get-in-touch form textarea {
+  border: none;
+  background: #eee;
+  border: 1px solid #eeeeee;
+  width: 100%;
+  padding: 0 10px; }
+.about-us-page .show-get-in-touch form input[type="submit"] {
+  border: none;
+  background: #eee;
+  border: 1px solid #eeeeee;
+  float: right;
+  padding: 5px 10px;
+  background: #222;
+  color: white;
+  text-transform: uppercase; }
+@media screen and (max-width: 768px) {
+  .about-us-page .show-our-address {
+    margin-bottom: 50px; } }
+@media screen and (min-width: 768px) {
+  .about-us-page .show-our-address {
+    padding-left: 50px; } }
+.about-us-page .show-our-address p {
+  font-family: Roboto,sans-serif;
+  font-weight: 300;
+  font-size: 14px; }
+
+/*# sourceMappingURL=about-us-page-style.css.map */

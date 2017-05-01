@@ -1,0 +1,54 @@
+.login-page{
+    $border: 1px solid #eeeeee;
+    & .row{
+        @mixin together-character-group{
+            padding: 15px 15px;
+            & .child{
+                padding: 10px 15px;
+                width: 100%;
+                border: $border;
+                
+                & .title{
+                    color: #222;
+                    font-size: 24px;
+                    font-weight: 300;
+                    padding: 20px 0;
+                    margin: 0;
+                    border-bottom: 1px solid #EEE;
+                    box-shadow: 0 1px 0 #FFF, 0 2px 0 #EEE;
+                    margin-bottom: 20px;
+                    padding-top: 0;
+                }
+
+                & input[type=text], & input[type=password]{
+                    width: 100%;
+                    padding: 10px 3px;
+                    margin-bottom: 10px;
+                    border: $border;
+                }
+
+                & input[type=submit] {
+                    padding: 5px 15px ;
+                    background: #222;
+                    color: #fff;
+                    border: none;
+                    border-radius: 3px;
+
+                    &:hover{
+                        background: #fff;
+                        color: black;;
+                        border: 1px solid black;
+                    }
+                }
+            }
+        }
+
+        & .sign-up-component{
+            @include together-character-group();
+        }
+
+        & .sign-in-componet{
+            @include together-character-group();
+        }
+    }
+}
