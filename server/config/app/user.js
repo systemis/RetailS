@@ -1,4 +1,3 @@
-
 module.exports = (router) => {
     var express       = require('express');
     var path          = require('path');
@@ -74,5 +73,15 @@ module.exports = (router) => {
                 res.send('Success');
             }
         })
+    })
+
+    router.post('/check-login', (req, res) => {
+        if(req.isAuthenticated()){
+            console.log(req.use);
+            res.send(req.use);
+        }else{
+            console.log('Chua dang nhap. ');
+            return res.send("Ban chua dang nhap. ");
+        }
     })
 }

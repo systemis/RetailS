@@ -1,0 +1,116 @@
+$border: 1px solid #eeeeee;
+@mixin flex() {
+    margin: 0;
+    padding: 0;
+}
+
+
+.user-dashboard-page{
+    position: relative;
+    padding: 0;
+    padding-top: 20px;
+
+    & .navigation-user-dashboard-page{
+        @include flex();
+        @mixin together-char-menu-item{
+            padding: 5px 3px;
+            border: $border;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 14px;
+
+
+            &:hover{ background: #888888; }
+
+            @media screen and (min-width: 991px) {
+                width: 160px;
+            }
+        }
+
+        & .row{
+            padding: 0;
+            margin: 0;
+             & ul.navigation-menu{
+                @include flex();
+                list-style-type: none;
+                
+                &.hidden{ 
+                    display: none; 
+                }
+                
+                & li{ 
+                    @include together-char-menu-item(); 
+                    margin: 0 0 5px 0;
+                }
+            }
+
+            & #content-user-dashboard-page{
+                @include flex();
+                @mixin input-character-together() {
+                    width: 100%;
+                    padding: 10px 3px;
+                    border: $border;
+                }
+
+                & .title-screen{
+                    font-size: 20px;
+                    font-family: inherit;
+                    @media screen and (min-width: 768px) {
+                        position: absolute;
+                        top: -30px;
+                        left: 50%;
+                    }
+                }
+
+                & .main{
+                    padding-top: 10px;
+                    & #user-dashboard-information-screen{
+                        & input[type=text], input[type=number] {
+                            @include input-character-together();
+                        }
+
+                        & #btn-update-user-information,
+                        & #btn-cancel-user-information{
+                            margin-left: 10px;
+                            float: right;
+                        }
+                    }
+
+                    & #user-dashboard-change-password-screen{
+                        & input[type=password] {
+                            @include input-character-together();
+                        }
+
+
+                        & #btn-change-user-password,
+                        & #btn-cancel-user-password{
+                            margin-left: 10px;
+                            float: right;
+                        }
+                    }
+
+                    @media screen and (min-width: 768px) {
+                        padding: 10px 50px
+                    }
+                }
+            }
+
+            & .max-w{
+                width: 100%;
+            }
+        } 
+    
+
+        & #btn-show-hidden-menu{
+            @include together-char-menu-item();
+            text-align: left;
+
+            @media screen and (max-width: 768px) {
+                width: 100%;
+            }
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        padding: 20px 20px 20px 20px;
+    }
+}

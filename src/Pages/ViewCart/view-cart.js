@@ -3,21 +3,55 @@ import ProductRow from './product-row.js';
 
 require('./Style/view-cart-page-style.css');
 
-class ViewCartPage extends Component {
+class ViewCartGroup extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            quantity: [1, 2, 3, 4]
+        }
+    }
+
     render() {
+        const updateProductQuantity = (key, choice) => {
+            console.log(this.state.quantity[key]);
+            
+            var allQuantity = this.state.quantity;
+            var quantity    = allQuantity[key];
+
+            switch(choice) {
+                case "+":
+                    quantity += 1;
+                    break;
+                case "-":
+                    if(quantity >= 0) {
+                        quantity -= 1;
+                    }
+                    break;
+                default: 
+                    return console.log("Error: Choice to update product quantity is not correct");
+                    break;
+            }
+
+            allQuantity[key] = quantity;
+            this.setState({quantity: allQuantity});
+        }
+
         return (
-            <div className="view-cart-page container ">
-                <h1>Cart</h1>
+            <div className="view-cart-page ">
                 <table className="show-products-info-in-cart">
                     <thead>
                         <th className="product"> Product   </th>
                         <th className="quantity"> Quantity </th>
                         <th className="sub-total"> Total   </th>
                     </thead>
-                    <ProductRow />
-                    <ProductRow />
-                    <ProductRow />
-                    <ProductRow />
+                    {this.state.quantity.map((value, index) => {
+                        return(
+                            <ProductRow 
+                                quantity={this.state.quantity} 
+                                changeQuantity={updateProductQuantity}
+                                index={index}
+                            />)
+                    })}
                 </table>
                 <div className="show-recommed-total">
                     <div className="show-recommed-product-group">
@@ -54,6 +88,10 @@ class ViewCartPage extends Component {
             </div>
         );
     }
+
+    shouldComponentUpdate (nextProps, nextState) {
+        console.log(nextState);
+    }
 }
 
-export default ViewCartPage;
+export default ViewCartGroup;

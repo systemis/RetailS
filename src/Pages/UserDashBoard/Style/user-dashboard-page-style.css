@@ -1,0 +1,78 @@
+.user-dashboard-page {
+  position: relative;
+  padding: 0;
+  padding-top: 20px; }
+  .user-dashboard-page .navigation-user-dashboard-page {
+    margin: 0;
+    padding: 0; }
+    .user-dashboard-page .navigation-user-dashboard-page .row {
+      padding: 0;
+      margin: 0; }
+      .user-dashboard-page .navigation-user-dashboard-page .row ul.navigation-menu {
+        margin: 0;
+        padding: 0;
+        list-style-type: none; }
+        .user-dashboard-page .navigation-user-dashboard-page .row ul.navigation-menu.hidden {
+          display: none; }
+        .user-dashboard-page .navigation-user-dashboard-page .row ul.navigation-menu li {
+          padding: 5px 3px;
+          border: 1px solid #eeeeee;
+          font-family: 'Times New Roman', Times, serif;
+          font-size: 14px;
+          margin: 0 0 5px 0; }
+          .user-dashboard-page .navigation-user-dashboard-page .row ul.navigation-menu li:hover {
+            background: #888888; }
+          @media screen and (min-width: 991px) {
+            .user-dashboard-page .navigation-user-dashboard-page .row ul.navigation-menu li {
+              width: 160px; } }
+      .user-dashboard-page .navigation-user-dashboard-page .row #content-user-dashboard-page {
+        margin: 0;
+        padding: 0; }
+        .user-dashboard-page .navigation-user-dashboard-page .row #content-user-dashboard-page .title-screen {
+          font-size: 20px;
+          font-family: inherit; }
+          @media screen and (min-width: 768px) {
+            .user-dashboard-page .navigation-user-dashboard-page .row #content-user-dashboard-page .title-screen {
+              position: absolute;
+              top: -30px;
+              left: 50%; } }
+        .user-dashboard-page .navigation-user-dashboard-page .row #content-user-dashboard-page .main {
+          padding-top: 10px; }
+          .user-dashboard-page .navigation-user-dashboard-page .row #content-user-dashboard-page .main #user-dashboard-information-screen input[type=text], .user-dashboard-page .navigation-user-dashboard-page .row #content-user-dashboard-page .main #user-dashboard-information-screen input[type=number] {
+            width: 100%;
+            padding: 10px 3px;
+            border: 1px solid #eeeeee; }
+          .user-dashboard-page .navigation-user-dashboard-page .row #content-user-dashboard-page .main #user-dashboard-information-screen #btn-update-user-information, .user-dashboard-page .navigation-user-dashboard-page .row #content-user-dashboard-page .main #user-dashboard-information-screen #btn-cancel-user-information {
+            margin-left: 10px;
+            float: right; }
+          .user-dashboard-page .navigation-user-dashboard-page .row #content-user-dashboard-page .main #user-dashboard-change-password-screen input[type=password] {
+            width: 100%;
+            padding: 10px 3px;
+            border: 1px solid #eeeeee; }
+          .user-dashboard-page .navigation-user-dashboard-page .row #content-user-dashboard-page .main #user-dashboard-change-password-screen #btn-change-user-password, .user-dashboard-page .navigation-user-dashboard-page .row #content-user-dashboard-page .main #user-dashboard-change-password-screen #btn-cancel-user-password {
+            margin-left: 10px;
+            float: right; }
+          @media screen and (min-width: 768px) {
+            .user-dashboard-page .navigation-user-dashboard-page .row #content-user-dashboard-page .main {
+              padding: 10px 50px; } }
+      .user-dashboard-page .navigation-user-dashboard-page .row .max-w {
+        width: 100%; }
+    .user-dashboard-page .navigation-user-dashboard-page #btn-show-hidden-menu {
+      padding: 5px 3px;
+      border: 1px solid #eeeeee;
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 14px;
+      text-align: left; }
+      .user-dashboard-page .navigation-user-dashboard-page #btn-show-hidden-menu:hover {
+        background: #888888; }
+      @media screen and (min-width: 991px) {
+        .user-dashboard-page .navigation-user-dashboard-page #btn-show-hidden-menu {
+          width: 160px; } }
+      @media screen and (max-width: 768px) {
+        .user-dashboard-page .navigation-user-dashboard-page #btn-show-hidden-menu {
+          width: 100%; } }
+  @media screen and (max-width: 768px) {
+    .user-dashboard-page {
+      padding: 20px 20px 20px 20px; } }
+
+/*# sourceMappingURL=user-dashboard-page-style.css.map */

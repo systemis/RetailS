@@ -21,9 +21,18 @@ class ProductRow extends Component {
                     </div>
                 </td>
                 <td className="show-quantity">
-                    <button className="btn btn-numberic" id="numberic-plus">+</button>
+                    <button 
+                        className="btn btn-numberic" 
+                        id="numberic-plus"
+                        onClick={() => this.props.changeQuantity(this.props.index, "+")}>
+                        +
+                    </button>
                     <input type="number" id="product-row-quantity" value="4"/>
-                    <button className="btn btn-numberic" id="numberic-minus">-</button>
+                    <button 
+                        className="btn btn-numberic" 
+                        id="numberic-minus">
+                        -
+                    </button>
                 </td>
                 <td className="show-sub-total">
                     £64.00

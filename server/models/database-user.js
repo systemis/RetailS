@@ -19,8 +19,8 @@ function UserDataManager(){
             }else if(result.length < 0) {
                 return fn("email_c");
             } 
-            var user = result[0];
-            if(password === user.password) {
+            
+            if( result[0] === user.password) {
                 fn(result[0]);
             }else{
                 fn("password_c");

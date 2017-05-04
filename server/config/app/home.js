@@ -4,6 +4,7 @@ module.exports = (router) => {
 
     router.get("/", (req, res) => { 
         console.log(req.isAuthenticated());
+        console.log(req.use);
         res.sendFile(path.resolve(__dirname, "../..", "build/index.html")); 
     })
 
