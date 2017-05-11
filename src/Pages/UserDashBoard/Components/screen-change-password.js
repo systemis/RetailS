@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import userInfoM            from '../js/userinfomation-manager';
 import $                    from 'jquery';
 
 class ChangePassWordScreen extends Component {
@@ -6,9 +7,24 @@ class ChangePassWordScreen extends Component {
         super(props);
     }
 
-    handlingWhenChangeValue = () => {
+    handlingWhenChangeValue(){
         $("#btn-change-user-password").removeClass("hidden");
         $("#btn-cancel-user-password").removeClass("hidden");
+    }
+
+    handlingChangePassword(){
+        $(document).ready(() => {
+            $("#form-change-user-password").submit(function(e) {
+                var oldPass = $(this).serializeArray()[0].value;
+                var newPass = $(this).serializeArray()[1].value;
+
+                if(oldPass && newPass){
+                    userInfoM.changePassWord(oldPass, newPass);
+                }
+
+                return false;
+            }) 
+        })
     }
 
     render() {
@@ -38,7 +54,7 @@ class ChangePassWordScreen extends Component {
                         />  
                     </div>
                     <br/>
-                    
+                     
                     <input 
                         type="button" 
                         id="btn-cancel-user-password"
@@ -56,6 +72,10 @@ class ChangePassWordScreen extends Component {
                 </form>
             </div>
         );
+    }
+
+    componentDidMount() {
+        this.handlingChangePassword();
     }
 }
 

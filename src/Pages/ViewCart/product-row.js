@@ -30,7 +30,8 @@ class ProductRow extends Component {
                     <input type="number" id="product-row-quantity" value="4"/>
                     <button 
                         className="btn btn-numberic" 
-                        id="numberic-minus">
+                        id="numberic-minus"
+                        onClick={() => this.props.changeQuantity(this.props.index, "-")}>
                         -
                     </button>
                 </td>

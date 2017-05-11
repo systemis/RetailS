@@ -4,7 +4,6 @@ import $ from 'jquery';
 class ProductSimpleInfo extends Component {
     constructor(props) {
         super(props);
-        
         this.handlingPlusMinusAmount();
     }
 
@@ -31,7 +30,7 @@ class ProductSimpleInfo extends Component {
                     </div>
                     <div className="show-selected-product-image col-md-5 col-sm-6">
                         <div className="child">
-                            <img src={this.props.Data.productimages} alt="Image about product"/>
+                            <img src={this.props.Data.image} alt="Image about product"/>
                             <span className="status sale">
                                 Sale 
                             </span>
@@ -77,12 +76,7 @@ class ProductSimpleInfo extends Component {
                                     {this.props.Data.category}
                                 </strong>
                             </p>
-                            <p>
-                                TAGS: 
-                                <strong className="show-b-simple-product-tags">
-                                    {this.props.Data.tags}
-                                </strong>
-                            </p>
+                            
                         </div>
                         <div className="show-share-group">
                             <p>Share this item: </p>
@@ -100,3 +94,12 @@ class ProductSimpleInfo extends Component {
 }
 
 export default ProductSimpleInfo;
+
+/**
+ * <p>
+                                TAGS: 
+                                <strong className="show-b-simple-product-tags">
+                                    {this.props.Data.tags}
+                                </strong>
+                            </p>
+ */

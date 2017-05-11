@@ -87,5 +87,30 @@ html{
                 }
             }
         }
+
+        & .btn{
+            width: auto;
+            &.right{
+                margin-left: 10px;
+                float: right;
+            }
+            &.none-radius{ border-radius: 0 }
+            &.purple{
+                background: purple;
+                color: #fff;
+                &:hover{
+                    color: #fff;
+                    background: #222;
+                }
+            }
+            &.red{
+                background: orange;
+                color: #fff;
+                &:hover{
+                    color: #fff;
+                    background: #222;
+                }
+            }
+        }
     }
 }

@@ -1,11 +1,10 @@
-$border: 1px solid #eeeeee;
-@mixin flex() {
-    margin: 0;
-    padding: 0;
-}
-
-
 .user-dashboard-page{
+    $border: 1px solid #eeeeee;
+    @mixin flex() {
+        margin: 0;
+        padding: 0;
+    }
+
     position: relative;
     padding: 0;
     padding-top: 20px;
@@ -85,6 +84,67 @@ $border: 1px solid #eeeeee;
                         & #btn-cancel-user-password{
                             margin-left: 10px;
                             float: right;
+                        }
+                    }
+
+                    & #user-dashboard-add-new-product-screen{
+                        & .add-group{
+                            margin-bottom: 10px;
+                            & .title-group-in-form{
+                                margin: 0;
+                                padding: 0;
+                                font-size: 12px;
+                                color: #888888;
+                            }
+                            
+                            & input[type=text]{
+                                border: $border;
+                                width: 100%;
+                                padding: 5px 3px;
+                            }
+
+                            & input[type=number] {
+                                margin-left: 10px;
+                                border: $border;
+                            }
+
+                            & select{
+                                border: none;
+                                border-radius: 0;
+                                border: $border;
+                            }
+
+                            & .superFancyBlockquote{
+                                color: #999;
+                                font-family: 'Hoefler Text', Georgia, serif;
+                                font-style: italic;
+                                text-align: center;
+                            }
+
+                            & .rich-editor-group-manager{
+                                padding: 20px 10px 20px 5px;
+                                border: $border;
+                                & .tool-c-text-s{
+                                    padding: 10px;
+                                    margin: 10px 0;
+                                    border: $border;
+                                    background: #eeeeee;
+                                    border-radius: 7px;
+                                    &:hover{
+                                        background: #fff;
+                                    }
+                                }
+
+                                & .RichEditor-controls:first-child{
+                                    padding-bottom: 30px;
+                                }
+                            }
+
+                            & .RichEditor-editor{
+                                margin-top: 10px;
+                                min-height: 150px;
+                                border: $border;
+                            }
                         }
                     }
 

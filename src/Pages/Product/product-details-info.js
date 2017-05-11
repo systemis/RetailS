@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 
-const additional_information_name = ["category", "weight", "dimensions", "material", "tags"];
+const additional_information_name = ["category", "weight", "height", "material", "tags"];
 var get_object_size = (obj) => {
     var index = 0;
     for(var i in obj) {
@@ -13,28 +13,29 @@ var get_object_size = (obj) => {
 class ProductDetailsInfo extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            product_details_info: {}
-        }
-        
-        // Phân tích và chọn ra những thuộc tính cho mục thông tin thêm từ dữ liệu .
+        this.state = { product_details_info: {} }
+
         this.handlingClickTab();
-        this.getAdditionalInformation();
     }
 
     getAdditionalInformation(){
         const sefl = this;
-        for(var i in this.props.Data) {
-            if(additional_information_name.indexOf(i) >= 0) {
-                var value_will_add = sefl.props.Data[i];
-                if(value_will_add !== null && value_will_add) {
-                    var product_details_info = sefl.state.product_details_info;
-                    product_details_info[i] = value_will_add;
-                    sefl.setState({"product_details_info": product_details_info});
+        const info = this.props.Infos;
+
+        var index  = 0;
+        var info_d = this.state.product_details_info;
+
+        for(var i in info){
+            if(additional_information_name.indexOf(i) >= 0 && info[i]){
+                info_d[i] = info[i];
+                if(index == get_object_size[info]){
+                    sefl.setState(info_d);
                 }
             }
+
+            index ++;
         }
-    }
+    };
 
     handlingClickTab(){
         $(document).ready(function(){
@@ -53,7 +54,7 @@ class ProductDetailsInfo extends Component {
         });
     }
 
-    renderAdditionalInformation(){
+    additionalInfoList(){
         const sefl = this;
         var itemsList = [];
         var index = 0;
@@ -71,7 +72,25 @@ class ProductDetailsInfo extends Component {
         }
     }
 
+    valueRowList(additional_info){
+        var _rows = []
+        for(var i in additional_info){
+            var row = (
+                <tr key={i} className="">
+                    <th>{additional_info[i].name}</th>
+                    <td><p>{additional_info[i].info}</p></td>
+                </tr>
+            );
+
+            _rows.push(row);
+        }
+
+        return _rows;
+    }
+
     render() {
+        this.getAdditionalInformation();
+        var additionalInfoList = this.additionalInfoList();
         return (
             <div className="product-view-page-product-details-info-group">
                 <ul className="nav nav-tabs tabs-group-details-info">
@@ -81,23 +100,20 @@ class ProductDetailsInfo extends Component {
                 </ul>
                 <div className="collapses">
                     <div className="collapse-item row show">
-                        <div className="collaspe-item-show-des">
+                        <div className="collaspe-item-show-des" id="show-product-description-deltailsscreen">
                             <p>
-                                {this.props.Data.des}
+                                {this.props.Infos.description}
                             </p>    
                         </div>
                     </div>
                     <div className="collapse-item row">
                         <table className="table-show-product-edditional-info">
                             <tbody>
-                                {this.renderAdditionalInformation().map((value, index) => {
-                                    return(
-                                        <tr className="">
-                                            <th>{value.name}</th>
-                                            <td><p>{value.info}</p></td>
-                                        </tr>
-                                    )
-                                })}
+                                {
+                                    this.valueRowList(additionalInfoList).map((value, index) => {
+                                        return value;
+                                    })
+                                }
                             </tbody>
                         </table>
                     </div>
@@ -107,7 +123,7 @@ class ProductDetailsInfo extends Component {
                         </div>
                         <div className="post-new-review-group">
                             <h3>ADD A REVIEW</h3>
-                            <form id="form-add-review-product" action={"/add-reviews-product/" + this.props.Data.id}>
+                            <form id="form-add-review-product" action={"/add-reviews-product/" + this.props.Infos.id}>
                                 <textarea name="commentvalue" id="comment-text" rows="10" placeholder="Your review ."></textarea>
                                 <input    type="submit" />
                             </form>
@@ -116,6 +132,14 @@ class ProductDetailsInfo extends Component {
                 </div>
             </div>
         );
+    }
+
+    componentDidMount() {
+        const sefl = this;
+        $(document).ready(function(){
+            $("#show-product-description-deltailsscreen").empty();
+            $("#show-product-description-deltailsscreen").append($.parseHTML(sefl.props.Infos.description));
+        })  
     }
 }
 

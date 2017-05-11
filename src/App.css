@@ -66,4 +66,24 @@ html {
     html body .App .btn-numberic {
       margin: 5px 1px; } }
 
+    html body .btn {
+      width: auto; }
+      html body .btn.right {
+        margin-left: 10px;
+        float: right; }
+      html body .btn.none-radius {
+        border-radius: 0; }
+      html body .btn.purple {
+        background: purple;
+        color: #fff; }
+        html body .btn.purple:hover {
+          color: #fff;
+          background: #222; }
+      html body .btn.red {
+        background: orange;
+        color: #fff; }
+        html body .btn.red:hover {
+          color: #fff;
+          background: #222; }
+
 /*# sourceMappingURL=App.css.map */

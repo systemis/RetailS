@@ -52,6 +52,46 @@
           .user-dashboard-page .navigation-user-dashboard-page .row #content-user-dashboard-page .main #user-dashboard-change-password-screen #btn-change-user-password, .user-dashboard-page .navigation-user-dashboard-page .row #content-user-dashboard-page .main #user-dashboard-change-password-screen #btn-cancel-user-password {
             margin-left: 10px;
             float: right; }
+          .user-dashboard-page .navigation-user-dashboard-page .row #content-user-dashboard-page .main #user-dashboard-add-new-product-screen .add-group {
+            margin-bottom: 10px; }
+            .user-dashboard-page .navigation-user-dashboard-page .row #content-user-dashboard-page .main #user-dashboard-add-new-product-screen .add-group .title-group-in-form {
+              margin: 0;
+              padding: 0;
+              font-size: 12px;
+              color: #888888; }
+            .user-dashboard-page .navigation-user-dashboard-page .row #content-user-dashboard-page .main #user-dashboard-add-new-product-screen .add-group input[type=text] {
+              border: 1px solid #eeeeee;
+              width: 100%;
+              padding: 5px 3px; }
+            .user-dashboard-page .navigation-user-dashboard-page .row #content-user-dashboard-page .main #user-dashboard-add-new-product-screen .add-group input[type=number] {
+              margin-left: 10px;
+              border: 1px solid #eeeeee; }
+            .user-dashboard-page .navigation-user-dashboard-page .row #content-user-dashboard-page .main #user-dashboard-add-new-product-screen .add-group select {
+              border: none;
+              border-radius: 0;
+              border: 1px solid #eeeeee; }
+            .user-dashboard-page .navigation-user-dashboard-page .row #content-user-dashboard-page .main #user-dashboard-add-new-product-screen .add-group .superFancyBlockquote {
+              color: #999;
+              font-family: 'Hoefler Text', Georgia, serif;
+              font-style: italic;
+              text-align: center; }
+            .user-dashboard-page .navigation-user-dashboard-page .row #content-user-dashboard-page .main #user-dashboard-add-new-product-screen .add-group .rich-editor-group-manager {
+              padding: 20px 10px 20px 5px;
+              border: 1px solid #eeeeee; }
+              .user-dashboard-page .navigation-user-dashboard-page .row #content-user-dashboard-page .main #user-dashboard-add-new-product-screen .add-group .rich-editor-group-manager .tool-c-text-s {
+                padding: 10px;
+                margin: 10px 0;
+                border: 1px solid #eeeeee;
+                background: #eeeeee;
+                border-radius: 7px; }
+                .user-dashboard-page .navigation-user-dashboard-page .row #content-user-dashboard-page .main #user-dashboard-add-new-product-screen .add-group .rich-editor-group-manager .tool-c-text-s:hover {
+                  background: #fff; }
+              .user-dashboard-page .navigation-user-dashboard-page .row #content-user-dashboard-page .main #user-dashboard-add-new-product-screen .add-group .rich-editor-group-manager .RichEditor-controls:first-child {
+                padding-bottom: 30px; }
+            .user-dashboard-page .navigation-user-dashboard-page .row #content-user-dashboard-page .main #user-dashboard-add-new-product-screen .add-group .RichEditor-editor {
+              margin-top: 10px;
+              min-height: 150px;
+              border: 1px solid #eeeeee; }
           @media screen and (min-width: 768px) {
             .user-dashboard-page .navigation-user-dashboard-page .row #content-user-dashboard-page .main {
               padding: 10px 50px; } }

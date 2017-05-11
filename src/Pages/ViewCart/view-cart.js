@@ -29,7 +29,6 @@ class ViewCartGroup extends Component {
                     break;
                 default: 
                     return console.log("Error: Choice to update product quantity is not correct");
-                    break;
             }
 
             allQuantity[key] = quantity;
@@ -47,9 +46,10 @@ class ViewCartGroup extends Component {
                     {this.state.quantity.map((value, index) => {
                         return(
                             <ProductRow 
+                                key={index}
+                                index={index}
                                 quantity={this.state.quantity} 
                                 changeQuantity={updateProductQuantity}
-                                index={index}
                             />)
                     })}
                 </table>

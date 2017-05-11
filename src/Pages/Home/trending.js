@@ -12,28 +12,28 @@ class TrendingGroup extends Component {
         this.state = {
             trendingProductsData: [
                 {
-                    Image: ExampleProdcuct1,
-                    Name:  "Paul Smith",
-                    Category: "Handsome",
-                    Price: "14.00"
+                    imagefilename: ExampleProdcuct1,
+                    name:  "Paul Smith",
+                    category: "Handsome",
+                    price: "14.00"
                 },
                 {
-                    Image: ExampleProdcuct2,
-                    Name:  "Paul Smith",
-                    Category: "Handsome",
-                    Price: "14.00"
+                    imagefilename: ExampleProdcuct2,
+                    name:  "Paul Smith",
+                    category: "Handsome",
+                    price: "14.00"
                 },
                 {
-                    Image: ExampleProdcuct3,
-                    Name:  "Paul Smith",
-                    Category: "Handsome",
-                    Price: "14.00"
+                    imagefilename: ExampleProdcuct3,
+                    name:  "Paul Smith",
+                    category: "Handsome",
+                    price: "14.00"
                 },
                 {
-                    Image: ExampleProdcuct4,
-                    Name:  "Paul Smith",
-                    Category: "Handsome",
-                    Price: "14.00"
+                    imagefilename: ExampleProdcuct4,
+                    name:  "Paul Smith",
+                    category: "Handsome",
+                    price: "14.00"
                 },
             ]
         }

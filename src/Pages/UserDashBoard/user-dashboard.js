@@ -4,16 +4,26 @@ import $                    from 'jquery';
 
 require('./Style/user-dashboard-page-style.css');
 
-const nameMenuItems = ["Thông tin", "Đổi mật khẩu ", " Giỏ hàng "];
+const url           = "http://localhost:3000/my-account/";
+const paramHrefs    = ["change-password", "cart", "new-product"];
+const nameMenuItems = ["Thông tin", "Đổi mật khẩu ", " Giỏ hàng ", "Thêm sản phẩm mới"];
 
 class Navigation extends Component {
     constructor(props) {
         super(props);
-
         this.state = { 
             navigation_hidden: "", 
             index_screen: 0
         }
+
+    }
+
+    setUpIndexScreen() {
+        var sefl = this;
+        let href = location.href;
+        if(href.indexOf("/change-password") >= 0) sefl.setState({index_screen: 1}); 
+        if(href.indexOf("/cart") >= 0)            sefl.setState({index_screen: 2});
+        if(href.indexOf("/new-product") >= 0)     sefl.setState({index_screen: 3});
     }
 
     hidden_show_navigation_menu = () => {
@@ -29,21 +39,36 @@ class Navigation extends Component {
     }
 
     clickActionMenuItem = () => {
-        const sefl = this;
-        
         $(document).ready(() => {
             var menuItems = $("#nv-mn-dashboard-page li");
             menuItems.map((index, item) => {
                 $(item).click(() => {
-                    var idString = $(item).attr("id");
-                    sefl.setState({index_screen: parseInt(idString.substr(idString.indexOf("&") + 1))});
+                    const idString = $(item).attr("id");
+                    const indexV   = parseInt(idString.substr(idString.indexOf("&") + 1));
                     
-                    console.log(sefl.state.index_screen);
+                    if(indexV !== 3) {
+                        if(indexV == 0) return location.href = url; 
+
+                        return location.href = url + paramHrefs[indexV - 1];
+                    }
+
+                    $.ajax({
+                        url: '/check-admin',
+                        method: 'POST',
+                        success: isAdmin => {
+                            if(isAdmin) {
+                                return location.href = url + paramHrefs[indexV - 1];
+                            } 
+                            
+                            return alert("Chức năng chỉ được sử dụng bởi admin thôi !");
+
+                        },
+                        error: err => console.log(err)
+                    })
                 })
             })
         })
     }
-
 
     setup_caret_char = () => {
         if(this.state.navigation_hidden === "") {
@@ -76,7 +101,7 @@ class Navigation extends Component {
                     <div className="row">
                         <ul id="nv-mn-dashboard-page" className={"col-md-2 col-sm-2 navigation-menu " + this.state.navigation_hidden}>
                             {nameMenuItems.map((title, index) => {
-                                return <li id={"mn_item_dashboard&" + index}>{title}</li>
+                                return <li key={index} id={"mn_item_dashboard&" + index}>{title}</li>
                             })}
                         </ul>
 
@@ -92,7 +117,8 @@ class Navigation extends Component {
     }
 
     componentDidMount () {
-        {this.clickActionMenuItem()}
+        this.clickActionMenuItem();
+        this.setUpIndexScreen();        
     }
 }
 

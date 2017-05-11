@@ -15,16 +15,26 @@ function UserDataManager(){
             if(err){
                 console.log(err);
                 return fn("err");
-                console.log(err);
             }else if(result.length < 0) {
                 return fn("email_c");
             } 
             
-            if( result[0] === user.password) {
-                fn(result[0]);
+            if(password === result[0].password) {
+                return fn(result[0]);
             }else{
-                fn("password_c");
+                return fn("password_c");
             }
+        })
+    }
+
+    this.getUserInformation = (email, fn) => {
+        connection.query("SELECT * FROM "+tableName+" WHERE email = ?", [email], (err, result) => {
+            if(err){
+                console.log(err);
+                return fn('err');
+            }
+
+            fn(result[0]);
         })
     }
 
@@ -39,6 +49,29 @@ function UserDataManager(){
             console.log(field);
             return fn(true);
         });
+    }
+
+    this.updateUserInfo = (email, name, andress, phonenumber, fn) => {
+        connection.query("UPDATE "+tableName+" SET name = ?, andress = ?, phonenumber = ? WHERE email = ?", [name, andress, phonenumber, email], (err) => {
+            if(err) {
+                console.log(err);
+                return fn("err");
+            }
+
+            return fn("Success");
+        })
+    }
+
+    this.changePasswordUser = (email, newPassword, fn) => {
+        connection.query("UPDATE "+tableName+" SET password = ? WHERE email = ?", [newPassword, email
+        ], (err, result) => {
+            if(err) {
+                console.log(err);
+                return fn("err");
+            }
+
+            return fn("Success");
+        })
     }
 
     this.deleteTable = (fn) => {

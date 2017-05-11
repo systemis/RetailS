@@ -1,7 +1,6 @@
 var express    = require('express');
 var connection = require('../config/mainDB.js');
-
-var app     = express();
+var app        = express();
 
 connection.connect((err) => {
     if(err){

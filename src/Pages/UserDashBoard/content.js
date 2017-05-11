@@ -1,10 +1,10 @@
 import React, { Component }    from 'react';
 import InformationScreen       from './Components/screen-information.js';
 import ChangePassWordScreen    from './Components/screen-change-password.js';
-import CartScreen              from './Components/screen-cart.js';
+import AddNewProductScreen     from './Components/screen_addnewproduct.js';
 import ViewCartGroup           from '../../Pages/ViewCart/view-cart.js';
 
-const screens = [<InformationScreen />, <ChangePassWordScreen />, <ViewCartGroup />];
+const screens = [<InformationScreen />, <ChangePassWordScreen />, <ViewCartGroup />, <AddNewProductScreen />];
 class Content extends Component {
     constructor(props) {
         super(props);

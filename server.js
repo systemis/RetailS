@@ -22,31 +22,47 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '.', 'build')));
 
 
-require('./server/app/user.js')(app);
 require('./server/app/home.js')(app);
+require('./server/app/user.js')(app);
+require('./server/app/product.js')(app);
+require('./server/app/image.js')(app);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}!`)
   
-  productDM.createTable((result) => console.log(result));
-  var bundle = {
-    id: Date.now(),
-    name: "fdnsis", 
-    category: "",
-    description: "dd",
-    price: "d",
-    weight: "2sd",
-    height: "",
-    material: "",
-    tags: "",
-    reviews: "",
-    status: ""
-  }
-  productDM.getProductByName("fdnsis", (result) => {
-    console.log(result);
-  })
-  productDM.deleteProductByName("fdnsis", (result) => {
-    console.log(result);
-  })
+  //productDM.createTable((result) => console.log(result));
+  // var bundle = {
+  //   id: Date.now(),
+  //   name: "fdndsis", 
+  //   category: "",
+  //   description: "dd",
+  //   price: "d",
+  //   weight: "2sd",
+  //   height: "",
+  //   material: "",
+  //   //tags: "",
+  //   reviews: "",
+  //   status: ""
+  // }
+
+  // productDM.newProduct(bundle, (result) => console.log(result));
+
+  // productDM.getProductByName("fdnsis", (result) => {
+  //   console.log(result);
+  // })
+  // productDM.deleteProductByName("fdnsis", (result) => {
+  //   console.log(result);
+  // })
+
+  // productDM.dropTable(result => {
+  //   console.log(result);
+  //   if(result) {
+  //     productDM.createTable(rs => {
+  //       console.log("Create table: " + rs);
+  //     });
+  //   }
+  // // })
+
+  // productDM.getProductByName("Quần jean từ Nhật Bản.", result => console.log(result));
 });
