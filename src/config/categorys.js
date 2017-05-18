@@ -1,1 +1,0 @@
-module.exports = ["Quần jean", "Áo thun", "Quần Kaki", "Áo ngủ", "Quần lót phụ nữ", "Quần lót đàn ông", "Áo ngực", "Quần thể thao", "Áo thể thao", "Giày thao"];

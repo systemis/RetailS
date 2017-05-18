@@ -3,7 +3,7 @@ const tableName  = "ProductData";
 
 function ProductDataManager() {
     this.createTable = (fn) => {
-        connection.query("CREATE TABLE IF NOT EXISTS `"+tableName+"` ( `id` INT NOT NULL , `name` VARCHAR(200) NOT NULL , `image` TEXT NOT NULL , `category` TEXT NOT NULL , `description` TEXT NOT NULL , `price` TEXT NOT NULL , `weight` TEXT NULL , `height` TEXT NULL , `material` TEXT NULL, `reviews` TEXT NOT NULL , `status` TEXT(200) NULL, `sell` INT NULL, PRIMARY KEY (`name`))", (err, result) => {
+        connection.query("CREATE TABLE IF NOT EXISTS `"+tableName+"` ( `id` INT NOT NULL , `name` VARCHAR(200) NOT NULL , `image` TEXT NOT NULL , `category` TEXT NOT NULL , `description` TEXT NOT NULL , `price` TEXT NOT NULL , `weight` TEXT NULL , `height` TEXT NULL , `material` TEXT NULL, `reviews` TEXT NOT NULL , `status` TEXT(200) NULL, `sell` INT NULL, `date` TEXT NOT NULL, PRIMARY KEY (`name`))", (err, result) => {
             if(err) {
                 console.log(err);
                 return fn('err');
@@ -42,7 +42,7 @@ function ProductDataManager() {
         })
     }
 
-    this.getProductByCategory = (category, fn) => {
+    this.getProductsByCategory = (category, fn) => {
         connection.query("SELECT * FROM "+tableName+" WHERE category = ?", [category], (err, result) => {
             if(err) {
                 return fn("Error");
@@ -65,12 +65,12 @@ function ProductDataManager() {
     }
 
     this.plusSell = (name, fn) => {
-        connection.query("SELECT * FROM "+tableName+" WHERE name = ?", [name], (err, result) => {
-            if(err) throw err;
+        connection.query("SELECT * FROM "+tableName+" WHERE name = ?", [name], (_err, _result) => {
+            if(_err) throw _err;
 
-            var newSell = result[0].sell + 1;
-            connection.query("UPDATE " + tablename + " SET sell = ? WHERE name = ?", [sell, name], (_err, result) => {
-                if(_err) throw _err;
+            var newSell = _result[0].sell + 1;
+            connection.query("UPDATE " + tableName + " SET sell = ? WHERE name = ?", [newSell, name], (err, result) => {
+                if(err) throw err;
 
                 fn(result);
             });

@@ -4,9 +4,12 @@
     padding-top: 20px;
     & .child{
         & .show-image-label{
+            $height: 250px;
+            //height: $height;
             position: relative;
             & img{
                 width: 100%;
+                height: $height;
             }
             & span{
                 text-transform: uppercase;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Editor               from './editor';
 import $                    from 'jquery';
-import categorys            from '../../../config/categorys.js';
+import categorys            from '../../../js/categorys.js';
 //import productM           from '../js/product-manager.js';
 
 class AddNewProductScreen extends Component {

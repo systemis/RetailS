@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import ProductCard from '../../Components/ProductCard/product-card.js';
+import ProductCard          from '../../Components/ProductCard/product-card.js';
+import $                    from 'jquery';
 
 var ExampleProdcuct1 = require('../../public/ex-1.jpg');
 var ExampleProdcuct2 = require('../../public/ex-2.jpg');
@@ -11,32 +12,48 @@ class TrendingGroup extends Component {
         super(props);
         this.state = {
             trendingProductsData: [
-                {
-                    imagefilename: ExampleProdcuct1,
-                    name:  "Paul Smith",
-                    category: "Handsome",
-                    price: "14.00"
-                },
-                {
-                    imagefilename: ExampleProdcuct2,
-                    name:  "Paul Smith",
-                    category: "Handsome",
-                    price: "14.00"
-                },
-                {
-                    imagefilename: ExampleProdcuct3,
-                    name:  "Paul Smith",
-                    category: "Handsome",
-                    price: "14.00"
-                },
-                {
-                    imagefilename: ExampleProdcuct4,
-                    name:  "Paul Smith",
-                    category: "Handsome",
-                    price: "14.00"
-                },
+                // {
+                //     image: ExampleProdcuct1,
+                //     name:  "Paul Smith",
+                //     category: "Handsome",
+                //     price: "14.00"
+                // },
+                // {
+                //     image: ExampleProdcuct2,
+                //     name:  "Paul Smith",
+                //     category: "Handsome",
+                //     price: "14.00"
+                // },
+                // {
+                //     image: ExampleProdcuct3,
+                //     name:  "Paul Smith",
+                //     category: "Handsome",
+                //     price: "14.00"
+                // },
+                // {
+                //     image: ExampleProdcuct4,
+                //     name:  "Paul Smith",
+                //     category: "Handsome",
+                //     price: "14.00"
+                // },
             ]
         }
+
+        this.getProduct();
+    }
+
+    getProduct(){
+        const sefl = this;
+        $.ajax({
+            url: "/get-related-products", type: 'GET', 
+            success: data => {
+                if(data){
+                    console.log(data);
+                    this.setState({trendingProductsData: data});
+                }       
+            },
+            error: err => console.log(err)
+        })
     }
 
     render() {

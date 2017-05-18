@@ -11,6 +11,7 @@ const productDM          = require('./server/models/database-product.js');
 
 const app = express();
 
+app.set('port', (process.env.PORT || 5000));
 app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'));
 app.use(cookieParser());
 app.use(expresssession( {
@@ -22,47 +23,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '.', 'build')));
 
 
+// Routers 
 require('./server/app/home.js')(app);
 require('./server/app/user.js')(app);
 require('./server/app/product.js')(app);
 require('./server/app/image.js')(app);
+require('./server/app/shop.js')(app);
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+app.listen(3000, () => {
   console.log(`App listening on port ${PORT}!`)
-  
-  //productDM.createTable((result) => console.log(result));
-  // var bundle = {
-  //   id: Date.now(),
-  //   name: "fdndsis", 
-  //   category: "",
-  //   description: "dd",
-  //   price: "d",
-  //   weight: "2sd",
-  //   height: "",
-  //   material: "",
-  //   //tags: "",
-  //   reviews: "",
-  //   status: ""
-  // }
-
-  // productDM.newProduct(bundle, (result) => console.log(result));
-
-  // productDM.getProductByName("fdnsis", (result) => {
-  //   console.log(result);
-  // })
-  // productDM.deleteProductByName("fdnsis", (result) => {
-  //   console.log(result);
-  // })
-
-  // productDM.dropTable(result => {
-  //   console.log(result);
-  //   if(result) {
-  //     productDM.createTable(rs => {
-  //       console.log("Create table: " + rs);
-  //     });
-  //   }
-  // // })
-
-  // productDM.getProductByName("Quần jean từ Nhật Bản.", result => console.log(result));
+  //productDM.plusSell("giay cua thinh", result => console.log("Plus sell of: " + "giay cua thinh " + " result: " + result))
+  //var date = new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString();
+  // productDM.createTable(_result => console.log(_result));
 });

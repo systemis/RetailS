@@ -1,0 +1,1 @@
+module.exports = ["Quan jean", "Ao thun", "Quan Kaki", "Ao ngu", "Giay the thao name", "Giay the thao nu"];

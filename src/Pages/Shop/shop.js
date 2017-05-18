@@ -1,96 +1,323 @@
 import React, { Component } from 'react';
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
-import ProductCard from '../../Components/ProductCard/product-card.js';
-import $ from 'jquery';
+import SelectField          from 'material-ui/SelectField';
+import MenuItem             from 'material-ui/MenuItem';
+import $                    from 'jquery';
+import ProductCard          from '../../Components/ProductCard/product-card.js';
 
+var CookieManager    = require('../../js/cookie-manager.js');
 var ExampleProdcuct1 = require('../../public/best-seller-image/ex-1.jpg');
 var ExampleProdcuct2 = require('../../public/best-seller-image/ex-2.jpg');
 var ExampleProdcuct3 = require('../../public/best-seller-image/ex-3.jpg');
 var ExampleProdcuct4 = require('../../public/best-seller-image/ex-4.jpg');
-
 require('./Style/shop-page-style.css');
+
+function getUrl(name){
+    name           = name + "/";
+    var value      = "";
+    var href       = window.location.href;
+    var href_array = href.split("");
+
+    console.log(href);
+    if(href.indexOf(name) >= 0){
+        var _value_array = [];
+        for(var i = href.indexOf(name) + name.length; i < href_array.length; i++) {
+            if(href_array[i] === '/'){
+                value = _value_array.join('');
+                i = href_array.length;
+                
+                return (name  + value).replace("%20", " ");
+            }else{
+                _value_array.push(href_array[i]);
+                console.log(href_array[i]);
+            }
+        }   
+    }
+
+    return "";
+}
+
+const cookieManager     = new CookieManager("SortKind");
+const limitshowproduct  = 2;
+var   urlGetProducsData = "";
+var   find_value = "";
+var   url  = "/get-related-products";
+
+if(getUrl("category")){
+    find_value  = getUrl("category");
+    url = "/get-product/" + "category/" + getUrl("category");
+};
+
+if(getUrl("tag")){
+    find_value  = getUrl("tag");
+    url = "/get-product/" + "tag/" + getUrl("category");
+};
+
+if(getUrl("sale")){
+    find_value  = getUrl("sale");
+    url = "/get-product/" + "sale/" + getUrl("category");
+};
+
+
+// get page index 
+function setup_get_pageindex(){
+    var href        = location.href;
+    var href_array  = href.split("");
+
+    // Xoá kí tự cuối cùng nếu bằng '/'
+    if(href_array[href_array.length - 1] !== '/') { location.href += '/' };
+    if(href_array[href_array.length - 1] === '/') { delete href_array[href_array.length - 1] };
+
+    if(href_array[href_array.length - 1] !== "/") {
+        if(
+            href.indexOf("shop")  === href.length - "shop" .length ||
+            href.indexOf(find_value)  === href.length - find_value.length) 
+        {
+            return location.href += "/0";
+        }
+    }else{
+        if(
+            href.indexOf("shop/") === href.length - "shop/".length ||
+            href.indexOf(find_value + "/") === href.length - (find_value + "/").length)
+        {
+            return location.href += "0";
+        }
+    }
+
+    var indexSelected = [];
+    var indexSelected_real = [];
+    for(var i = href_array.length - 1; i >= 0; i--){
+        if(href_array[i] === "/") {
+            i = -1;
+        }else{
+            indexSelected.push(href_array[i])
+        }
+    }
+
+    for(var i = indexSelected.length - 1; i >= 0; i--) indexSelected_real.push(indexSelected[i]);
+
+    var pageIndex = parseInt(indexSelected_real.join(""));
+    if(pageIndex < 0) {
+        return setPageIndex_href(0);
+    }
+
+    return pageIndex;
+}
+
+// Change href 
+function setPageIndex_href(index){
+    var href = location.href;
+    var href_array  = href.split("");
+    
+    // Xoá kí tự cuối cùng nếu bằng '/'
+    if(href_array[href_array.length - 1] === '/') delete href_array[href_array.length - 1];
+
+    for(var i = href_array.length - 1; i >= 0; i--){
+        if(href_array[i] === "/") {
+            i = -1;
+        }else{
+            delete href_array[i];
+        }
+    }
+
+    location.href = href_array.join("") + index.toString();
+}
+
+// Get sort kind from cookie 
+function getSortKind(){
+    if(cookieManager.checkCookie() === false){
+        cookieManager.setCookie("0");
+        return 0;
+    }
+
+    return cookieManager.getCookie();
+}
+
+
+
+
+// console.log(getUrl("category"));
+const _sortKind         = getSortKind();
+
+
+// Sort product with sortion kind which is selected .
+class SortProduct {
+    constructor(self, sortKind){
+        this.self     = self;
+        this.sortKind = sortKind;
+        if (parseInt(sortKind) === 0) { this.sortDefault() };
+        if (parseInt(sortKind) === 1) { this.sortWithSell() };
+        if (parseInt(sortKind) === 2) { this.sortWithPrice_cheapToexpensive() }; 
+        if (parseInt(sortKind) === 3) { this.sortWithPrice_expensiveToCheaper() };
+    }
+
+    sortDefault(){
+        var array_sort = this.self.state.trendingProductsData;
+        for(var i = 0; i < array_sort.length; i++){
+            for(var j = 0; j < array_sort.length; j++){
+                if(parseInt(Date.parse(array_sort[j].date)) < parseInt(Date.parse(array_sort[i].date))){
+                    let  _single  = array_sort[i];
+                    array_sort[i] = array_sort[j];
+                    array_sort[j] = _single;
+                }
+            }
+        }
+
+        this.self.setState({trendingProductsData: array_sort});
+    }
+
+    // Xắp xếp theo giá từ thấp tới cao 
+    sortWithPrice_cheapToexpensive(){
+        var array_sort = this.self.state.trendingProductsData;
+        for(var i = 0; i < array_sort.length; i++){
+            for(var j = 0; j < array_sort.length; j++){
+                if(parseInt(array_sort[j].price) > parseInt(array_sort[i].price)){
+                    let  _single  = array_sort[i];
+                    array_sort[i] = array_sort[j];
+                    array_sort[j] = _single;
+                }
+            }
+        }
+
+        console.log(array_sort);
+
+        this.self.setState({trendingProductsData: array_sort});
+    }
+
+    // Xắp xếp theo giá từ cao tới thấp 
+    sortWithPrice_expensiveToCheaper(){
+        var array_sort = this.self.state.trendingProductsData;
+        for(var i = 0; i < array_sort.length; i++){
+            for(var j = 0; j < array_sort.length; j++){
+                if(parseInt(array_sort[j].price) < parseInt(array_sort[i].price)){
+                    let  _single  = array_sort[i];
+                    array_sort[i] = array_sort[j];
+                    array_sort[j] = _single;
+                }
+            }
+        }
+
+        this.self.setState({trendingProductsData: array_sort});
+    }
+
+    // Xắp xếp theo doanh thu 
+    sortWithSell(){
+        var array_sort = this.self.state.trendingProductsData;
+        for(var i = 0; i < array_sort.length; i++){
+            for(var j = 0; j < array_sort.length; j++){
+                if(parseInt(array_sort[j].sell) < parseInt(array_sort[i].sell)){
+                    let  _single  = array_sort[i];
+                    array_sort[i] = array_sort[j];
+                    array_sort[j] = _single;
+                }
+            }
+        }
+
+        this.self.setState({trendingProductsData: array_sort});
+    }
+}
 
 class ShopPage extends Component {
     constructor(props){
         super(props);
+        var pageIndexSelected = setup_get_pageindex();
         this.state = { 
-            SortKind: 1,
-            pageIndex: 0,
-            trendingProductsData: [
-                {
-                    Image: ExampleProdcuct1,
-                    Name:  "Paul Smith",
-                    Category: "Handsome",
-                    Price: "14.00"},
-                {
-                    Image: ExampleProdcuct2,
-                    Name:  "Paul Smith",
-                    Category: "Handsome",
-                    Price: "14.00"},
-                {
-                    Image: ExampleProdcuct3,
-                    Name:  "Paul Smith",
-                    Category: "Handsome",
-                    Price: "14.00"},
-                {
-                    Image: ExampleProdcuct4,
-                    Name:  "Paul Smith",
-                    Category: "Handsome",
-                    Price: "14.00" },
-                {
-                    Image: ExampleProdcuct2,
-                    Name:  "Paul Smith",
-                    Category: "Handsome",
-                    Price: "14.00"},
-                {
-                    Image: ExampleProdcuct3,
-                    Name:  "Paul Smith",
-                    Category: "Handsome",
-                    Price: "14.00"},
+            pageIndex: pageIndexSelected,
+            trendingProductsData: [ // Example data to run client 
+                // {
+                //     image: ExampleProdcuct4,
+                //     name:  "Paul Smith 1",
+                //     category: "Handsome",
+                //     price: "1",
+                //     sell: 4
+                // },
+                // {
+                //     image: ExampleProdcuct4,
+                //     name:  "Paul Smith 1",
+                //     category: "Handsome",
+                //     price: "2",
+                //     sell: 2
+                // },
+                // {
+                //     image: ExampleProdcuct4,
+                //     name:  "Paul Smith 1",
+                //     category: "Handsome",
+                //     price: "4", 
+                //     sell: 3
+                // },
+                // {
+                //     image: ExampleProdcuct4,
+                //     name:  "Paul Smith 1",
+                //     category: "Handsome",
+                //     price: "3",
+                //     sell: 1
+                // },
             ]
         }
 
-        this.chanePageIndex();
+        this.getProduct();       
+        this.changePageIndex();
     }
 
-    handleChange = event => this.setState({SortKind: $("#shop-choose-kind-sort").val()})
+    getProduct(){
+        $.ajax({
+            url: url, type: 'GET', 
+            success: data => {
+                if(data){
+                    console.log(data);
+                    this.setState({trendingProductsData: data});
+                    new SortProduct(this, _sortKind);
+                }       
+            },
+            error: err => console.log(err)
+        })
+    }
 
-    chanePageIndex = () => {
+    // Sort product when client click 
+    handleChange = event => {
+        let value = $("#shop-choose-kind-sort").val();
+        new SortProduct(this, value);
+        cookieManager.setCookie(value);
+    }
+
+    changePageIndex(){
         const sefl = this;
          $(document).ready(() => {
             var nbList = $("#phan-trang-group > span.page");
             nbList.map((index, el) => {
                 $(el).click(function(){
-                    sefl.setState({pageIndex: parseInt($(this).attr('id'))})
+                    setPageIndex_href(parseInt($(this).attr('id')));
                 })
             })
          })
     };
 
+    // Handling when client lick next button or previous button .
     nextAndpreviousPage = (choice) => {
         if(choice == 1){
-            if(this.state.pageIndex < parseInt(this.state.trendingProductsData.length / 16)){
-                this.setState({pageIndex: this.state.pageIndex + choice });
+            if(this.state.pageIndex < parseInt(this.state.trendingProductsData.length / limitshowproduct)){
+                setPageIndex_href(this.state.pageIndex + choice);
             }
         }else{
             if(this.state.pageIndex > 0) {
-                this.setState({pageIndex: this.state.pageIndex + choice });
+                setPageIndex_href(this.state.pageIndex + choice);
             }
         }
     }
 
+    // Xử lý để hiện thị thanh phân trang .
     renderPhanTrangGroup = () => {
         const sefl = this;
-        var pagesAmount = sefl.state.trendingProductsData.length / 16;
+        var pagesAmount = parseInt(this.state.trendingProductsData.length / limitshowproduct);
+        //console.log(pagesAmount);
+        if(this.state.trendingProductsData.length < pagesAmount * limitshowproduct || this.state.trendingProductsData.length > pagesAmount * limitshowproduct) { pagesAmount ++; }
         if(pagesAmount > 1) {
             var nutBam = [];
-            for(var i = 0; i <= parseInt(pagesAmount); i++){
+            for(var i = 0; i < parseInt(pagesAmount); i++){
                 let classSpan = "";
                 if(i == sefl.state.pageIndex) { classSpan = "active"; }
-                nutBam.push((<span id={i} className={"page "+classSpan}> {i + 1} </span>));
+                nutBam.push((<span id={i} className={"page "+classSpan}> {i} </span>));
                 
-                if(i == parseInt(pagesAmount)){
+                if(i == parseInt(pagesAmount) - 1){
                     let previousBtn = "";
                     if(sefl.state.pageIndex > 0) {
                         previousBtn = <span onClick={() => {this.nextAndpreviousPage(-1)}}> Previous </span>
@@ -116,30 +343,57 @@ class ShopPage extends Component {
         }
     }
 
+    // Danh sách sản phẩm dưới dạng DOM dùng để render .
+    productsList(){
+        var products_render = [];
+
+        const products_info = this.state.trendingProductsData;
+        const page_index    = this.state.pageIndex;
+
+        for(var i = 0; i < products_info.length; i++){
+            if(i >= limitshowproduct * page_index){
+                if(i < (limitshowproduct * page_index + limitshowproduct)){
+                    // console.log(page_index);
+                    products_render.push(<ProductCard key={i} Data={products_info[i]} />);
+                }
+            }
+        }
+
+        return products_render;
+    }
+
     render() {
         return (
             <div className="shop-page container">
                 <h1> Shop </h1>    
                 <div className="select-sort-kind-group row">
-                    <select id="shop-choose-kind-sort" onChange={() => this.handleChange()}>
-                        <option value="1"> Sắp xếp mặc định   </option>
-                        <option value="2"> Bán chạy nhất.     </option>
-                        <option value="3"> Giá: thấp tới cao. </option>
-                        <option value="4"> Giáo: cao tới thấp.</option>
+                    <select 
+                        id="shop-choose-kind-sort" 
+                        onChange={() => this.handleChange()}>
+                        <option value="0"> Sắp xếp mặc định   </option>
+                        <option value="1" >Bán chạy nhất.     </option>
+                        <option value="2"> Giá: thấp tới cao  </option>
+                        <option value="3"> Giáo: cao tới thấp </option>
                     </select>
                 </div>
                 <div className="show-best-sellers-product row">
-                    {this.state.trendingProductsData.map((value, index) => {
-                       if(index >= 16 * this.state.pageIndex) {
-                           if(index < (16 * this.state.pageIndex + 16)){
-                                return <ProductCard key={index} Data={value} />
-                           }
-                       }
-                    })}
+                    {this.productsList().map(value => {return value;})}
                 </div>
-                {this.renderPhanTrangGroup()}
+                    {this.renderPhanTrangGroup()}
             </div>
         );
+    }
+
+    componentDidMount() {
+        var optionList = document.getElementById("shop-choose-kind-sort").querySelectorAll("option");
+        for(var i = 0; i < optionList.length; i++){
+            if(i == _sortKind){
+                optionList[i].setAttribute("selected", "selected");
+                i = optionList.length;
+            }
+        }
+        
+        return true;        
     }
 }
 

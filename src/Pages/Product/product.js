@@ -3,15 +3,14 @@ import ProductSimpleInfo    from './product-simple-info.js';
 import ProductDetailsInfo   from './product-details-info.js';
 import $                    from 'jquery';
 
-var ExampleProdcuct1 = require('../../public/ex-1.jpg');
-
+const ExampleProdcuct1 = require('../../public/ex-1.jpg');
 require('./Style/product-page-style.css');
 
 class ProductPage extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            productInfo: {
+        this.productName      = props.match.params.name;
+        this.state = {productInfo: {
                 // id: 1029,
                 // name: "CHEAP MONDAY",
                 // description: "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. bag",
@@ -34,15 +33,14 @@ class ProductPage extends Component {
     
     getProductInfos() {
         const sefl        = this;
-        const productName = this.props.match.params.name;
         $.ajax({
-            url: "/get-product-by-name/" + productName,
-            type: "POST",
+            url: "/get-product-by-name/" + this.productName,
+            type: "get",
             success: data => {
-                console.log(data);
-                
                 sefl.setState({productInfo: data});
-                console.log(sefl.state.productInfo);
+                
+                // Tăng lượt xem của sản phẩm .
+                if(data) setTimeout(() => this.plusProductSell(), 500);
             },
             error: err => {
                 console.log(err)
@@ -50,8 +48,16 @@ class ProductPage extends Component {
         })
     }
 
+    plusProductSell(){
+        console.log("Tang san pham ");
+        $.ajax({
+            url: "/plus-product-sell/" + this.productName, type:"POST", 
+            success: data => console.log(data), 
+            error: err => console.log(err)
+        });
+    }
+
     render() {
-        console.log(this.state.productInfo);
         if(this.state.productInfo){
             return (
                 <div className="product-view-page container">
