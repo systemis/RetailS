@@ -207,7 +207,7 @@ class SortProduct {
         this.self.setState({trendingProductsData: array_sort});
     }
 
-    // Xắp xếp theo doanh thu 
+    // Xắp xếp theo doanh thu ( từ cao tới thấp )
     sortWithSell(){
         var array_sort = this.self.state.trendingProductsData;
         for(var i = 0; i < array_sort.length; i++){
@@ -274,6 +274,8 @@ class ShopPage extends Component {
                 if(data){
                     console.log(data);
                     this.setState({trendingProductsData: data});
+
+                    // Xắp xếp sản phẩm theo lựa chọn của người dùng sau khi lấy được dữ liệu từ server .
                     new SortProduct(this, _sortKind);
                 }       
             },
@@ -316,7 +318,9 @@ class ShopPage extends Component {
     // Xử lý để hiện thị thanh phân trang .
     renderPhanTrangGroup(){
         const sefl = this;
-        
+        // Trường hợp có thằng nào điên mới hiện thị nữa sản phẩm .
+        if(limitshowproduct < 1) limitshowproduct = 1;
+
         // Set page amount by litmitation product to show .
         var pagesAmount = parseInt(this.state.trendingProductsData.length / limitshowproduct);
 
@@ -325,12 +329,12 @@ class ShopPage extends Component {
 
         if(pagesAmount > 1) {
             var nutBam = [];
-            for(var i = 0; i < parseInt(pagesAmount); i++){
+            for(var i = 0; i < pagesAmount; i++){
                 let classSpan = "";
                 if(i == sefl.state.pageIndex) { classSpan = "active"; }
                 nutBam.push((<span id={i} className={"page "+classSpan}> {i} </span>));
                 
-                if(i == parseInt(pagesAmount) - 1){
+                if(i == pagesAmount - 1){
                     let previousBtn = "";
                     if(sefl.state.pageIndex > 0) {
                         previousBtn = <span onClick={() => {this.nextAndpreviousPage(-1)}}> Previous </span>
@@ -386,7 +390,7 @@ class ShopPage extends Component {
                         <option value="0"> Sắp xếp mặc định   </option>
                         <option value="1" >Bán chạy nhất.     </option>
                         <option value="2"> Giá: thấp tới cao  </option>
-                        <option value="3"> Giáo: cao tới thấp </option>
+                        <option value="3"> Giá: cao tới thấp  </option>
                     </select>
                 </div>
                 <div className="show-best-sellers-product row">
