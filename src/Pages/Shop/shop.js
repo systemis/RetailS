@@ -14,47 +14,54 @@ require('./Style/shop-page-style.css');
 function getUrl(name){
     name           = name + "/";
     var value      = "";
-    var href       = window.location.href;
+    var href       = location.href;
     var href_array = href.split("");
 
     console.log(href);
-    if(href.indexOf(name) >= 0){
-        var _value_array = [];
-        for(var i = href.indexOf(name) + name.length; i < href_array.length; i++) {
-            if(href_array[i] === '/'){
-                value = _value_array.join('');
-                i = href_array.length;
-                
-                return (name  + value).replace("%20", " ");
-            }else{
-                _value_array.push(href_array[i]);
-                console.log(href_array[i]);
-            }
-        }   
+
+    if(name === "sale"){
+        if(href.indexOf(name) >= 0){
+            return "sale";
+        }
+    }else {
+        if(href.indexOf(name) >= 0){
+            var _value_array = [];
+            for(var i = href.indexOf(name) + name.length; i < href_array.length; i++) {
+                if(href_array[i] === '/'){
+                    value = _value_array.join('');
+                    i = href_array.length;
+                    
+                    return value;
+                }else{
+                    _value_array.push(href_array[i]);
+                }
+            }   
+        }
     }
 
     return "";
 }
 
 const cookieManager     = new CookieManager("SortKind");
-const limitshowproduct  = 2;
+const limitshowproduct  = 1;
 var   urlGetProducsData = "";
-var   find_value = "";
+var   find_value = "shop";
 var   url  = "/get-related-products";
 
+// Get category value if client wanted find product with category on this value 
 if(getUrl("category")){
     find_value  = getUrl("category");
-    url = "/get-product/" + "category/" + getUrl("category");
+    url = ("/get-product/" + "category/" + find_value).replace("%20", " ");
 };
-
+// Get category value if client wanted find product with tag on this value 
 if(getUrl("tag")){
     find_value  = getUrl("tag");
-    url = "/get-product/" + "tag/" + getUrl("category");
+    url = ("/get-product/" + "tag/" + find_value).replace("%20", " ");
 };
-
+// Get sale if client wanted the products are saling
 if(getUrl("sale")){
-    find_value  = getUrl("sale");
-    url = "/get-product/" + "sale/" + getUrl("category");
+    find_value  = "sale";
+    url         = ("/get-product/" + "sale/");
 };
 
 
@@ -66,36 +73,37 @@ function setup_get_pageindex(){
     // Xoá kí tự cuối cùng nếu bằng '/'
     if(href_array[href_array.length - 1] !== '/') { location.href += '/' };
     if(href_array[href_array.length - 1] === '/') { delete href_array[href_array.length - 1] };
-
-    if(href_array[href_array.length - 1] !== "/") {
-        if(
-            href.indexOf("shop")  === href.length - "shop" .length ||
-            href.indexOf(find_value)  === href.length - find_value.length) 
-        {
-            return location.href += "/0";
-        }
-    }else{
-        if(
-            href.indexOf("shop/") === href.length - "shop/".length ||
-            href.indexOf(find_value + "/") === href.length - (find_value + "/").length)
-        {
-            return location.href += "0";
-        }
+    
+    // If href don't have page index, it will append automactily append index is 0 to location href .
+    if(href.indexOf(find_value)  === href.length - find_value.length) 
+    {
+        return location.href += "/0";
+    }else if(href.indexOf(find_value + "/") === href.length - (find_value + "/").length)
+    {
+        return location.href += "0";
     }
 
+    // Get page index if client puted index in href .    
     var indexSelected = [];
     var indexSelected_real = [];
     for(var i = href_array.length - 1; i >= 0; i--){
         if(href_array[i] === "/") {
+            // Reverse string .
+            for(var j = indexSelected.length - 1; j >= 0; j--) {
+                indexSelected_real.push(indexSelected[j]);
+                if(j === 0){
+                    // Get page index .
+                    var pageIndex = parseInt(indexSelected_real.join(" "));
+                }
+            }
+
             i = -1;
         }else{
             indexSelected.push(href_array[i])
         }
     }
 
-    for(var i = indexSelected.length - 1; i >= 0; i--) indexSelected_real.push(indexSelected[i]);
-
-    var pageIndex = parseInt(indexSelected_real.join(""));
+    //var pageIndex = parseInt(indexSelected_real.join(""));
     if(pageIndex < 0) {
         return setPageIndex_href(0);
     }
@@ -219,6 +227,7 @@ class SortProduct {
 class ShopPage extends Component {
     constructor(props){
         super(props);
+        console.log("Url to get product data: " + url);
         var pageIndexSelected = setup_get_pageindex();
         this.state = { 
             pageIndex: pageIndexSelected,
@@ -305,11 +314,15 @@ class ShopPage extends Component {
     }
 
     // Xử lý để hiện thị thanh phân trang .
-    renderPhanTrangGroup = () => {
+    renderPhanTrangGroup(){
         const sefl = this;
+        
+        // Set page amount by litmitation product to show .
         var pagesAmount = parseInt(this.state.trendingProductsData.length / limitshowproduct);
-        //console.log(pagesAmount);
-        if(this.state.trendingProductsData.length < pagesAmount * limitshowproduct || this.state.trendingProductsData.length > pagesAmount * limitshowproduct) { pagesAmount ++; }
+
+        // Plus one into page amout if  product amount not equal page
+        if(this.state.trendingProductsData.length !== pagesAmount * limitshowproduct) { pagesAmount ++; }
+
         if(pagesAmount > 1) {
             var nutBam = [];
             for(var i = 0; i < parseInt(pagesAmount); i++){
