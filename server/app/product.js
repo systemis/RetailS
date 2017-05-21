@@ -98,8 +98,9 @@ module.exports = router => {
                         return console.log("Error when upload image " + err);
                     }
 
+                    console.log(Date.now());
                     var productBundle   = req.body;
-                    productBundle.id    = Date.now();
+                    // productBundle.id    = Date.now();
                     productBundle.sell  = 0;
                     productBundle.date  = new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString();
                     productBundle.name  = removeWordFromLastPosition(" ", productBundle.name);

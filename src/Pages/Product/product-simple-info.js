@@ -8,14 +8,26 @@ class ProductSimpleInfo extends Component {
     }
 
     handlingPlusMinusAmount(){
+        const sefl = this;
+        var amount = (amount) => {
+            var info = this.props.Data;
+            info.amount += amount;
+            info.total   = info.amount * info.price;
+
+            console.log(info);
+            this.props.update(info);
+         
+            $("#product-page-ammount").val(info.amount);
+        }
+
         $(document).ready(() => {
             $("#numberic-plus").click(function() {
-                $("#product-page-ammount").val(parseInt($("#product-page-ammount").val()) + 1);
+                amount(1);
             })
             
             $("#numberic-minus").click(function() {
-                if($("#product-page-ammount").val() > 0){
-                    $("#product-page-ammount").val(parseInt($("#product-page-ammount").val()) - 1);
+                if(sefl.props.Data.amount > 1){
+                    amount(-1);
                 }
             })
         })
@@ -56,10 +68,13 @@ class ProductSimpleInfo extends Component {
                         <div className="show-amount-addtocard row">
                             <div className="show-ammount">
                                 <button className="btn btn-numberic" id="numberic-plus">+</button>
-                                <input type="number" id="product-page-ammount" value="0"/>
+                                <input type="number" id="product-page-ammount" value="1" />
                                 <button className="btn btn-numberic" id="numberic-minus">-</button>
                             </div>
-                            <button className="btn btn-addtocard">
+                            <button 
+                                className="btn btn-addtocard"
+                                onClick={() => this.props.addListener()}
+                                >
                                 add to card 
                             </button>
                         </div>

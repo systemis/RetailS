@@ -8,14 +8,21 @@ class ProductRow extends Component {
                 <td className="show-product">
                     <div className="row">
                         <div className="show-image col-md-2 col-sm-2 col-xs-6">
-                            <img src={EXIMAGE} alt="Image"/>
+                            <img 
+                                src={this.props.data.image} 
+                                alt="Image"
+                                style={{marginTop: "20px"}}/>
                         </div>
                         <div className="show-info col-md-10 col-sm-10 col-xs-6">
                             <h3 className="show-name">
-                                Pocket Watch
+                                <a 
+                                    href={"/product-by-name/" + this.props.data.name}
+                                    style={{color: "black", textDecoration: "none"}}>
+                                    {this.props.data.name}
+                                </a>
                             </h3>
                             <p className="show-price">
-                                £16.00
+                                {this.props.data.price}
                             </p>
                         </div>
                     </div>
@@ -24,19 +31,22 @@ class ProductRow extends Component {
                     <button 
                         className="btn btn-numberic" 
                         id="numberic-plus"
-                        onClick={() => this.props.changeQuantity(this.props.index, "+")}>
+                        onClick={() => this.props.changeQuantity(this.props.index, 1)}>
                         +
                     </button>
-                    <input type="number" id="product-row-quantity" value="4"/>
+                    <input 
+                        type="number"
+                        id="product-row-quantity" 
+                        value={this.props.data.amount}/>
                     <button 
                         className="btn btn-numberic" 
                         id="numberic-minus"
-                        onClick={() => this.props.changeQuantity(this.props.index, "-")}>
+                        onClick={() => this.props.changeQuantity(this.props.index, -1)}>
                         -
                     </button>
                 </td>
                 <td className="show-sub-total">
-                    £64.00
+                    {this.props.data.total}
                 </td>
             </tr>
         );

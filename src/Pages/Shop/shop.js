@@ -42,8 +42,8 @@ function getUrl(name){
     return "";
 }
 
-const cookieManager     = new CookieManager("SortKind");
 const limitshowproduct  = 1;
+const cookieManager     = new CookieManager("SortKind");
 var   urlGetProducsData = "";
 var   find_value = "shop";
 var   url  = "/get-related-products";
@@ -130,6 +130,7 @@ function setPageIndex_href(index){
     location.href = href_array.join("") + index.toString();
 }
 
+
 // Get sort kind from cookie 
 function getSortKind(){
     if(cookieManager.checkCookie() === false){
@@ -145,7 +146,6 @@ function getSortKind(){
 
 // console.log(getUrl("category"));
 const _sortKind         = getSortKind();
-
 
 // Sort product with sortion kind which is selected .
 class SortProduct {
@@ -285,6 +285,7 @@ class ShopPage extends Component {
 
     // Sort product when client click 
     handleChange = event => {
+        // Get value sort kind which was selected by client 
         let value = $("#shop-choose-kind-sort").val();
         new SortProduct(this, value);
         cookieManager.setCookie(value);
@@ -368,9 +369,10 @@ class ShopPage extends Component {
         const page_index    = this.state.pageIndex;
 
         for(var i = 0; i < products_info.length; i++){
+            // If i in limitation amount amount to show product .
             if(i >= limitshowproduct * page_index){
                 if(i < (limitshowproduct * page_index + limitshowproduct)){
-                    // console.log(page_index);
+
                     products_render.push(<ProductCard key={i} Data={products_info[i]} />);
                 }
             }

@@ -1,40 +1,65 @@
 import React, { Component } from 'react';
-import ProductRow from './product-row.js';
+import ProductRow           from './product-row.js';
+import CartMG               from '../../js/cartmanager';
 
 require('./Style/view-cart-page-style.css');
 
 class ViewCartGroup extends Component {
     constructor(props) {
         super(props);
+        console.log(CartMG.getProductList());
+
         this.state = {
-            quantity: [1, 2, 3, 4]
+            productlist: CartMG.getProductList()
         }
+
+        this.updateProductQuantity = this.updateProductQuantity.bind(this);
+    }
+
+    updateProductQuantity(key, value){
+        var productlist = this.state.productlist;
+        productlist.map((product, index) => {
+            if(index === key){
+                if(value < 1){
+                    if(product.amount <= 1){
+                        return ;
+                    }
+                }
+
+                product.amount += value;
+                product.total   = product.price * product.amount;
+
+                this.setState({productlist: productlist});
+                return CartMG.setData(product);
+            }
+        })
+    }
+
+    getSubTotal(){
+        var subTotal    = 0;
+        var productlist = this.state.productlist;
+        productlist.map((value, index) => {
+            subTotal += value.total;
+        })
+
+        return subTotal;
+    }
+
+    changeToHuman(){
+        var subTotal = this.getSubTotal().toString().split('');
+        var index    = 0;
+        for(var i = subTotal.length - 1; i >= 0; i--){
+            index ++;
+            if(index == 3 && i !== 0){
+                subTotal[i] = "." + subTotal[i];
+                index = 0;
+            }
+        }
+
+        return subTotal.join("");
     }
 
     render() {
-        const updateProductQuantity = (key, choice) => {
-            console.log(this.state.quantity[key]);
-            
-            var allQuantity = this.state.quantity;
-            var quantity    = allQuantity[key];
-
-            switch(choice) {
-                case "+":
-                    quantity += 1;
-                    break;
-                case "-":
-                    if(quantity >= 0) {
-                        quantity -= 1;
-                    }
-                    break;
-                default: 
-                    return console.log("Error: Choice to update product quantity is not correct");
-            }
-
-            allQuantity[key] = quantity;
-            this.setState({quantity: allQuantity});
-        }
-
         return (
             <div className="view-cart-page ">
                 <table className="show-products-info-in-cart">
@@ -43,13 +68,13 @@ class ViewCartGroup extends Component {
                         <th className="quantity"> Quantity </th>
                         <th className="sub-total"> Total   </th>
                     </thead>
-                    {this.state.quantity.map((value, index) => {
+                    {this.state.productlist.map((value, index) => {
                         return(
                             <ProductRow 
                                 key={index}
                                 index={index}
-                                quantity={this.state.quantity} 
-                                changeQuantity={updateProductQuantity}
+                                data={value}
+                                changeQuantity={this.updateProductQuantity}
                             />)
                     })}
                 </table>
@@ -62,17 +87,17 @@ class ViewCartGroup extends Component {
                             <h2 className="title">Cart total </h2>
                             <tr>
                                 <th>sub total</th>
-                                <td>£64.00</td>
+                                <td>£{this.changeToHuman()}</td>
                             </tr>
 
                             <tr>
                                 <th>vat</th>
-                                <td>£13.80</td>
+                                <td>0</td>
                             </tr>
 
                             <tr>
                                 <th>sub total</th>
-                                <td>£82.80</td>
+                                <td>£{this.changeToHuman()}</td>
                             </tr>
                         </table>
                     </div>
@@ -91,6 +116,9 @@ class ViewCartGroup extends Component {
 
     shouldComponentUpdate (nextProps, nextState) {
         console.log(nextState);
+        this.render();
+
+        return true;
     }
 }
 

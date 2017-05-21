@@ -3,7 +3,7 @@ const tableName  = "ProductData";
 
 function ProductDataManager() {
     this.createTable = (fn) => {
-        connection.query("CREATE TABLE IF NOT EXISTS `"+tableName+"` ( `id` INT NOT NULL , `name` VARCHAR(200) NOT NULL , `image` TEXT NOT NULL , `category` TEXT NOT NULL , `description` TEXT NOT NULL , `price` TEXT NOT NULL , `weight` TEXT NULL , `height` TEXT NULL , `material` TEXT NULL, `reviews` TEXT NOT NULL , `status` TEXT(200) NULL, `sell` INT NULL, `date` TEXT NOT NULL, PRIMARY KEY (`name`))", (err, result) => {
+        connection.query("CREATE TABLE IF NOT EXISTS `"+tableName+"` ( `id` INT NOT NULL AUTO_INCREMENT, `name` VARCHAR(200) NOT NULL , `image` TEXT NOT NULL , `category` TEXT NOT NULL , `description` TEXT NOT NULL , `price` TEXT NOT NULL , `weight` TEXT NULL , `height` TEXT NULL , `material` TEXT NULL, `reviews` TEXT NOT NULL , `status` TEXT(200) NULL, `sell` INT NULL, `date` TEXT NOT NULL, PRIMARY KEY (`id`))", (err, result) => {
             if(err) {
                 console.log(err);
                 return fn('err');
