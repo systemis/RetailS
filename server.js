@@ -22,12 +22,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '.', 'build')));
 
 
+app.get('/about-us', (req, res) => {
+  res.sendFile(path.resolve(__dirname, "." ,"build/index.html"));
+})
+
 // Routers 
 require('./server/app/home.js')(app);
 require('./server/app/user.js')(app);
 require('./server/app/product.js')(app);
 require('./server/app/image.js')(app);
 require('./server/app/shop.js')(app);
+require('./server/app/feedback.js')(app);
 
 const PORT = process.env.PORT || 3000;
 app.listen(3000, () => {

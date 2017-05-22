@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import SimpleMap from'./maps.js';
+import SimpleMap            from './maps.js';
+import $                    from 'jquery'
 
 require('./Style/about-us-page-style.css');
 
@@ -17,12 +18,15 @@ class AboutUsPage extends Component {
                         <div className="show-get-in-touch col-md-6 col-sm-6">
                             <h2>Get in touch</h2>
                             <h3>WRITE US A LETTER</h3>
-                            <form action="/">
+                            <form 
+                                action="/send-feedback" 
+                                method="POST"
+                                id="form-send-feedback">
                                 <input type="text" name="name"  placeholder="Name*"/>
                                 <br/>
                                 <input type="text" name="email" placeholder="E-mail*"/>
                                 <br/>
-                                <textarea name="messgae" id="get-message" cols="100" rows="10" placeholder="Messgase*">
+                                <textarea name="message" id="get-message" cols="100" rows="10" placeholder="Messgase*">
                                 </textarea>
                                 <br/>
                                 <input type="submit" value="Send message"/>
@@ -47,6 +51,43 @@ class AboutUsPage extends Component {
                 </div>
             </div>
         );
+    }
+
+    componentDidMount() {
+        $(document).ready(() => {
+            $("#form-send-feedback").submit(function(){
+                var data = $(this).serializeArray();
+
+
+                console.log(data);
+                if(data[0].value && data[2].value && data[2].value){
+                    var _data = {
+                        name: data[0].value,
+                        email: data[1].value,
+                        message: data[2].value
+                    }
+
+                    $.ajax({
+                        url: $(this).attr("action"), type: $(this).attr("method"), data: _data, 
+                        success: res => {
+                            switch(res) {
+                                case 'success': 
+                                    alert("Gởi phản hồi thành công.");
+                                    location.reload();
+                                    break;
+                                default:
+                                    alert("Gởi phản hồi thất bại, vui lòng thử lại sau !");
+                                    break;
+                            }
+                        },
+                        error: err => console.log("Error: " + err)
+                    });
+                }else{
+                    alert("Thông tin bị thiếu, xin mới nhập lại ");
+                }
+                return false;
+            })
+        })        
     }
 }
 
