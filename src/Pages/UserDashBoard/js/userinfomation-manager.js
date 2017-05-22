@@ -4,7 +4,7 @@ class UserInfomationManagaer{
     getUserInfo(fn) {
         $.ajax({
             url: "/get-user-information", 
-            type: "POST",
+            type: "GET",
             success: data => {
                 if(data === 'err'){
                     return 'err'

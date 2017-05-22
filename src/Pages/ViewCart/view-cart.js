@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ProductRow           from './product-row.js';
 import CartMG               from '../../js/cartmanager';
+import $                    from 'jquery';
 
 require('./Style/view-cart-page-style.css');
 
@@ -26,6 +27,7 @@ class ViewCartGroup extends Component {
                     }
                 }
 
+                // Change amount and total price 
                 product.amount += value;
                 product.total   = product.price * product.amount;
 
@@ -45,7 +47,8 @@ class ViewCartGroup extends Component {
         return subTotal;
     }
 
-    changeToHuman(){
+    // Cứ cách ba số là một dấu chấm .
+    getSubTotalReal(){
         var subTotal = this.getSubTotal().toString().split('');
         var index    = 0;
         for(var i = subTotal.length - 1; i >= 0; i--){
@@ -57,6 +60,21 @@ class ViewCartGroup extends Component {
         }
 
         return subTotal.join("");
+    }
+
+    // check out function .
+    checkOut(){
+        const self = this;
+        $.ajax({
+            url: '/check-out', type: 'POST', 
+            data: {data: JSON.stringify(self.state.productlist)},
+            success: result => {
+                console.log(result);
+                if(result === "Info correct"){
+                    alert("Thông tin của bạn còn thiếu. Xin kiểm tra lại ở phần thông tin!");
+                }
+            }, 
+            error: err => console.log("Error: " + err)});
     }
 
     render() {
@@ -87,7 +105,7 @@ class ViewCartGroup extends Component {
                             <h2 className="title">Cart total </h2>
                             <tr>
                                 <th>sub total</th>
-                                <td>£{this.changeToHuman()}</td>
+                                <td>£{this.getSubTotalReal()}</td>
                             </tr>
 
                             <tr>
@@ -97,17 +115,21 @@ class ViewCartGroup extends Component {
 
                             <tr>
                                 <th>sub total</th>
-                                <td>£{this.changeToHuman()}</td>
+                                <td>£{this.getSubTotalReal()}</td>
                             </tr>
                         </table>
                     </div>
                     <div className="show-btnupdatecart-btncheckout">
-                        <a href="#" className="btnn update-cart">
+                        <button
+                            className="btnn update-cart"
+                            onClick={() => location.reload()}>
                             Update Cart
-                        </a>
-                        <a href="#" className="btnn check-out">
+                        </button>
+                        <button 
+                            className="btnn check-out"
+                            onClick={() => this.checkOut()}>
                             Check out 
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>

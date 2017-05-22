@@ -6,6 +6,19 @@ module.exports = (router) => {
 
     var userDM = require('../models/database-user.js');
 
+    function getUserInfo(req, fn){
+        if(req.isAuthenticated()){
+            var userEmail = req.user.email;
+            var userInfo  = userDM.getUserInformation(userEmail, result => {
+                if(result === "err") return fn(result);
+
+                return fn(result);
+            })
+        }else{
+            return fn("Not login!");
+        }
+    }
+
     const defaultRouteMethod = (req, res) => {
         console.log(req.isAuthenticated());
         if(req.isAuthenticated()){
@@ -98,15 +111,26 @@ module.exports = (router) => {
     router.get('/my-account/change-password', defaultRouteMethod);
     router.get('/my-account/new-product', defaultRouteMethod);
 
-    router.post('/get-user-information', (req, res) => {
-        if(req.isAuthenticated()) {
-            var userEmail = req.user.email;
-            var userInfo  = userDM.getUserInformation(userEmail, result => {
-                if(result === "err") return res.send(result);
+    router.get('/get-user-information', (req, res) => {
+        getUserInfo(req, result => res.send(result));
+    })
 
-                res.send(result);
-            })
-        }
+    router.post('/check-out', (req, res) => {
+        getUserInfo(req, info => {
+            if(info !== "Not login!"){
+                console.log(info.andress);
+                console.log(info.phonenumber);
+
+                if(info.andress && info.phonenumber){
+                    // Check out heppend here 
+                    const exhibition = req.body.data;
+
+                    console.log("Khach hang: " + info.email + " da dat kho hang: " + exhibition);
+                }else{
+                    return res.send("Info correct");
+                }
+            }
+        })
     })
 
     router.post('/update-user-information', (req, res) => {

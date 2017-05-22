@@ -12,12 +12,14 @@ class CartManager {
         console.log(this.data);
     }
 
-    getProductList(){
+    getProductList()
+    {
         return this.data;
     }
 
     newProduct(bundle){
         if(this.data.length > 0){
+            // Check product is already exists in data 
             var ess = false;
             for(var i = 0; i < this.data.length; i++){
                 if(this.data[i].id === bundle.id){
