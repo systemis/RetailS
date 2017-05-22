@@ -23,6 +23,14 @@ class FeelBackManager {
         })
     }
 
+    getFeedBackList(fn) {
+        connection.query("SELECT * FROM "+this.tableName+"", (err, result) => {
+            if(err) return fn("err");
+
+            return fn(result)
+        })
+    }
+
     deleteFeedBack(name, fn){
         connection.query("DELETE FROM "+this.tableName+" WHERE name = ?", [name], (err, result) => {
             if(err) return fn("error");
