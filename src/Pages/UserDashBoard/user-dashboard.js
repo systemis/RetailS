@@ -4,9 +4,20 @@ import $                    from 'jquery';
 
 require('./Style/user-dashboard-page-style.css');
 
-const url           = "http://localhost:3000/my-account/";
+const url           = "/my-account/";
 const paramHrefs    = ["change-password", "cart", "new-product"];
 const nameMenuItems = ["Thông tin", "Đổi mật khẩu ", " Giỏ hàng ", "Thêm sản phẩm mới"];
+
+function checkAdmin(fn){
+    $.ajax({
+        url: '/check-admin',
+        method: 'POST',
+        success: isAdmin => {
+            return fn(isAdmin);
+        },
+        error: err => console.log(err)
+    })
+}
 
 class Navigation extends Component {
     constructor(props) {
@@ -23,7 +34,15 @@ class Navigation extends Component {
         let href = location.href;
         if(href.indexOf("/change-password") >= 0) sefl.setState({index_screen: 1}); 
         if(href.indexOf("/cart") >= 0)            sefl.setState({index_screen: 2});
-        if(href.indexOf("/new-product") >= 0)     sefl.setState({index_screen: 3});
+        if(href.indexOf("/new-product") >= 0) {
+            checkAdmin(isAdmin => {
+                if(isAdmin){
+                    return sefl.setState({index_screen: 3})
+                }
+                alert("Chức năng chỉ được sử dụng bởi admin thôi !");
+                return location.href = "/my-account";
+            })
+        }
     }
 
     hidden_show_navigation_menu = () => {
@@ -52,18 +71,13 @@ class Navigation extends Component {
                         return location.href = url + paramHrefs[indexV - 1];
                     }
 
-                    $.ajax({
-                        url: '/check-admin',
-                        method: 'POST',
-                        success: isAdmin => {
-                            if(isAdmin) {
-                                return location.href = url + paramHrefs[indexV - 1];
-                            } 
-                            
-                            return alert("Chức năng chỉ được sử dụng bởi admin thôi !");
-
-                        },
-                        error: err => console.log(err)
+                    checkAdmin(isAdmin => {
+                        if(isAdmin) {
+                            return location.href = url + paramHrefs[indexV - 1];
+                        } 
+                        
+                        alert("Chức năng chỉ được sử dụng bởi admin thôi !");
+                        return location.href = "/my-account";
                     })
                 })
             })

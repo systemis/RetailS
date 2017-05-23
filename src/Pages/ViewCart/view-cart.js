@@ -65,16 +65,21 @@ class ViewCartGroup extends Component {
     // check out function .
     checkOut(){
         const self = this;
-        $.ajax({
-            url: '/check-out', type: 'POST', 
-            data: {data: JSON.stringify(self.state.productlist)},
-            success: result => {
-                console.log(result);
-                if(result === "Info correct"){
-                    alert("Thông tin của bạn còn thiếu. Xin kiểm tra lại ở phần thông tin!");
-                }
-            }, 
-            error: err => console.log("Error: " + err)});
+        if(CartMG.getProductList.length > 0){
+            $.ajax({
+                url: '/check-out', type: 'POST', 
+                data: {data: JSON.stringify(self.state.productlist)},
+                success: result => {
+                    console.log(result);
+                    if(result === "Info correct"){
+                        alert("Thông tin của bạn còn thiếu. Xin kiểm tra lại ở phần thông tin!");
+                    }
+                }, 
+                error: err => console.log("Error: " + err)
+            });
+        }else{
+            alert("Không có sản phẩm nào trong giỏ hàng của bạn hết!. Xin mời thêm sản phẩm .")
+        }
     }
 
     render() {
@@ -120,15 +125,23 @@ class ViewCartGroup extends Component {
                         </table>
                     </div>
                     <div className="show-btnupdatecart-btncheckout">
-                        <button
-                            className="btnn update-cart"
-                            onClick={() => location.reload()}>
-                            Update Cart
-                        </button>
                         <button 
                             className="btnn check-out"
                             onClick={() => this.checkOut()}>
                             Check out 
+                        </button>
+                        <button 
+                            className="btnn delete-all"
+                            onClick={() => {
+                                CartMG.deleteAll();
+                                location.reload();
+                            }}>
+                            Delete all 
+                        </button>
+                        <button
+                            className="btnn update-cart"
+                            onClick={() => location.reload()}>
+                            Update Cart
                         </button>
                     </div>
                 </div>
