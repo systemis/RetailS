@@ -8,8 +8,10 @@ class FeelBackManager {
     }
 
     createTable(){
-        connection.query("CREATE TABLE IF NOT EXISTS `"+this.tableName+"` ( `ID` INT NOT NULL AUTO_INCREMENT , `name` TEXT NOT NULL , `email` TEXT NOT NULL , `message` TEXT NOT NULL , PRIMARY KEY (`ID`))", (err, rs) => {
-            if(err) throw err;
+        connection.query("CREATE TABLE IF NOT EXISTS `"+this.tableName+"` ( `ID` INT NOT NULL AUTO_INCREMENT , `name` TEXT NOT NULL , `email` TEXT NOT NULL , `message` TEXT NOT NULL , PRIMARY KEY (`ID`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci", (err, rs) => {
+            if(err){
+                return console.log(err);
+            } 
 
             console.log("Create table: " + rs);
         })
@@ -36,6 +38,14 @@ class FeelBackManager {
             if(err) return fn("error");
 
             return fn("success");
+        })
+    }
+
+    dropTable(fn){
+        connection.query("DROP TABLE "+this.tableName+"", err => {
+            if(err) console.log(err);
+
+            fn("Drop table succsess!");
         })
     }
 }

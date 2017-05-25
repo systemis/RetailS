@@ -7,6 +7,7 @@ const cookieParser    = require("cookie-parser");
 const expresssession  = require("express-session");
 const userDM          = require('./server/models/database-user.js');
 const productDM       = require('./server/models/database-product.js');
+const feedbackDM      = require('./server/models/database-feedback.js');
 
 const app = express();
 
@@ -35,11 +36,12 @@ require('./server/app/shop.js')(app);
 require('./server/app/feedback.js')(app);
 
 const PORT = process.env.PORT || 3000;
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log(`App listening on port ${PORT}!`)
-  // productDM.plusSell("giay cua thinh", result => console.log("Plus sell of: " + "giay cua thinh " + " result: " + result))
-  //var date = new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString();
-  // productDM.createTable(_result => console.log(_result));
-  // console.log(Date.now());
-  // productDM.dropTable(result => productDM.createTable(resultS => console.log(resultS)));
+
+  // userDM   .dropTable(rs => userDM   .createTable(_rs => console.log(_rs)));
+  // productDM.dropTable(rs => productDM.createTable(_rs => console.log(_rs)));
+  // userDM    .dropTable(rs => {});
+  // productDM .dropTable(rs => {});
+  // feedbackDM.dropTable(rs => {})
 });

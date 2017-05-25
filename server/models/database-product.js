@@ -3,7 +3,7 @@ const tableName  = "ProductData";
 
 function ProductDataManager() {
     this.createTable = (fn) => {
-        connection.query("CREATE TABLE IF NOT EXISTS `"+tableName+"` ( `id` INT NOT NULL AUTO_INCREMENT, `name` VARCHAR(200) NOT NULL , `image` TEXT NOT NULL , `category` TEXT NOT NULL , `description` TEXT NOT NULL , `price` TEXT NOT NULL , `weight` TEXT NULL , `height` TEXT NULL , `material` TEXT NULL, `reviews` TEXT NOT NULL , `status` TEXT(200) NULL, `sell` INT NULL, `date` TEXT NOT NULL, PRIMARY KEY (`id`))", (err, result) => {
+        connection.query("CREATE TABLE IF NOT EXISTS `"+tableName+"` ( `id` INT NOT NULL AUTO_INCREMENT, `name` VARCHAR(200) NOT NULL , `image` TEXT NOT NULL , `category` TEXT NOT NULL , `description` TEXT NOT NULL , `price` TEXT NOT NULL , `weight` TEXT NULL , `height` TEXT NULL , `material` TEXT NULL, `reviews` TEXT NOT NULL , `status` TEXT(200) NULL, `sell` INT NULL, `date` TEXT NOT NULL, PRIMARY KEY (`id`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci", (err, result) => {
             if(err) {
                 console.log(err);
                 return fn('err');
@@ -87,7 +87,7 @@ function ProductDataManager() {
 
     this.checkIsExistsByName = (name, fn) => {
         connection.query("SELECT * FROM " + tableName + "", (err, result) => {
-            if(err) throw err;
+            if(err) console.log(err);
 
             for(var i = 0; i < result.length; i++) {
                 if(result[i].name === name) {
@@ -101,15 +101,15 @@ function ProductDataManager() {
 
     this.dropTable = fn => {
         connection.query("DROP TABLE "+tableName+"", err => {
-            if(err) throw err;
+            if(err) console.log(err);
 
             fn("Drop table succsess!");
         })
     }
 
     this.getProducsList = fn => {
-        connection.query("Select * from ProductData", (err, result) => {
-            if(err) throw err;
+        connection.query("Select * from "+tableName+"", (err, result) => {
+            if(err) console.log(err);
 
             return fn(result);
         })
