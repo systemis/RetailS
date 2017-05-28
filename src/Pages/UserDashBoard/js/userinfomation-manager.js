@@ -10,7 +10,6 @@ class UserInfomationManagaer{
                     return 'err'
                 }
 
-                //sefl.setState({userInformation: data});
                 fn(data);
             },
             error: err => {
