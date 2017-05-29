@@ -1,16 +1,15 @@
-Đây là project e-commerce được tạo bằng React.js và Node.js .
+# Truong Thinh website  _TT_:
+E-commerce store for fashiopn for vietnamese people.
+  - Delyoped by Systemis(http://systemis-blog.herokuapp.com/)
+  - Back-end technology: Nodejs; Express
+  - Font-end technology: React.js; Sass
+  - Database technology: Mysql
 
-Project được thiết kế hoàn toàn bằng React.js và Sass .
-Dùng Node.js làm ngôn ngữ server .
-Dùng Mysql làm cơ sở dữ liêu .
+## Developing on [Heroku](http://truongthinh.herokuapp.com)
 
-Công dụng: Đây là project thực tế, có báo giá, có công dụng thương mại rõ ràng (Truong Thinh company) và cũng làm cho vui, thực tập .
 
-Version 1:
-  1. Header ui .
-  2. Home page ui .
+<img src="http://i.imgur.com/w18CseE.jpg" />
 
-Run app: type in console .
-  1. Setup framework: npm install 
-  2. Build client ui: npm run build 
-  3. Run app: nodemon server
+## SETUP
+  - 'npm run build' to build ui
+  - 'npm start' || 'nodemon server' to run app 
