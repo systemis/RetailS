@@ -11,5 +11,5 @@ E-commerce store for fashiopn for vietnamese people.
 <img src="http://i.imgur.com/w18CseE.jpg" />
 
 ## SETUP
-  - 'npm run build' to build ui
-  - 'npm start' || 'nodemon server' to run app 
+  - `npm run build` to build ui
+  - `npm start` || `nodemon server` to run app 
