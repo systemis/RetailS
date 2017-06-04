@@ -1,4 +1,6 @@
 // server/app.js
+'use strict';
+
 const express         = require('express');
 const morgan          = require('morgan');
 const path            = require('path');
@@ -36,7 +38,8 @@ require('./server/app/shop.js')(app);
 require('./server/app/feedback.js')(app);
 
 const PORT = process.env.PORT || 3000;
-app.listen(process.env.PORT || 3000, () => {
+const Xinchao = "Thinh"
+app.listen(process.env.PORT || 9288, () => {
   console.log(`App listening on port ${PORT}!`)
 
   // userDM   .dropTable(rs => userDM   .createTable(_rs => console.log(_rs)));
@@ -44,4 +47,6 @@ app.listen(process.env.PORT || 3000, () => {
   // userDM    .dropTable(rs => {});
   // productDM .dropTable(rs => {});
   // feedbackDM.dropTable(rs => {})
+  console.log(`dn ${Xinchao}`);
+
 });

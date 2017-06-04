@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Content              from './content.js';
+import userMG               from '../../js/user.js'
 import $                    from 'jquery';
 
 require('./Style/user-dashboard-page-style.css');
@@ -8,16 +9,16 @@ const url           = "/my-account/";
 const paramHrefs    = ["change-password", "cart", "new-product"];
 const nameMenuItems = ["Thông tin", "Đổi mật khẩu ", " Giỏ hàng ", "Thêm sản phẩm mới"];
 
-function checkAdmin(fn){
-    $.ajax({
-        url: '/check-admin',
-        method: 'POST',
-        success: isAdmin => {
-            return fn(isAdmin);
-        },
-        error: err => console.log(err)
-    })
-}
+// function checkAdmin(fn){
+//     $.ajax({
+//         url: '/check-admin',
+//         method: 'POST',
+//         success: isAdmin => {
+//             return fn(isAdmin);
+//         },
+//         error: err => console.log(err)
+//     })
+// }
 
 class Navigation extends Component {
     constructor(props) {
@@ -35,7 +36,7 @@ class Navigation extends Component {
         if(href.indexOf("/change-password") >= 0) sefl.setState({index_screen: 1}); 
         if(href.indexOf("/cart") >= 0)            sefl.setState({index_screen: 2});
         if(href.indexOf("/new-product") >= 0) {
-            checkAdmin(isAdmin => {
+            userMG.checkAdmin(isAdmin => {
                 if(isAdmin){
                     return sefl.setState({index_screen: 3})
                 }
@@ -71,7 +72,7 @@ class Navigation extends Component {
                         return location.href = url + paramHrefs[indexV - 1];
                     }
 
-                    checkAdmin(isAdmin => {
+                    userMG.checkAdmin(isAdmin => {
                         if(isAdmin) {
                             return location.href = url + paramHrefs[indexV - 1];
                         } 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import userInfoM            from '../js/userinfomation-manager';
 import $                    from 'jquery';
 
+
 class InformationScreen extends Component {
     constructor(props) {
         super(props);
@@ -13,11 +14,13 @@ class InformationScreen extends Component {
             }
         }
 
+        // Get user info 
         userInfoM.getUserInfo((data) => {
             if(data !== "err") this.setState({userInformation: data})
         });
     }
 
+    // Set value which was seted by client 
     setUpDefaultValue = () => {
         const sefl = this;
         $(document).ready(() => {
@@ -50,7 +53,7 @@ class InformationScreen extends Component {
                     <input 
                         type="text" 
                         name="name"  
-                        placeholder="Input your name here ."
+                        placeholder={`Input your name here .`}
                         onChange={() => this.handlingWhenChangeValue()}
                         />
                     <br/>

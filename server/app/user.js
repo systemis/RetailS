@@ -67,12 +67,22 @@ module.exports = (router) => {
 
 
     router.get("/login", (req, res) => {
-        res.sendFile(path.resolve(__dirname, "../../", "build", "index.html"));
+        if(req.isAuthenticated() === false){
+            return res.sendFile(path.resolve(__dirname, "../../", "build", "index.html"));
+        }
+        res.redirect("/");
     });
 
     // Handling when client sign in 
     router.post('/sign-in', passport.authenticate('local'), (req, res) => {
         res.redirect('/');
+    })
+
+    router.post('/logout', (req, res) => {
+        if(req.isAuthenticated()){
+            req.logout();
+            res.send(true);
+        }
     })
     
     // Handling when client retisger 

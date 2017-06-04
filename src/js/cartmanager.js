@@ -1,6 +1,6 @@
 class CartManager {
     constructor(){
-        this.tablename = "cartmanager";       
+        this.tablename = "cartmanager";
         // this.deleteAll();
         this.data = localStorage.getItem(this.tablename);
         if(!this.data) {
@@ -19,7 +19,7 @@ class CartManager {
 
     newProduct(bundle){
         if(this.data.length > 0){
-            // Check product is already exists in data 
+            // Check product is already exists in data
             var ess = false;
             for(var i = 0; i < this.data.length; i++){
                 if(this.data[i].id === bundle.id){
@@ -27,7 +27,7 @@ class CartManager {
 
                     ess = true;
                     i == this.data.length;
-    
+
                     return this.setData();
                 }
             }
