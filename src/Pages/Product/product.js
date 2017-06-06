@@ -43,14 +43,10 @@ class ProductPage extends Component {
             }
         }
 
-        userMG.checkLogin(isLogin => {
-            this.setState({isLogin: isLogin})
-        })
-
         this.getProductInfos();
-
-        this.addProduct_Cart = this.addProduct_Cart.bind(this);
-        this.updateData      = this.updateData.bind(this);
+        this.addProduct_Cart     = this.addProduct_Cart.bind(this);
+        this.updateData          = this.updateData.bind(this);
+        this.updateProductReview = this.updateProductReview.bind(this);
     }
 
     getProductInfos() {
@@ -94,10 +90,30 @@ class ProductPage extends Component {
     }
 
     updateProductReview(message){
-        var review = {
-            message: message,
-            date   : new Date().toLocaleDateString()
-        };
+        userMG.checkLogin(user => {
+            if(user !== false){
+                var review  = {
+                    message : message,
+                    date    : new Date().toLocaleDateString(),
+                    email   : user.email,
+                };
+
+                const newReviews = this.state.productInfo.reviews.push(review);
+                console.log("Old reviews: " + this.state.productInfo.reviews);
+                console.log("New reviews: " + newReviews);
+                console.log("Review message: " + message);
+                console.log(review);
+
+                this.setState({productInfo: newReviews});
+            }else{
+                return alert("Bạn chưa đăng nhập !");
+            }
+        })
+    }
+
+    
+    componentWillMount() {
+        userMG.checkLogin(user => this.setState({user: user}))        
     }
 
     render() {
@@ -112,8 +128,9 @@ class ProductPage extends Component {
                         />   
                     
                     <ProductDetailsInfo 
-                        Infos   ={this.state.productInfo}
-                        idLogin ={this.state.isLogin}
+                        Infos        ={this.state.productInfo}
+                        isLogin      ={this.state.user}
+                        updateReview ={this.updateProductReview}
                         />   
                 </div>
             );

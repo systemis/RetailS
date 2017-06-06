@@ -119,20 +119,18 @@ class ProductDetailsInfo extends Component {
         var addReviewGroup     = () => {
             if(this.props.isLogin !== false){
                 return (
-                    <form 
-                        id="form-add-review-product" 
-                        action={"/add-reviews-product/" + this.props.Infos.name}
-                        //onSubmit={() => newReview()}
-                        >
-                        <textarea 
-                            name="commentvalue" 
-                            id="comment-text" 
-                            rows="10" 
-                            placeholder="Your review .">
-                        </textarea>
-                        <input 
-                            type="submit" />
-                    </form>
+                    <div className="post-new-review-group">
+                        <h3>ADD A REVIEW</h3>
+                        <form id="form-add-review-product">
+                            <textarea 
+                                name="commentvalue" 
+                                id="comment-text" 
+                                rows="10" 
+                                placeholder="Your review .">
+                            </textarea>
+                            <input type="submit" />
+                        </form>
+                    </div>
                 );
             }
         }
@@ -165,14 +163,13 @@ class ProductDetailsInfo extends Component {
                     </div>
                     <div className="collapse-item row">
                         <div className="show-reviews-group">
-                            {this.state.product_details_info.reviews.map((review, index) => {
-                                return <ReviewRow data={review} key={index} />
-                            })}
+                            {
+                                // this.state.product_details_info.reviews.map((review, index) => {
+                                //     return <ReviewRow data={review} key={index} />
+                                // })
+                            }
                         </div>
-                        <div className="post-new-review-group">
-                            <h3>ADD A REVIEW</h3>
-                            {addReviewGroup()}
-                        </div>
+                        {addReviewGroup()}
                     </div>
                 </div>
             </div>
@@ -184,6 +181,13 @@ class ProductDetailsInfo extends Component {
         $(document).ready(function(){
             $("#show-product-description-deltailsscreen").empty();
             $("#show-product-description-deltailsscreen").append($.parseHTML(sefl.props.Infos.description));
+            $("#form-add-review-product").submit(function(){
+                const message = $(this).serializeArray()[0].value;
+                console.log(message);
+                sefl.props.updateReview(message);
+                
+                return false;
+            })
         })  
     }
 }

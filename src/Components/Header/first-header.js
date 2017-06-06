@@ -3,15 +3,15 @@ import userMG               from '../../js/user.js'
 
 require('./Style/firstheaderstyle.css');
 
-var isAdmin = false;
+var isLogin = false;
 class FirstHeader extends Component {
     constructor(props){
         super(props);
-        this.state = {isAdmin: false};
+        this.state = {isLogin: false};
     }
-    
+    // XPathEvaluator
     handlingRenderCP(component){
-        if(this.state.isAdmin){
+        if(this.state.isLogin !== false){
             return component;
         }
 
@@ -19,12 +19,12 @@ class FirstHeader extends Component {
     }
 
     componentWillMount() { 
-        userMG.checkAdmin(_isAdmin => this.setState({isAdmin: _isAdmin})); 
+        userMG.checkLogin(_isLogin => this.setState({isLogin: _isLogin})); 
     }
 
     render() {
         const loginButton = () => {
-            if(this.state.isAdmin === false){
+            if(this.state.isLogin === false){
                 return <a href="/login" className="show-my-account">Login</a>
             }
         }

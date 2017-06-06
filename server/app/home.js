@@ -4,10 +4,6 @@ module.exports = (router) => {
 
     router.get("/", (req, res) => { 
         console.log(req.isAuthenticated());
-        console.log(req.use);
-    })
-
-    router.post('/check', (req, res) => {
-        res.send(req.isAuthenticated());
+        console.log(req.user);
     })
 };

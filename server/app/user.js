@@ -69,7 +69,8 @@ module.exports = (router) => {
     router.get("/login", (req, res) => {
         if(req.isAuthenticated() === false){
             return res.sendFile(path.resolve(__dirname, "../../", "build", "index.html"));
-        }
+        }   
+        
         res.redirect("/");
     });
 
@@ -108,8 +109,8 @@ module.exports = (router) => {
 
     router.post('/check-login', (req, res) => {
         if(req.isAuthenticated()){
-            console.log(req.use);
-            res.send(req.use);
+            console.log(req.user);
+            res.send(req.user);
         }else{
             console.log('Chua dang nhap. ');
             return res.send(false);

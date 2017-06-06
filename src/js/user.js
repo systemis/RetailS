@@ -1,16 +1,12 @@
 import $ from 'jquery';
 
 class UserManager{
-    checkLogin(isLogin){
+    checkLogin(fn){
         $.ajax({
             url: '/check-login',
             type: 'POST',
             success: isLogin => {
-                if(isAdmin !== false){
-                    return console.log(isAdmin);
-                }
-
-                return false;
+                return fn(isLogin);
             },
             
             error: err => {
@@ -24,6 +20,7 @@ class UserManager{
             url: '/check-admin',
             method: 'POST',
             success: isAdmin => {
+                console.log("is admin:" + isAdmin);
                 return fn(isAdmin);
             },
             error: err => console.log(err)
