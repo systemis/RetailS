@@ -44,7 +44,6 @@ class ProductPage extends Component {
             }
         }
 
-        this.getProductInfos();
         this.addProduct_Cart     = this.addProduct_Cart.bind(this);
         this.updateData          = this.updateData.bind(this);
         this.updateProductReview = this.updateProductReview.bind(this);
@@ -104,6 +103,7 @@ class ProductPage extends Component {
 
     
     componentWillMount() {
+        this.getProductInfos();
         userMG.checkLogin(user => this.setState({user: user}))        
     }
 

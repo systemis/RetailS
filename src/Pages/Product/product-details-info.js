@@ -15,7 +15,7 @@ const ReviewRow = props => {
         <div className="review-row row">
             <div className="col-md-2 col-sm-2">
                 <img src={props.data.avatar} alt="Avatar about user"/>
-                <h3  className="show-name">{props.data.username}</h3>
+                <h3  className="show-name">{props.data.email}</h3>
                 <p   className="show-data">{props.data.date}</p>
             </div>
             <div className="col-md-10 col-sm-10">
@@ -136,6 +136,20 @@ class ProductDetailsInfo extends Component {
                 return <h1 style={{textAlign: 'center', color: 'red'}}> Dang nhap de binh luan </h1>
             }
         }
+        var reviewListDom = () => {
+            var reviewsRows = []
+            var reviews     = this.props.Infos.reviews;
+            console.log(this.props.Infos);
+            if(reviews instanceof Array){
+                console.log(reviews);
+                for(var i = reviews.length - 1; i >= 0; i--){
+                    console.log(reviews[i]);
+                    reviewsRows.push(<ReviewRow data={reviews[i]} key={i} />);
+                }
+            }
+
+            return reviewsRows;
+        }
 
         return (
             <div className="product-view-page-product-details-info-group">
@@ -165,11 +179,7 @@ class ProductDetailsInfo extends Component {
                     </div>
                     <div className="collapse-item row">
                         <div className="show-reviews-group">
-                            {
-                                // this.state.product_details_info.reviews.map((review, index) => {
-                                //     return <ReviewRow data={review} key={index} />
-                                // })
-                            }
+                            {reviewListDom().map(row => {return row})}
                         </div>
                         {addReviewGroup()}
                     </div>

@@ -48,5 +48,4 @@ app.listen(process.env.PORT || 3000, () => {
   // productDM .dropTable(rs => {});
   // feedbackDM.dropTable(rs => {})
   console.log(`dn ${Xinchao}`);
-
 });
