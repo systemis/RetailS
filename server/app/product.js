@@ -100,11 +100,13 @@ module.exports = router => {
 
                     console.log(Date.now());
                     var productBundle   = req.body;
+                    var reviews         = [{}];
                     // productBundle.id    = Date.now();
-                    productBundle.sell  = 0;
                     productBundle.date  = new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString();
-                    productBundle.name  = removeWordFromLastPosition(" ", productBundle.name);
-                    productBundle.name  = removeWordFromLastPosition(".", productBundle.name);
+                    productBundle.sell    = 0;
+                    productBundle.name    = removeWordFromLastPosition(" ", productBundle.name);
+                    productBundle.name    = removeWordFromLastPosition(".", productBundle.name);
+                    productBundle.reviews = JSON.stringify(reviews);
                     
                     if(filename) { productBundle.image = filename; }
 

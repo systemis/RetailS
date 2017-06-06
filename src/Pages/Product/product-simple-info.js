@@ -109,12 +109,3 @@ class ProductSimpleInfo extends Component {
 }
 
 export default ProductSimpleInfo;
-
-/**
- * <p>
-                                TAGS: 
-                                <strong className="show-b-simple-product-tags">
-                                    {this.props.Data.tags}
-                                </strong>
-                            </p>
- */

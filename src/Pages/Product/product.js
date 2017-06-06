@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import ProductSimpleInfo    from './product-simple-info.js';
 import ProductDetailsInfo   from './product-details-info.js';
 import $                    from 'jquery';
+import userMG               from '../../js/user.js';
+import CartMG               from"../../js/cartmanager.js";
 
-const CartMG           = require("../../js/cartmanager.js")
 const ExampleProdcuct1 = require('../../public/ex-1.jpg');
 require('./Style/product-page-style.css');
 
@@ -41,7 +42,11 @@ class ProductPage extends Component {
                 // tags: ["Bag", "Bags"], 
             }
         }
-        
+
+        userMG.checkLogin(isLogin => {
+            this.setState({isLogin: isLogin})
+        })
+
         this.getProductInfos();
 
         this.addProduct_Cart = this.addProduct_Cart.bind(this);
@@ -54,11 +59,11 @@ class ProductPage extends Component {
             url: "/get-product-by-name/" + this.productName,
             type: "get",
             success: data => {
-                data.amount = 1;
-                data.total  = data.price;
+                data.amount  = 1;
+                data.total   = data.price;
+                data.reviews = JSON.parse(data.reviews);
                 sefl.setState({productInfo: data});
-                console.log(data);
-                
+
                 // Tăng lượt xem của sản phẩm .
                 setTimeout(() => this.plusProductSell(), 500);
             },
@@ -88,6 +93,13 @@ class ProductPage extends Component {
         this.setState({productInfo: data});
     }
 
+    updateProductReview(message){
+        var review = {
+            message: message,
+            date   : new Date().toLocaleDateString()
+        };
+    }
+
     render() {
         if(this.state.productInfo !== 'err' || checkEmptyObject(this.state.productInfo) > 0){
             return (
@@ -99,7 +111,10 @@ class ProductPage extends Component {
                         addListener ={this.addProduct_Cart}
                         />   
                     
-                    <ProductDetailsInfo Infos ={this.state.productInfo}/>   
+                    <ProductDetailsInfo 
+                        Infos   ={this.state.productInfo}
+                        idLogin ={this.state.isLogin}
+                        />   
                 </div>
             );
         }else{

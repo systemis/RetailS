@@ -21,7 +21,7 @@ class FirstHeader extends Component {
     componentWillMount() { 
         userMG.checkAdmin(_isAdmin => this.setState({isAdmin: _isAdmin})); 
     }
-    
+
     render() {
         const loginButton = () => {
             if(this.state.isAdmin === false){

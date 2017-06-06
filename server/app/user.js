@@ -112,7 +112,7 @@ module.exports = (router) => {
             res.send(req.use);
         }else{
             console.log('Chua dang nhap. ');
-            return res.send("Ban chua dang nhap. ");
+            return res.send(false);
         }
     })
 

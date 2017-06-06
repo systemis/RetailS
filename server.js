@@ -39,7 +39,7 @@ require('./server/app/feedback.js')(app);
 
 const PORT = process.env.PORT || 3000;
 const Xinchao = "Thinh"
-app.listen(process.env.PORT || 9288, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log(`App listening on port ${PORT}!`)
 
   // userDM   .dropTable(rs => userDM   .createTable(_rs => console.log(_rs)));

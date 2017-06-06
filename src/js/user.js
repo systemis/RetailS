@@ -1,6 +1,24 @@
 import $ from 'jquery';
 
 class UserManager{
+    checkLogin(isLogin){
+        $.ajax({
+            url: '/check-login',
+            type: 'POST',
+            success: isLogin => {
+                if(isAdmin !== false){
+                    return console.log(isAdmin);
+                }
+
+                return false;
+            },
+            
+            error: err => {
+                console.log("Error when check login" + err);
+            }
+        })
+    }
+
     checkAdmin(fn){ 
         $.ajax({
             url: '/check-admin',

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import $ from 'jquery';
+import $                    from 'jquery';
 
 const additional_information_name = ["category", "weight", "height", "material", "tags"];
 var get_object_size = (obj) => {
@@ -8,6 +8,23 @@ var get_object_size = (obj) => {
         index ++;
     }
     return index;
+}
+
+const ReviewRow = props => {
+    return (
+        <div className="review-row row">
+            <div className="col-md-2 col-sm-2">
+                <img src={props.data.avatar} alt="Avatar about user"/>
+                <h3  className="show-name">{props.data.username}</h3>
+                <p   className="show-data">{props.data.date}</p>
+            </div>
+            <div className="col-md-10 col-sm-10">
+                <p className="show-rep-message">
+                    {props.data.message}
+                </p>
+            </div>
+        </div>
+    )
 }
 
 class ProductDetailsInfo extends Component {
@@ -88,9 +105,38 @@ class ProductDetailsInfo extends Component {
         return _rows;
     }
 
+    newReview(message){
+        var review = {};
+        
+        review.message  = message;
+        review.date     = new Date().toLocaleDateString();
+        //review.username = 
+    }
+
     render() {
         this.getAdditionalInformation();
         var additionalInfoList = this.additionalInfoList();
+        var addReviewGroup     = () => {
+            if(this.props.isLogin !== false){
+                return (
+                    <form 
+                        id="form-add-review-product" 
+                        action={"/add-reviews-product/" + this.props.Infos.name}
+                        //onSubmit={() => newReview()}
+                        >
+                        <textarea 
+                            name="commentvalue" 
+                            id="comment-text" 
+                            rows="10" 
+                            placeholder="Your review .">
+                        </textarea>
+                        <input 
+                            type="submit" />
+                    </form>
+                );
+            }
+        }
+
         return (
             <div className="product-view-page-product-details-info-group">
                 <ul className="nav nav-tabs tabs-group-details-info">
@@ -119,14 +165,13 @@ class ProductDetailsInfo extends Component {
                     </div>
                     <div className="collapse-item row">
                         <div className="show-reviews-group">
-
+                            {this.state.product_details_info.reviews.map((review, index) => {
+                                return <ReviewRow data={review} key={index} />
+                            })}
                         </div>
                         <div className="post-new-review-group">
                             <h3>ADD A REVIEW</h3>
-                            <form id="form-add-review-product" action={"/add-reviews-product/" + this.props.Infos.id}>
-                                <textarea name="commentvalue" id="comment-text" rows="10" placeholder="Your review ."></textarea>
-                                <input    type="submit" />
-                            </form>
+                            {addReviewGroup()}
                         </div>
                     </div>
                 </div>
