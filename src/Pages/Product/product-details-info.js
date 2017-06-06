@@ -132,6 +132,8 @@ class ProductDetailsInfo extends Component {
                         </form>
                     </div>
                 );
+            }else{
+                return <h1 style={{textAlign: 'center', color: 'red'}}> Dang nhap de binh luan </h1>
             }
         }
 

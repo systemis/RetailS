@@ -37,7 +37,7 @@ function ProductDataManager() {
             if(err) { return fn("Error"); }
             if(result.length <= 0) { return fn("Not products")};
             
-            console.log(result)
+            result[0].reviews = JSON.parse(result[0].reviews);
             return fn(result[0]);
         })
     }
@@ -54,7 +54,7 @@ function ProductDataManager() {
     }
 
     this.updateProduct = (bundle, fn) => {
-        connection.query("UPDATE "+tableName+" SET name = ?, image = ?, category = ?, description = ?, price = ?, weight = ?, height = ?, material = ?, status = ? WHERE id = ?", [bundle.name, bundle.image, bundle.category, bundle.description, bundle.price, bundle.weight, bundle.height, bundle.material, bundle.status, bundle.id], (err, result) => {
+        connection.query("UPDATE "+tableName+" SET name = ?, image = ?, category = ?, description = ?, price = ?, weight = ?, height = ?, reviews = ?, material = ?, status = ? WHERE id = ?", [bundle.name, bundle.image, bundle.category, bundle.description, bundle.price, bundle.weight, bundle.height, JSON.stringify(bundle.reviews), bundle.material, bundle.status, bundle.id], (err, result) => {
             if(err) {
                 return fn("Error");
             }
@@ -85,20 +85,6 @@ function ProductDataManager() {
         })
     }
 
-    this.checkIsExistsByName = (name, fn) => {
-        connection.query("SELECT * FROM " + tableName + "", (err, result) => {
-            if(err) console.log(err);
-
-            for(var i = 0; i < result.length; i++) {
-                if(result[i].name === name) {
-                    return fn(false);
-                }
-            }
-
-            return fn(true);
-        })
-    }
-
     this.dropTable = fn => {
         connection.query("DROP TABLE "+tableName+"", err => {
             if(err) console.log(err);
@@ -112,6 +98,20 @@ function ProductDataManager() {
             if(err) console.log(err);
 
             return fn(result);
+        })
+    }
+
+    this.checkIsExistsByName = (name, fn) => {
+        connection.query("SELECT * FROM " + tableName + "", (err, result) => {
+            if(err) console.log(err);
+
+            for(var i = 0; i < result.length; i++) {
+                if(result[i].name === name) {
+                    return fn(false);
+                }
+            }
+
+            return fn(true);
         })
     }
 }   

@@ -3,6 +3,7 @@ import ProductSimpleInfo    from './product-simple-info.js';
 import ProductDetailsInfo   from './product-details-info.js';
 import $                    from 'jquery';
 import userMG               from '../../js/user.js';
+import productMG            from '../../js/product.js';
 import CartMG               from"../../js/cartmanager.js";
 
 const ExampleProdcuct1 = require('../../public/ex-1.jpg');
@@ -51,21 +52,13 @@ class ProductPage extends Component {
 
     getProductInfos() {
         const sefl        = this;
-        $.ajax({
-            url: "/get-product-by-name/" + this.productName,
-            type: "get",
-            success: data => {
-                data.amount  = 1;
-                data.total   = data.price;
-                data.reviews = JSON.parse(data.reviews);
-                sefl.setState({productInfo: data});
+        productMG.getProductByName(this.productName, data => {
+            data.amount  = 1;
+            data.total   = data.price;
+            sefl.setState({productInfo: data});
 
-                // Tăng lượt xem của sản phẩm .
-                setTimeout(() => this.plusProductSell(), 500);
-            },
-            error: err => {
-                console.log(err)
-            }
+            // Tăng lượt xem của sản phẩm .
+            setTimeout(() => this.plusProductSell(), 500);
         })
     }
 
@@ -90,6 +83,7 @@ class ProductPage extends Component {
     }
 
     updateProductReview(message){
+        const sefl = this;
         userMG.checkLogin(user => {
             if(user !== false){
                 var review  = {
@@ -98,13 +92,10 @@ class ProductPage extends Component {
                     email   : user.email,
                 };
 
-                const newReviews = this.state.productInfo.reviews.push(review);
-                console.log("Old reviews: " + this.state.productInfo.reviews);
-                console.log("New reviews: " + newReviews);
-                console.log("Review message: " + message);
-                console.log(review);
-
-                this.setState({productInfo: newReviews});
+                const product = sefl.state.productInfo; 
+                product.reviews.push(review);
+                sefl.setState({productInfo: product});
+                productMG.updateProduct(product);
             }else{
                 return alert("Bạn chưa đăng nhập !");
             }
@@ -141,6 +132,12 @@ class ProductPage extends Component {
                 </h1>
             )
         }
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log(nextState.productInfo.reviews);
+
+        return true;
     }
 }
 

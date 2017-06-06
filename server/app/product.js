@@ -138,6 +138,12 @@ module.exports = router => {
     })
 
 
+    router.post('/update-product', (req, res) => {
+        productDM.updateProduct(req.body.data, (result) => {
+            return console.log(result);
+        })
+    })
+
     function removeWordFromLastPosition(word, text){
         var chA = text.split("");
         console.log(chA);
