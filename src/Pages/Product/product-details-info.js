@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import $                    from 'jquery';
 
 const additional_information_name = ["category", "weight", "height", "material", "tags"];
-var get_object_size = (obj) => {
+const get_object_size = (obj) => {
     var index = 0;
     for(var i in obj) {
         index ++;
@@ -34,8 +34,7 @@ const ReviewRow = props => {
 class ProductDetailsInfo extends Component {
     constructor(props) {
         super(props);
-        this.state = { product_details_info: {} }
-
+        this.state = { product_details_info: {}, limitShowReviews: 8}
         this.handlingClickTab();
     }
 
@@ -140,19 +139,45 @@ class ProductDetailsInfo extends Component {
                 return <h1 style={{textAlign: 'center', color: 'red'}}> Dang nhap de binh luan </h1>
             }
         }
+        
         var reviewListDom = () => {
-            var reviewsRows = []
+            var reviewsRows = [];
             var reviews     = this.props.Infos.reviews;
             console.log(this.props.Infos);
             if(reviews instanceof Array){
-                console.log(reviews);
+                var index = 0;
                 for(var i = reviews.length - 1; i >= 0; i--){
-                    console.log(reviews[i]);
-                    reviewsRows.push(<ReviewRow data={reviews[i]} key={i} />);
+                    index ++;
+                    if(index <= this.state.limitShowReviews){
+                        reviewsRows.push(<ReviewRow data={reviews[i]} key={i} />);
+                    }
                 }
             }
 
             return reviewsRows;
+        }
+
+        var showMoreButton = () => {
+            const sefl = this;
+            if(this.props.Infos.reviews instanceof Array){
+                if(sefl.props.Infos.reviews.length > this.state.limitShowReviews){
+                    return(
+                        <button 
+                            className="btn btn-primary"
+                            style={{textAlign: 'center'}} 
+                            onClick={() => {
+                                const newLimit = sefl.state.limitShowReviews + 3;
+                                sefl.setState({limitShowReviews: newLimit});
+                            }}> 
+                            Show more
+                        </button>
+                    )
+                }else{
+                    return ;
+                }
+            }else{
+                return ;
+            }
         }
 
         return (
@@ -184,6 +209,7 @@ class ProductDetailsInfo extends Component {
                     <div className="collapse-item row">
                         <div className="show-reviews-group">
                             {reviewListDom().map(row => {return row})}
+                            {showMoreButton()}
                         </div>
                         {addReviewGroup()}
                     </div>
