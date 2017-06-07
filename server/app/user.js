@@ -50,7 +50,8 @@ module.exports = (router) => {
                 default: 
                     var user = {
                         name : result.name,
-                        email: result.email
+                        email: result.email,
+                        username: result.name,
                     }
                     done(null, user);
                     break;
@@ -151,6 +152,7 @@ module.exports = (router) => {
                 console.log(rs);
                 if(rs === 'err') return res.send("Có lỗi xảy ra, vui lòng thử lại sau !");
 
+                req.user.username = updateData.name;
                 res.redirect('/my-account');
             });
         }

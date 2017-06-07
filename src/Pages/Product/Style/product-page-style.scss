@@ -1,5 +1,6 @@
 .product-view-page{
     //padding: 0;
+    $border: 1px solid #eeeeee;
     @mixin flex(){
         margin: 0;
         padding: 0;
@@ -264,6 +265,43 @@
                             background: #eee;
                         }
                     }    
+                }
+                & .show-reviews-group{
+                    & .review-row.row{
+                        border-bottom: $border;
+                        margin: 5px 0px;
+                        @media screen and (max-width: 768px) {
+                            margin: 0px;
+                        }
+                        & .f-col{
+                            & .show-avatar{
+                                width: 100%;
+                                border-radius: 50%;
+                            }
+                            & .show-date{
+                                margin-top: 5px;
+                                width: 100%;
+                                text-align: center;
+                            }
+                        }
+                        & .s-col{
+                            height: 100%;
+                            padding-left: 25px;
+                            & .child{
+                                & .show-name{
+                                    width: 100%;
+                                    font-size: 14px;
+                                    font-family: inherit;
+                                    font-weight: bold;
+                                }
+
+                                & .show-rep-message{
+                                    font-size: 13px;
+                                    font-family: 'Times New Roman', Times, serif;
+                                }
+                            }
+                        }
+                    }
                 }
                 & .post-new-review-group{
                     & #form-add-review-product{

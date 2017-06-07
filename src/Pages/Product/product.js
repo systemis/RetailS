@@ -31,7 +31,7 @@ class ProductPage extends Component {
                 // name: "CHEAP MONDAYgkbkjb  mdn",
                 // description: "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. bag",
                 // price: "20$",
-                // review: "httpl...",
+                // reviews: [{username: 'syst@gmail.com', date: new Date().toLocaleDateString(), message: 'Test', avatar: 'https://tapchianhdep.com/wp-content/uploads/2016/05/bo-suu-tap-hinh-anh-avatar-doc-chat-nhat-qua-dat-3.jpg'}],
                 // imagefilename: ExampleProdcuct1,
                 
                 // // Additional information 
@@ -89,6 +89,9 @@ class ProductPage extends Component {
                     message : message,
                     date    : new Date().toLocaleDateString(),
                     email   : user.email,
+                    username: user.username,
+                    avatar  :
+                    'https://tapchianhdep.com/wp-content/uploads/2016/05/bo-suu-tap-hinh-anh-avatar-doc-chat-nhat-qua-dat-3.jpg'
                 };
 
                 const product = sefl.state.productInfo; 

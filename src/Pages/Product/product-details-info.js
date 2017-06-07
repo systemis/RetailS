@@ -13,15 +13,19 @@ var get_object_size = (obj) => {
 const ReviewRow = props => {
     return (
         <div className="review-row row">
-            <div className="col-md-2 col-sm-2">
-                <img src={props.data.avatar} alt="Avatar about user"/>
-                <h3  className="show-name">{props.data.email}</h3>
-                <p   className="show-data">{props.data.date}</p>
+            <div className="col-md-1 col-sm-1 col-xs-2 f-col">
+                <img 
+                    className="show-avatar"
+                    src={props.data.avatar} alt="Avatar about user"/>
+                <p  className="show-date">{props.data.date}</p>
             </div>
-            <div className="col-md-10 col-sm-10">
-                <p className="show-rep-message">
-                    {props.data.message}
-                </p>
+            <div className="col-md-11 col-sm-11 col-xs-10 s-col">
+                <div className="child">
+                    <p  className="show-name">{props.data.username}</p>
+                    <p className="show-rep-message">
+                        {props.data.message}
+                    </p>
+                </div>
             </div>
         </div>
     )

@@ -89,27 +89,6 @@
   .product-view-page .product-view-page-simple-product-info-group .row .show-simple-product-info .show-amount-addtocard .show-ammount {
     margin-right: 20px;
     float: left; }
-    .product-view-page .product-view-page-simple-product-info-group .row .show-simple-product-info .show-amount-addtocard .show-ammount .btn-numberic {
-      padding: 0 10px;
-      font-size: 17px;
-      background: #eee;
-      text-transform: uppercase;
-      border-radius: 0;
-      height: 40px;
-      line-height: 40px;
-      margin-right: 1px;
-      background: #eee;
-      border-radius: none; }
-      @media screen and (max-width: 991px) {
-        .product-view-page .product-view-page-simple-product-info-group .row .show-simple-product-info .show-amount-addtocard .show-ammount .btn-numberic {
-          margin: 5px 1px; } }
-  @media screen and (max-width: 991px) and (max-width: 768px) {
-    .product-view-page .product-view-page-simple-product-info-group .row .show-simple-product-info .show-amount-addtocard .show-ammount .btn-numberic {
-      margin: 5px 1px; } }
-
-      .product-view-page .product-view-page-simple-product-info-group .row .show-simple-product-info .show-amount-addtocard .show-ammount .btn-numberic:hover {
-        background: #222;
-        color: white; }
     .product-view-page .product-view-page-simple-product-info-group .row .show-simple-product-info .show-amount-addtocard .show-ammount #product-page-ammount {
       padding: 0 10px;
       font-size: 17px;
@@ -256,6 +235,30 @@
             padding: 5px 5px; }
           .product-view-page .product-view-page-product-details-info-group .collapses .collapse-item .table-show-product-edditional-info tr:hover {
             background: #eee; }
+      .product-view-page .product-view-page-product-details-info-group .collapses .collapse-item .show-reviews-group .review-row.row {
+        border-bottom: 1px solid #eeeeee;
+        margin: 5px 0px; }
+        @media screen and (max-width: 768px) {
+          .product-view-page .product-view-page-product-details-info-group .collapses .collapse-item .show-reviews-group .review-row.row {
+            margin: 0px; } }
+        .product-view-page .product-view-page-product-details-info-group .collapses .collapse-item .show-reviews-group .review-row.row .f-col .show-avatar {
+          width: 100%;
+          border-radius: 50%; }
+        .product-view-page .product-view-page-product-details-info-group .collapses .collapse-item .show-reviews-group .review-row.row .f-col .show-date {
+          margin-top: 5px;
+          width: 100%;
+          text-align: center; }
+        .product-view-page .product-view-page-product-details-info-group .collapses .collapse-item .show-reviews-group .review-row.row .s-col {
+          height: 100%;
+          padding-left: 25px; }
+          .product-view-page .product-view-page-product-details-info-group .collapses .collapse-item .show-reviews-group .review-row.row .s-col .child .show-name {
+            width: 100%;
+            font-size: 14px;
+            font-family: inherit;
+            font-weight: bold; }
+          .product-view-page .product-view-page-product-details-info-group .collapses .collapse-item .show-reviews-group .review-row.row .s-col .child .show-rep-message {
+            font-size: 13px;
+            font-family: 'Times New Roman', Times, serif; }
       .product-view-page .product-view-page-product-details-info-group .collapses .collapse-item .post-new-review-group #form-add-review-product h3 {
         font-size: 36px;
         margin-top: 40px;
