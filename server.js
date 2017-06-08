@@ -1,13 +1,13 @@
 // server/app.js
 'use strict';
 
+const path            = require('path');
+const fs              = require('fs');
 const express         = require('express');
 const morgan          = require('morgan');
-const path            = require('path');
 const bodyParser      = require("body-parser");
 const cookieParser    = require("cookie-parser");
 const expresssession  = require("express-session");
-const fs              = require('fs');
 const imgurUploader   = require('imgur-uploader');
 const userDM          = require('./server/models/database-user.js');
 const productDM       = require('./server/models/database-product.js');
@@ -43,15 +43,4 @@ const PORT = process.env.PORT || 3000;
 const Xinchao = "Thinh"
 app.listen(process.env.PORT || 3000, () => {
   console.log(`App listening on port ${PORT}!`)
-
-  // userDM   .dropTable(rs => userDM   .createTable(_rs => console.log(_rs)));
-  // productDM.dropTable(rs => productDM.createTable(_rs => console.log(_rs)));
-  // userDM    .dropTable(rs => {});
-  // productDM .dropTable(rs => {});
-  // feedbackDM.dropTable(rs => {})
-  //console.log(`dn ${Xinchao}`);
-
-  // // imgurUploader(fs.readFileSync('./server/public/upload/productimage/fwpANHL.jpg_.jpg'), {title: 'produ'}).then(data => {
-  // //   console.log(data.link);
-  // })
 });

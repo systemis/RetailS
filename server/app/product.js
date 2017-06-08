@@ -7,11 +7,6 @@ module.exports = router => {
     var filename          = '';
     var _filename         = '';
 
-    
-    // imgurUploader(fs.readFileSync('./server/public/upload/productimage/fwpANHL.jpg_.jpg'), {'title': 'dd'}).then(res => {
-    //     console.log('Link: ' + res.link);
-    // });
-
     const multerCustom = {
         destination: function(req, file, cb) {
             cb(null, path.resolve(__dirname, "../public/upload/productimage"));
@@ -110,9 +105,8 @@ module.exports = router => {
                         imgurUploader(fs.readFileSync(_filename), {title: 'product-image'}).then(data => {
                             fs.unlink(_filename);
                             console.log(`image link: ${data.link}`);
-                            console.log(Date.now());
-                            var productBundle     = req.body;
                             // productBundle.id    = Date.now();
+                            var productBundle     = req.body;
                             productBundle.date    = new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString();
                             productBundle.sell    = 0;
                             productBundle.name    = removeWordFromLastPosition(" ", productBundle.name);
