@@ -7,6 +7,8 @@ const path            = require('path');
 const bodyParser      = require("body-parser");
 const cookieParser    = require("cookie-parser");
 const expresssession  = require("express-session");
+const fs              = require('fs');
+const imgurUploader   = require('imgur-uploader');
 const userDM          = require('./server/models/database-user.js');
 const productDM       = require('./server/models/database-product.js');
 const feedbackDM      = require('./server/models/database-feedback.js');
@@ -47,5 +49,9 @@ app.listen(process.env.PORT || 3000, () => {
   // userDM    .dropTable(rs => {});
   // productDM .dropTable(rs => {});
   // feedbackDM.dropTable(rs => {})
-  console.log(`dn ${Xinchao}`);
+  //console.log(`dn ${Xinchao}`);
+
+  // // imgurUploader(fs.readFileSync('./server/public/upload/productimage/fwpANHL.jpg_.jpg'), {title: 'produ'}).then(data => {
+  // //   console.log(data.link);
+  // })
 });

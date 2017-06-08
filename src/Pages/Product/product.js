@@ -25,6 +25,7 @@ class ProductPage extends Component {
         super(props);
         this.productName      = props.match.params.name;
         this.state = {productInfo: {
+                // Data to test font-end .
                 // total: 0,
                 // amount: 0,
                 // id: 102329,

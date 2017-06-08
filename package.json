@@ -13,6 +13,8 @@
     "express": "^4.15.2",
     "express-session": "^1.15.2",
     "google-map-react": "^0.24.0",
+    "imgur-upload": "^0.1.2",
+    "imgur-uploader": "^4.2.0",
     "jquery": "^3.2.1",
     "material-ui": "^0.17.4",
     "morgan": "^1.8.1",
