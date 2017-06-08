@@ -118,8 +118,8 @@ class ProductDetailsInfo extends Component {
 
     render() {
         this.getAdditionalInformation();
-        var additionalInfoList = this.additionalInfoList();
-        var addReviewGroup     = () => {
+        const additionalInfoList = this.additionalInfoList();
+        const addReviewGroup     = () => {
             if(this.props.isLogin !== false){
                 return (
                     <div className="post-new-review-group">
@@ -136,11 +136,18 @@ class ProductDetailsInfo extends Component {
                     </div>
                 );
             }else{
-                return <h1 style={{textAlign: 'center', color: 'red'}}> Dang nhap de binh luan </h1>
+                return (
+                    <a  href="/login" 
+                        style={{textAlign: 'center'}}>
+                        <h4> 
+                            Dang nhap de binh luan 
+                        </h4>
+                    </a>
+                )
             }
         }
         
-        var reviewListDom = () => {
+        const reviewListDom = () => {
             var reviewsRows = [];
             var reviews     = this.props.Infos.reviews;
             console.log(this.props.Infos);
@@ -157,20 +164,23 @@ class ProductDetailsInfo extends Component {
             return reviewsRows;
         }
 
-        var showMoreButton = () => {
+        const showMoreButton = () => {
             const sefl = this;
             if(this.props.Infos.reviews instanceof Array){
                 if(sefl.props.Infos.reviews.length > this.state.limitShowReviews){
                     return(
-                        <button 
-                            className="btn btn-primary"
-                            style={{textAlign: 'center'}} 
-                            onClick={() => {
-                                const newLimit = sefl.state.limitShowReviews + 3;
-                                sefl.setState({limitShowReviews: newLimit});
-                            }}> 
-                            Show more
-                        </button>
+                        <p style={{textAlign: 'center'}}>
+                            <button 
+                                className="btn btn-primary container"
+                                style={{textAlign: 'center'}} 
+                                onClick={() => {
+                                    const newLimit = sefl.state.limitShowReviews + 3;
+                                    sefl.setState({limitShowReviews: newLimit});
+                                }}> 
+                                Show more
+                            </button>
+                        </p>
+
                     )
                 }else{
                     return ;

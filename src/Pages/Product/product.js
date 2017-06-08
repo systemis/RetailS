@@ -91,7 +91,7 @@ class ProductPage extends Component {
                     email   : user.email,
                     username: user.username,
                     avatar  :
-                    'https://tapchianhdep.com/wp-content/uploads/2016/05/bo-suu-tap-hinh-anh-avatar-doc-chat-nhat-qua-dat-3.jpg'
+                    'http://icons.iconarchive.com/icons/graphicloads/colorful-long-shadow/256/User-icon.png'
                 };
 
                 const product = sefl.state.productInfo; 
