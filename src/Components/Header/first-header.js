@@ -10,7 +10,7 @@ class FirstHeader extends Component {
         this.state = {isLogin: false};
     }
     // XPathEvaluator
-    handlingRenderCP(component){
+    renderCP(component){
         if(this.state.isLogin !== false){
             return component;
         }
@@ -33,18 +33,16 @@ class FirstHeader extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-6 col-sm-6 left">
-                            {this.handlingRenderCP( 
-                                <a href="/my-account" className="show-account-link">My Account details</a>)
-                            }
-                            {this.handlingRenderCP(<span className="dot-khoangcach">|</span>)}
+                            {this.renderCP(<a href="/my-account" className="show-account-link">My Account details</a>)}
+                            {this.renderCP(<span className="dot-khoangcach">|</span>)}
                             <span className="show-date-now">
                                 {new Date().toLocaleDateString()}
                             </span>
                         </div>
                         <div className="col-md-6 col-sm-6 right">
-                            {this.handlingRenderCP(<a href="/my-account" className="show-my-account">My account</a>)}
-                            {this.handlingRenderCP(<span className="show-store-link">Store</span>)}
-                            {this.handlingRenderCP(<span className="show-store-link" onClick={() => userMG.logOut()}>Logout</span>)}
+                            {this.renderCP(<a href="/my-account" className="show-my-account">My account</a>)}
+                            {this.renderCP(<span className="show-store-link">Store</span>)}
+                            {this.renderCP(<span className="show-store-link" onClick={() => userMG.logOut()}>Logout</span>)}
                             {loginButton()}
                         </div>
                     </div>
