@@ -1,4 +1,6 @@
-import $ from 'jquery'
+import $      from 'jquery'
+import axios  from 'axios';
+
 class Product {
     updateProduct(bundle){
         console.log(bundle.reviews);

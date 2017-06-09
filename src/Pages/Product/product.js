@@ -91,8 +91,7 @@ class ProductPage extends Component {
                     date    : new Date().toLocaleDateString(),
                     email   : user.email,
                     username: user.username,
-                    avatar  :
-                    'http://icons.iconarchive.com/icons/graphicloads/colorful-long-shadow/256/User-icon.png'
+                    avatar  : 'http://icons.iconarchive.com/icons/graphicloads/colorful-long-shadow/256/User-icon.png'
                 };
 
                 const product = sefl.state.productInfo; 

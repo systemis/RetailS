@@ -40,7 +40,7 @@ require('./server/app/shop.js')(app);
 require('./server/app/feedback.js')(app);
 
 const PORT = process.env.PORT || 3000;
-const Xinchao = "Thinh"
 app.listen(process.env.PORT || 3000, () => {
   console.log(`App listening on port ${PORT}!`)
+  // productDM.createTable(fn => console.log(fn));
 });

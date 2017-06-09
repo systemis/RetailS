@@ -27,15 +27,11 @@ module.exports = router => {
     var upload    = multer({storage: storage}).single('imagevalue');
     
     router.get("/product-by-name/:name",     (req, res) => res.sendfile(path.resolve(__dirname, "../../", "build/index.html")));
-    // router.get("/product-by-name/:category", (req, res) => res.sendfile(path.resolve(__dirname, "../../", "build/index.html")));
-
-
     router.get("/all-product", (req, res) => {
         productDM.getProducsList(result =>{
             return res.json(result)
         })
     })
-
 
     router.get("/get-product-by-name/:name", (req, res) => {
         const productName = req.params.name;
@@ -47,38 +43,47 @@ module.exports = router => {
 
     router.get("/get-besell-products", (req, res) => {
         productDM.getProducsList(result => {
-            for(var i = 0; i < result.length; i++) {
-                for(var j = 0; j < result.length; j ++) {
-                    if(result[i].sell > result[j].sell) {
-                        var _single_result = result[i];
-                        result[i] = result[j];
-                        result[j] = _single_result;
+            if(result !== false){
+                for(var i = 0; i < result.length; i++) {
+                    for(var j = 0; j < result.length; j ++) {
+                        if(result[i].sell > result[j].sell) {
+                            var _single_result = result[i];
+                            result[i] = result[j];
+                            result[j] = _single_result;
+                        }
                     }
                 }
-            }
 
-            var _result = [];
-            for(var i = 0; i < result.length; i ++) {
-                if(i < 4 && result[i]) _result.push(result[i]);
-            }
+                var _result = [];
+                for(var i = 0; i < result.length; i ++) {
+                    if(i < 4 && result[i]) _result.push(result[i]);
+                }
 
-            res.json(_result);
+                res.json(_result);
+            }else{
+                res.send('Khong co du lieu');
+            }
         })
     })
 
     router.get("/get-related-products", (req, res) => {
         productDM.getProducsList(result => {
-            for(var i = 0; i < result.length; i++){
-                for(var j = 0; j < result.length; j++){
-                    if(Date.parse(result[i].date) > Date.parse(result[j].date)){
-                        var _single_result = result[i];
-                        result[i] = result[j];
-                        result[j] = _single_result;
+                if(result !== false){
+
+                for(var i = 0; i < result.length; i++){
+                    for(var j = 0; j < result.length; j++){
+                        if(Date.parse(result[i].date) > Date.parse(result[j].date)){
+                            var _single_result = result[i];
+                            result[i] = result[j];
+                            result[j] = _single_result;
+                        }
                     }
                 }
-            }
 
-            res.send(result);
+                res.send(result);
+            }else{
+                res.send("Khong co du lieu");
+            }
         })
     })
 

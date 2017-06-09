@@ -1,0 +1,1 @@
+module.exports = ['sale', 'new', 'bessells', 'trending', 'for you'];

@@ -95,9 +95,16 @@ function ProductDataManager() {
 
     this.getProducsList = fn => {
         connection.query("Select * from "+tableName+"", (err, result) => {
-            if(err) console.log(err);
-
-            return fn(result);
+            if(err) {
+                console.log(err);
+                return fn(false)
+            }else{
+                if(result){
+                    return fn(result);
+                }else{
+                    return fn(false);
+                }
+            }
         })
     }
 

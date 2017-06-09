@@ -1,5 +1,34 @@
 var mysql = require('mysql');
 
+// module.exports = mysql.createConnection({
+//     connectionLimit: 100,
+//     host: 'mysql7.000webhosting.com',
+//     // port: 3306,
+//     user: 'id561439_ttprojectdata',
+//     password: 'Technology12',
+//     database: '	id561439_ttprojectdata',
+// })
+
+
+// module.exports = mysql.createConnection({
+//     connectionLimit: 100,
+//     host: 'sql12.freemysqlhosting.net',
+//     port: 3306,
+//     user: 'sql12176052',
+//     password: 'YES',
+//     database: 'sql12176052',
+// })
+
+// module.exports = mysql.createConnection({
+//     connectionLimit: 100,
+//     host: 'mysql.hostinger.vn',
+//     port: 3306,
+//     user: 'u446271841_ttapp',
+//     password: 'Technology12',
+//     database: '	u446271841_ttapp',
+// })
+
+
 module.exports = mysql.createConnection({
     connectionLimit: 100,
     host: 'localhost',

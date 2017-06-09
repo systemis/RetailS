@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import statusItem           from '../status-item.js';
 require('./Style/product-card-style.css');
 
 class ProductCard extends Component {
@@ -9,7 +9,7 @@ class ProductCard extends Component {
                 <div className="child">
                     <div className="show-image-label">
                         <img src={this.props.Data.image} alt="Image"/>
-                        <span className="sale"> Sale </span>
+                        {statusItem(this.props.Data.status)}
                     </div>
                     <div className="show-body">
                         <div className="show-title-btnadd row">

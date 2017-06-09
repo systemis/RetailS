@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
+import statusItem           from '../../Components/status-item.js';
 import $ from 'jquery';
 
 class ProductSimpleInfo extends Component {
     constructor(props) {
         super(props);
-        this.handlingPlusMinusAmount();
     }
 
     handlingPlusMinusAmount(){
@@ -32,7 +32,11 @@ class ProductSimpleInfo extends Component {
             })
         })
     }
-
+    
+    componentWillMount() {
+        this.handlingPlusMinusAmount();
+    }
+    
     render() {
         return (
             <div className="product-view-page-simple-product-info-group">
@@ -43,9 +47,7 @@ class ProductSimpleInfo extends Component {
                     <div className="show-selected-product-image col-md-5 col-sm-6">
                         <div className="child">
                             <img src={this.props.Data.image} alt="Image about product"/>
-                            <span className="status sale">
-                                Sale 
-                            </span>
+                            {statusItem(this.props.Data.status)}
                         </div>
                     </div>
                     <div className="show-simple-product-info col-md-5 col-sm-6">
