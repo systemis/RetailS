@@ -40,7 +40,14 @@ require('./server/app/shop.js')(app);
 require('./server/app/feedback.js')(app);
 
 const PORT = process.env.PORT || 3000;
+
+function hasLowecapse(s){
+  return s.toUpperCase() === s;
+}
+
 app.listen(process.env.PORT || 3000, () => {
   console.log(`App listening on port ${PORT}!`)
+  console.log(hasLowecapse('h'))
   // productDM.createTable(fn => console.log(fn));
 });
+
