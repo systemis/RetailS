@@ -29,6 +29,35 @@ class Product {
             }
         })
     }
+
+    getNewProduct(fn){
+        $.ajax({
+            url: "/get-related-products", type: 'GET', 
+            success: data => {
+                if(data){
+                    console.log(data);
+                    fn(data);
+                }       
+            },
+            error: err => {
+                console.log(`Error when get new products: ${err}`); 
+            }
+        })
+    }
+
+    getBessellProducts(fn){
+        $.ajax({
+            url: 'http://localhost:3000/get-besell-products',
+            type: 'GET',
+            success: data => {
+                console.log(data);
+                fn(data);
+            },
+            error: err => {
+                console.log(`Error when get best sell products: ${err}`);
+            }
+        })
+    }
 }
 
 module.exports = new Product();

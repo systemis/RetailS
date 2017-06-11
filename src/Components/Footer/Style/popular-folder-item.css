@@ -31,5 +31,13 @@
         .home-page-popular-folder-group-item .child .show-products .product-card-popular-group-item .row .show-name-price .show-price {
           position: relative;
           bottom: 0; }
+  .home-page-popular-folder-group-item:first-child {
+    margin-left: 12.5%; }
+    @media screen and (max-width: 991px) {
+      .home-page-popular-folder-group-item:first-child {
+        margin-left: 0; } }
+    @media screen and (max-width: 768px) {
+      .home-page-popular-folder-group-item:first-child {
+        margin: 0; } }
 
 /*# sourceMappingURL=popular-folder-item.css.map */

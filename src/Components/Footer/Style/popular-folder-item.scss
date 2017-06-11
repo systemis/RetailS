@@ -50,4 +50,16 @@
             }
         }
     }
+
+    &:first-child{
+        margin-left: 12.5%;
+        @media screen and(max-width: 991px) {
+            & {margin-left: 0;}
+        }
+        @media screen and(max-width: 768px) {
+            &{
+                margin: 0;
+            }
+        }
+    }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-
 import ProductCard from '../../Components/ProductCard/product-card.js';
+import productMG            from '../../js/product.js';
 import $           from 'jquery';
 
 class BestSellerGroup extends Component {
@@ -15,15 +15,8 @@ class BestSellerGroup extends Component {
 
     getProduct(){
         const sefl = this;
-        $.ajax({
-            url: "/get-besell-products", type: 'GET', 
-            success: data => {
-                if(data){
-                    console.log(data);
-                    this.setState({trendingProductsData: data});
-                }       
-            },
-            error: err => console.log(err)
+        productMG.getBessellProducts(data => {
+            sefl.setState({trendingProductsData: data});
         })
     }
 
