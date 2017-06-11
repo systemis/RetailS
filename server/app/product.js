@@ -87,6 +87,24 @@ module.exports = router => {
         })
     })
 
+    router.get('/get-sale-products', (req, res) => {
+        productDM.getProducsList(result => {
+            if(result !== false){
+                var _result = [];
+                for(var i = 0; i < result.length; i++){
+                    if(result[i].status === 'new'){
+                        _result.push(result[i]);
+                        console.log("Get sale product: " + i);
+                    }
+                }
+
+                res.json(_result);
+            }else{
+                res.send("Khong co du lieu");
+            }
+        })
+    }) 
+
     router.get("/get-product/category/:category", (req, res) => {
         const category = req.params.category;
         console.log(category);

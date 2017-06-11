@@ -58,6 +58,19 @@ class Product {
             }
         })
     }
+
+    getSaleProducts(fn){
+        $.ajax({
+            url: '/get-sale-products',
+            type: 'GET', 
+            success: data => {
+                fn(data);
+            },
+            error: err => {
+                console.log(`Error when get sale product: ${err}`);
+            }
+        })
+    }
 }
 
 module.exports = new Product();

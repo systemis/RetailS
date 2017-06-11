@@ -10,7 +10,7 @@ const ProductCard = props => {
                     <img src={props.Data.image} alt="Image about product"/>
                 </div>
                 <div className="show-name-price col-md-9 col-sm-9 col-xs-10">
-                    <a href={"/product/" + props.Data.name} className="show-name">
+                    <a href={"/product-by-name/" + props.Data.name} className="show-name">
                         {props.Data.name}
                     </a>
                     <p className="show-price">{props.Data.price}</p>
@@ -26,7 +26,7 @@ class PopularFolderItem extends Component {
             <div className={"home-page-popular-folder-group-item col-md-3 col-sm-4 "}>
                 <div className="child">
                     <div className="header-group">
-                        <p className="show-title">{this.props.Data.Title}</p>
+                        <p className="show-title" style={{textTransform: 'uppercase'}}>{this.props.Data.Title}</p>
                     </div>
                     <div className="show-products">
                         {this.props.Data.Products.map((value, index) => {

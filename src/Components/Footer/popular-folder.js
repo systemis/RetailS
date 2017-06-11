@@ -2,78 +2,54 @@ import React, { Component } from 'react';
 import FolderItem           from './Components/popular-folder-item.js';
 import productMG            from '../../js/product.js';
 
-var ExampleProdcuct2 = require('../../public/best-seller-image/ex-2.jpg');
-var ExampleProdcuct3 = require('../../public/best-seller-image/ex-3.jpg');
-var ExampleProdcuct4 = require('../../public/best-seller-image/ex-4.jpg');
-
 class PopularFolderGroup extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            folderData: [
-                // {
-                //     Title: "FEATURED",
-                //     Products: [
-                //         {image: ExampleProdcuct2, name: "BILLIONAIRE BOYS", price: "$ 30"},
-                //         {image: ExampleProdcuct4, name: "BILLIONAIRE BOYS", price: "$ 30"},
-                //         {image: ExampleProdcuct3, name: "BILLIONAIRE BOYS", price: "$ 30"},
-                //     ]
-                // },
-                // {
-                //     Title: "NEW PRODUCTS",
-                //     Products: [
-                //         {image: ExampleProdcuct2, name: "BILLIONAIRE BOYS", price: "$ 30"},
-                //         {image: ExampleProdcuct4, name: "BILLIONAIRE BOYS", price: "$ 30"},
-                //         {image: ExampleProdcuct3, name: "BILLIONAIRE BOYS", price: "$ 30"},
-                //     ]
-                // },
-                {
-                    Title: "ON-SALE",
-                    Products: [
-                        {image: ExampleProdcuct2, name: "BILLIONAIRE BOYS", price: "$ 30"},
-                        {image: ExampleProdcuct4, name: "BILLIONAIRE BOYS", price: "$ 30"},
-                        {image: ExampleProdcuct3, name: "BILLIONAIRE BOYS", price: "$ 30"},
-                    ]
-                },
-                {
-                    Title: "BESTSELLER",
-                    Products: [
-                        {image: ExampleProdcuct2, name: "BILLIONAIRE BOYS", price: "$ 30"},
-                        {image: ExampleProdcuct4, name: "BILLIONAIRE BOYS", price: "$ 30"},
-                        {image: ExampleProdcuct3, name: "BILLIONAIRE BOYS", price: "$ 30"},
-                    ]
-                }
-            ]
+            folderData: []
         }
     }
 
     enTry(title, data) {
         var nD      = this.state.folderData;
+        var r_D     = [];
+        data.map((value, index) => {
+            if(index < 4){
+                r_D.push(value);
+            }
+        })
+
         var folder  = {
             Title: title,
-            Products: data
+            Products: r_D
         };;
         
         nD.push(folder);
         this.setState({folder: nD});
     }
 
-    getNewProduct(){
+    getNewProducts(){
         productMG.getNewProduct(data => {
             this.enTry("New products", data);
         })
     }
 
-    getBestSellProduct(){
-        const self = this;
+    getBestSellProducts(){
         productMG.getBessellProducts(data => {
             this.enTry("BESTSELLER", data);
         })
     }
 
+    getSaleProducts(){
+        productMG.getSaleProducts(data => {
+            this.enTry("ON-Sale", data);
+        })
+    }
+
     componentWillMount() {
-        this.getNewProduct();        
-        this.getBestSellProduct();
+        this.getNewProducts();        
+        this.getBestSellProducts();
+        this.getSaleProducts();
     }
 
     render() {
