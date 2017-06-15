@@ -124,6 +124,8 @@ module.exports = router => {
                     if(err){
                         return console.log("Error when upload image " + err);
                     }
+
+                    // After 2sec 
                     setTimeout(() => {
                         imgurUploader(fs.readFileSync(_filename), {title: 'product-image'}).then(data => {
                             fs.unlink(_filename);

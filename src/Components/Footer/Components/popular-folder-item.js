@@ -1,5 +1,4 @@
 import React, { Component }        from 'react';
-
 require('../Style/popular-folder-item.css');
 
 const ProductCard = props => {

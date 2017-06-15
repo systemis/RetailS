@@ -20,10 +20,6 @@ class HomePage extends Component {
     }
 
     componentDidMount() {
-        $.getJSON("http://localhost:3000/all-product", data => {
-            console.log(data);
-            console.log(JSON.parse(data));
-        })
     }
 }
 

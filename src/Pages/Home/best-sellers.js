@@ -7,7 +7,7 @@ class BestSellerGroup extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            trendingProductsData: []
+            bessellersProductsData: []
         }
 
         this.getProduct();
@@ -16,7 +16,7 @@ class BestSellerGroup extends Component {
     getProduct(){
         const sefl = this;
         productMG.getBessellProducts(data => {
-            sefl.setState({trendingProductsData: data});
+            sefl.setState({bessellersProductsData: data});
         })
     }
 
@@ -29,7 +29,7 @@ class BestSellerGroup extends Component {
                     <div className="ngan"></div>
                 </div>
                 <div className="show-best-sellers-product row">
-                    {this.state.trendingProductsData.map((value, index) => {
+                    {this.state.bessellersProductsData.map((value, index) => {
                        return <ProductCard key={index} Data={value} />
                     })}
                 </div>

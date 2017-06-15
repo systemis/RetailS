@@ -17,9 +17,9 @@ export default class SimpleMap extends Component {
                 defaultZoom={this.props.zoom}
             >
                 <AnyReactComponent
-                lat={companyLocation.lat}
-                lng={companyLocation.lng}
-                text={'Systemis Inc'}
+                    lat={companyLocation.lat}
+                    lng={companyLocation.lng}
+                    text={'Systemis Inc'}
                 />
             </GoogleMapReact>
             );

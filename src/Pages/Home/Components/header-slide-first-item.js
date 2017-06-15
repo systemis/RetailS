@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 var exampleProduct = require('../Accest/pamooxhi.png');
 
 class HeaderSlideFirstItem extends Component {

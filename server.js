@@ -45,9 +45,52 @@ function hasLowecapse(s){
   return s.toUpperCase() === s;
 }
 
+
+
+
+function handling(s) {
+    var time   = 0;
+    var index  = 0;
+    var check  = "hackerank";
+    var arr    = s.split('');
+    for(var i = 0; i < arr.length; i++){
+        if(i >= index && check.split('')[time] === arr[i]){
+            time += 1;
+            index = i;
+        }
+    }
+
+    console.log(time);
+    if(time >= check.length){
+        if(s.length - 1 === check.length){
+            console.log("NO");
+        }else{
+            console.log("YES")
+        }
+        
+        if(time / check.length > 1){
+            console.log("NO");
+        }
+    }else{
+        console.log("NO");
+    }
+}
+
+
+function main() {
+    var q = "hhhackkerbanker"
+    handling(q);
+}
+
 app.listen(process.env.PORT || 3000, () => {
   console.log(`App listening on port ${PORT}!`)
   console.log(hasLowecapse('h'))
+  
+  main();
   // productDM.createTable(fn => console.log(fn));
 });
+
+
+
+
 
