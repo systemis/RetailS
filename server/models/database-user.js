@@ -3,7 +3,7 @@ const tableName  = "UserData";
 
 class UserDataManager{
     constructor(){
-        connection.query("CREATE TABLE IF NOT EXISTS UserData (`name` TEXT NOT NULL , `email` VARCHAR(200) NOT NULL , `password` TEXT NOT NULL , `andress` TEXT NOT NULL , `phonenumber` TEXT NOT NULL , PRIMARY KEY (`email`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci", (err, result) => {
+        connection.query("CREATE TABLE IF NOT EXISTS UserData (`name` TEXT NOT NULL , `email` VARCHAR(200) NOT NULL , `password` TEXT NOT NULL , `andress` TEXT NULL , `phonenumber` TEXT NULL , PRIMARY KEY (`email`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci", (err, result) => {
             if(err) return console.log(err);
 
             console.log(result);

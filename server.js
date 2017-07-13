@@ -40,8 +40,8 @@ require('./server/app/shop.js')(app);
 require('./server/app/feedback.js')(app);
 
 app.listen(process.env.PORT || 3000, () => {
-    productDM.dropTable(fn => console.log(fn))
-    userDM   .dropTable(fn => console.log(fn));
+    // productDM.dropTable(fn => console.log(fn))
+    // userDM   .dropTable(fn => console.log(fn));
 });
 
 

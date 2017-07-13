@@ -3,7 +3,7 @@ const tableName  = "ProductData";
 
 class ProductDataManager{
     constructor(){
-        connection.query("CREATE TABLE IF NOT EXISTS `"+tableName+"` ( `id` INT NOT NULL AUTO_INCREMENT, `name` VARCHAR(200) NOT NULL , `image` TEXT NOT NULL , `category` TEXT NOT NULL , `description` TEXT NOT NULL , `price` TEXT NOT NULL , `weight` TEXT NULL , `height` TEXT NULL , `material` TEXT NULL, `reviews` TEXT NOT NULL , `status` TEXT(200) NULL, `sell` INT NULL, `date` TEXT NOT NULL, `andress` TEXT NULL, PRIMARY KEY (`id`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci", (err, result) => {
+        connection.query("CREATE TABLE IF NOT EXISTS `"+tableName+"` ( `id` INT NOT NULL AUTO_INCREMENT, `name` VARCHAR(200) NOT NULL , `image` TEXT NOT NULL , `category` TEXT NOT NULL , `description` TEXT NOT NULL , `price` TEXT NOT NULL , `weight` TEXT NULL , `height` TEXT NULL , `material` TEXT NULL, `reviews` TEXT NOT NULL , `status` TEXT(200) NULL, `sell` INT NULL, `date` TEXT NOT NULL, PRIMARY KEY (`id`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci", (err, result) => {
             if(err) {
                 console.log(err);
             }

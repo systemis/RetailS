@@ -9,14 +9,14 @@ module.exports = router => {
 
     const multerCustom = {
         destination: function(req, file, cb) {
-            cb(null, path.resolve(__dirname, "../public/upload/productimage"));
+            cb(null, path.resolve(__dirname, "../public/upload/"));
         },
         filename: function(req, file, cb){
             var normalFileName = file.originalname.replace(" ", "") ;
             var uploadFileName = normalFileName + "_" + normalFileName.substr(normalFileName.indexOf('.'));
 
-            filename  = "/public/upload/productimage/"   + uploadFileName;
-            _filename = "./server/public/upload/productimage/" + uploadFileName;
+            filename  = "/public/upload/"   + uploadFileName;
+            _filename = "./server/public/upload/" + uploadFileName;
 
             return cb(false, uploadFileName);
         }
