@@ -7,8 +7,21 @@
     padding-bottom: 2px;
     & .navbar-menu-app{
         @mixin together-char-icon(){
-            & i.fa{
+            & .fa{
                 font-size: 25px;
+            }
+
+            & .show-quantily-of-cart{
+                position: relative;
+                top: -10px;
+                font-size: 15px;
+                margin-left: 3px;
+                background: #222;
+                border-radius: 2px;
+                color: white;
+                padding: 2px 3px;
+                font-weight: bold;
+                text-transform: uppercase;
             }
         }
         background: white;

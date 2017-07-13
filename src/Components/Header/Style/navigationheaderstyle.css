@@ -18,8 +18,19 @@
         background: none;
         border: none;
         color: #4d4d4d; }
-        .navigation-header .navbar-menu-app .container-fluid .navbar-header a i.fa {
+        .navigation-header .navbar-menu-app .container-fluid .navbar-header a .fa {
           font-size: 25px; }
+        .navigation-header .navbar-menu-app .container-fluid .navbar-header a .show-quantily-of-cart {
+          position: relative;
+          top: -10px;
+          font-size: 15px;
+          margin-left: 3px;
+          background: #222;
+          border-radius: 2px;
+          color: white;
+          padding: 2px 3px;
+          font-weight: bold;
+          text-transform: uppercase; }
         .navigation-header .navbar-menu-app .container-fluid .navbar-header a.navbar-brand {
           padding: 7px 5px;
           margin-top: 5px; }
@@ -50,8 +61,19 @@
             background: #e7e7e7; }
       .navigation-header .navbar-menu-app .container-fluid #myNavbar .navbar-nav.navbar-right li {
         padding: 0; }
-        .navigation-header .navbar-menu-app .container-fluid #myNavbar .navbar-nav.navbar-right li a i.fa {
+        .navigation-header .navbar-menu-app .container-fluid #myNavbar .navbar-nav.navbar-right li a .fa {
           font-size: 25px; }
+        .navigation-header .navbar-menu-app .container-fluid #myNavbar .navbar-nav.navbar-right li a .show-quantily-of-cart {
+          position: relative;
+          top: -10px;
+          font-size: 15px;
+          margin-left: 3px;
+          background: #222;
+          border-radius: 2px;
+          color: white;
+          padding: 2px 3px;
+          font-weight: bold;
+          text-transform: uppercase; }
         .navigation-header .navbar-menu-app .container-fluid #myNavbar .navbar-nav.navbar-right li a:hover {
           background: transparent;
           text-decoration: none; }

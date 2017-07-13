@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {connect}            from 'react-redux';
 import CollapseShop         from './collapse-shop.js'
-import cartMG               from '../../js/cartmanager.js'
 
 var Logo1 = require('./Accest/logo1.png');
 
@@ -9,8 +8,16 @@ require('./Style/navigationheaderstyle.css');
 
 class NavigationHeader extends Component {
     render() {
-        console.log(cartMG.getProductList());
-        console.log(this.props.apiValue);
+        const cartData = this.props.cartData;
+        const showQuantilyCart = () => {
+            if(!cartData) return;
+            if(cartData.length <= 0) return;
+            
+            return (
+                <span className="show-quantily-of-cart">
+                    {cartData.length.toString()}
+                </span>
+            )}
 
         return (
             <div className="navigation-header">
@@ -42,7 +49,9 @@ class NavigationHeader extends Component {
                             <ul className="nav navbar-nav navbar-right">
                                 <li>
                                     <a href="/my-account/cart">
-                                        <i className="fa fa-shopping-cart" aria-hidden="true"></i>
+                                        <span className="fa fa-shopping-cart" aria-hidden="true">
+                                            {showQuantilyCart()}
+                                        </span>
                                     </a>
                                 </li>
                             </ul>
@@ -54,4 +63,8 @@ class NavigationHeader extends Component {
     }
 }
 
-export default connect(state => {apiValue: state.apiValue})(NavigationHeader);
+export default connect(state => {
+    return{
+        cartData: state.cartData
+    }
+})(NavigationHeader);
