@@ -64,4 +64,4 @@ class CartManager {
     }
 }
 
-module.exports = new CartManager();
+export default new CartManager();

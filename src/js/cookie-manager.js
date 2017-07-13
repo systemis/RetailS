@@ -34,7 +34,7 @@ class CookieManager{
     }
 
     checkCookie(){
-        if(this.getCookie() === ''){
+        if(!this.getCookie()){
             return false;
         }
 

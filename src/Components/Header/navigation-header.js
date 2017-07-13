@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import CollapseShop from './collapse-shop.js'
+import {connect}            from 'react-redux';
+import CollapseShop         from './collapse-shop.js'
+import cartMG               from '../../js/cartmanager.js'
 
 var Logo1 = require('./Accest/logo1.png');
 
@@ -7,6 +9,9 @@ require('./Style/navigationheaderstyle.css');
 
 class NavigationHeader extends Component {
     render() {
+        console.log(cartMG.getProductList());
+        console.log(this.props.apiValue);
+
         return (
             <div className="navigation-header">
                 <nav className="navbar navbar-default navbar-menu-app container">
@@ -49,4 +54,4 @@ class NavigationHeader extends Component {
     }
 }
 
-export default NavigationHeader;
+export default connect(state => {apiValue: state.apiValue})(NavigationHeader);
