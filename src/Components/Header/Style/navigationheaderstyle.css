@@ -81,8 +81,15 @@
               text-align: center;
               width: 130px;
               text-transform: none; }
-          .navigation-header .navbar-menu-app .container-fluid #myNavbar .navbar-nav.navbar-right li #dh-cart-group .dropdown-menu .cart-item .show-photo img {
-            width: 100%; }
+          .navigation-header .navbar-menu-app .container-fluid #myNavbar .navbar-nav.navbar-right li #dh-cart-group .dropdown-menu .cart-item {
+            padding-bottom: 10px; }
+            .navigation-header .navbar-menu-app .container-fluid #myNavbar .navbar-nav.navbar-right li #dh-cart-group .dropdown-menu .cart-item .show-photo img {
+              width: 100%; }
+            .navigation-header .navbar-menu-app .container-fluid #myNavbar .navbar-nav.navbar-right li #dh-cart-group .dropdown-menu .cart-item .show-name.show-quantily {
+              padding: 0; }
+              .navigation-header .navbar-menu-app .container-fluid #myNavbar .navbar-nav.navbar-right li #dh-cart-group .dropdown-menu .cart-item .show-name.show-quantily p {
+                padding: 0;
+                margin: 0; }
   .navigation-header .fa {
     font-size: 25px; }
 

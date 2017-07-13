@@ -124,8 +124,16 @@
                                     }
 
                                     & .cart-item{
+                                        padding-bottom: 10px;
                                         & .show-photo img{
                                             width: 100%;
+                                        }
+                                        & .show-name.show-quantily{
+                                            padding: 0;
+                                            & p{
+                                                padding: 0;
+                                                margin: 0;
+                                            }
                                         }
                                     }
                                 }
