@@ -7,22 +7,7 @@
     padding-bottom: 2px;
     & .navbar-menu-app{
         @mixin together-char-icon(){
-            & .fa{
-                font-size: 25px;
-            }
-
-            & .show-quantily-of-cart{
-                position: relative;
-                top: -10px;
-                font-size: 15px;
-                margin-left: 3px;
-                background: #222;
-                border-radius: 2px;
-                color: white;
-                padding: 2px 3px;
-                font-weight: bold;
-                text-transform: uppercase;
-            }
+            
         }
         background: white;
         border: none;
@@ -101,10 +86,58 @@
                                     display: none;
                                 }
                             }
+
+                            & #dh-cart-group{
+                                $tim-color: #7b599b;
+                                & .fa.fa-shopping-cart{
+                                    line-height: 60px;
+                                }
+
+                                & .show-quantily-of-cart{
+                                    position: relative;
+                                    top: -10px;
+                                    font-size: 15px;
+                                    margin-left: 3px;
+                                    background:$tim-color;
+                                    border-radius: 50%;
+                                    color: white;
+                                    padding: 2px 3px;
+                                    font-weight: bold;
+                                    text-transform: uppercase;
+                                }
+
+                                & .dropdown-menu{
+                                    top: 75%;
+                                    padding: 5px;
+                                    width: 348px;
+                                    & .dh-group{
+                                        padding: 10px 5px 5px; 
+                                        & .btn-view-cart{
+                                            padding: 6px 0;
+                                            float: right;
+                                            color: #fff;
+                                            background: $tim-color;
+                                            text-align: center;
+                                            width: 130px;
+                                            text-transform: none;
+                                        }
+                                    }
+
+                                    & .cart-item{
+                                        & .show-photo img{
+                                            width: 100%;
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             }
         }    
+    }
+
+    & .fa{
+        font-size: 25px;
     }
 }

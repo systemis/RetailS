@@ -18,19 +18,6 @@
         background: none;
         border: none;
         color: #4d4d4d; }
-        .navigation-header .navbar-menu-app .container-fluid .navbar-header a .fa {
-          font-size: 25px; }
-        .navigation-header .navbar-menu-app .container-fluid .navbar-header a .show-quantily-of-cart {
-          position: relative;
-          top: -10px;
-          font-size: 15px;
-          margin-left: 3px;
-          background: #222;
-          border-radius: 2px;
-          color: white;
-          padding: 2px 3px;
-          font-weight: bold;
-          text-transform: uppercase; }
         .navigation-header .navbar-menu-app .container-fluid .navbar-header a.navbar-brand {
           padding: 7px 5px;
           margin-top: 5px; }
@@ -61,24 +48,42 @@
             background: #e7e7e7; }
       .navigation-header .navbar-menu-app .container-fluid #myNavbar .navbar-nav.navbar-right li {
         padding: 0; }
-        .navigation-header .navbar-menu-app .container-fluid #myNavbar .navbar-nav.navbar-right li a .fa {
-          font-size: 25px; }
-        .navigation-header .navbar-menu-app .container-fluid #myNavbar .navbar-nav.navbar-right li a .show-quantily-of-cart {
-          position: relative;
-          top: -10px;
-          font-size: 15px;
-          margin-left: 3px;
-          background: #222;
-          border-radius: 2px;
-          color: white;
-          padding: 2px 3px;
-          font-weight: bold;
-          text-transform: uppercase; }
         .navigation-header .navbar-menu-app .container-fluid #myNavbar .navbar-nav.navbar-right li a:hover {
           background: transparent;
           text-decoration: none; }
         @media screen and (max-width: 768px) {
           .navigation-header .navbar-menu-app .container-fluid #myNavbar .navbar-nav.navbar-right li:first-child {
             display: none; } }
+        .navigation-header .navbar-menu-app .container-fluid #myNavbar .navbar-nav.navbar-right li #dh-cart-group .fa.fa-shopping-cart {
+          line-height: 60px; }
+        .navigation-header .navbar-menu-app .container-fluid #myNavbar .navbar-nav.navbar-right li #dh-cart-group .show-quantily-of-cart {
+          position: relative;
+          top: -10px;
+          font-size: 15px;
+          margin-left: 3px;
+          background: #7b599b;
+          border-radius: 50%;
+          color: white;
+          padding: 2px 3px;
+          font-weight: bold;
+          text-transform: uppercase; }
+        .navigation-header .navbar-menu-app .container-fluid #myNavbar .navbar-nav.navbar-right li #dh-cart-group .dropdown-menu {
+          top: 75%;
+          padding: 5px;
+          width: 348px; }
+          .navigation-header .navbar-menu-app .container-fluid #myNavbar .navbar-nav.navbar-right li #dh-cart-group .dropdown-menu .dh-group {
+            padding: 10px 5px 5px; }
+            .navigation-header .navbar-menu-app .container-fluid #myNavbar .navbar-nav.navbar-right li #dh-cart-group .dropdown-menu .dh-group .btn-view-cart {
+              padding: 6px 0;
+              float: right;
+              color: #fff;
+              background: #7b599b;
+              text-align: center;
+              width: 130px;
+              text-transform: none; }
+          .navigation-header .navbar-menu-app .container-fluid #myNavbar .navbar-nav.navbar-right li #dh-cart-group .dropdown-menu .cart-item .show-photo img {
+            width: 100%; }
+  .navigation-header .fa {
+    font-size: 25px; }
 
 /*# sourceMappingURL=navigationheaderstyle.css.map */

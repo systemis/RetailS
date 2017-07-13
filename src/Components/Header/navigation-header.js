@@ -7,9 +7,39 @@ var Logo1 = require('./Accest/logo1.png');
 require('./Style/navigationheaderstyle.css');
 
 class NavigationHeader extends Component {
+    itemList_cart(cartData){
+        const domsRender = [];
+        if(!cartData) return [];
+        if(cartData.length < 0) return [];
+
+        for(var i = 0; i < cartData.length; i++){
+            const item = (
+                <li className="cart-item">
+                    <div className="row">
+                        <div className="col-md-3 col-sm-3 show-photo">
+                            <img src={cartData[i].image} alt="Image product" />
+                        </div>
+                        <div className="col-md-6 col-sm-6 show-name show-quantily">
+                            <p className="show-name">{cartData[i].name}</p>
+                            <p className="show-quantily"> {cartData[i].amount} </p>
+                        </div>
+                        <div className="col-md-3 col-sm-3 show-price">
+                            <p> {cartData[i].price} </p>
+                        </div>
+                    </div>
+                </li>
+            )
+
+            domsRender.push(item);
+        }
+
+        return domsRender;
+    }
+
     render() {
-        console.log(this.props.cartData);
-        const cartData = this.props.cartData;
+        const cartData  = this.props.cartData;
+        const cartItems = this.itemList_cart(cartData);
+        console.log(cartItems);
         const showQuantilyCart = () => {
             if(!cartData) return;
             if(cartData.length <= 0) return;
@@ -49,11 +79,29 @@ class NavigationHeader extends Component {
                             </ul>
                             <ul className="nav navbar-nav navbar-right">
                                 <li>
-                                    <a href="/my-account/cart">
-                                        <span className="fa fa-shopping-cart" aria-hidden="true">
-                                            {showQuantilyCart()}
+                                    <div 
+                                        className="dropdown" 
+                                        id="dh-cart-group">
+                                        <span 
+                                            className="dropdown-toggle" 
+                                            data-toggle="dropdown">
+                                            <span 
+                                                className="fa fa-shopping-cart" 
+                                                aria-hidden="true">
+                                                    {showQuantilyCart()}
+                                            </span>
                                         </span>
-                                    </a>
+                                        <ul className="dropdown-menu" role="menu">
+                                            {cartItems.map(item => item)}
+                                            <li className="dh-group">
+                                                <a 
+                                                    href="/my-account/cart"                 
+                                                    className="btn-view-cart">
+                                                    View Cart 
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </li>
                             </ul>
                         </div>
@@ -63,6 +111,11 @@ class NavigationHeader extends Component {
         );
     }
 }
+
+/**
+ * <a href="/my-account/cart">
+                                    </a>
+ */
 
 export default connect(state => {
     return{
