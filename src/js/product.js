@@ -47,7 +47,7 @@ class Product {
 
     getBessellProducts(fn){
         $.ajax({
-            url: 'http://localhost:3000/get-besell-products',
+            url: '/get-besell-products',
             type: 'GET',
             success: data => {
                 console.log(data);
