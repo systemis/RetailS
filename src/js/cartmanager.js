@@ -17,28 +17,29 @@ class CartManager {
         return this.data;
     }
 
-    newProduct(bundle){
+    newProduct(bundle, fn){
         if(this.data.length > 0){
             // Check product is already exists in data
             var ess = false;
             for(var i = 0; i < this.data.length; i++){
                 if(this.data[i].id === bundle.id){
                     this.data[i] = bundle;
-
-                    ess = true;
                     i == this.data.length;
+                    ess = true;
+                }
 
-                    return this.setData();
+                if(i === this.data.length || i === this.data.length - 1){
+                    if(!ess){ this.data.push(bundle); }
+
+                    this.setData();
+                    return fn(this.data);
                 }
             }
 
-            if(!ess){
-                this.data.push(bundle);
-                return this.setData();
-            }
         }else{
             this.data.push(bundle);
-            return this.setData();
+            this.setData();
+            return fn(this.data);
         }
     }
 

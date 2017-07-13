@@ -8,6 +8,7 @@ require('./Style/navigationheaderstyle.css');
 
 class NavigationHeader extends Component {
     render() {
+        console.log(this.props.cartData);
         const cartData = this.props.cartData;
         const showQuantilyCart = () => {
             if(!cartData) return;

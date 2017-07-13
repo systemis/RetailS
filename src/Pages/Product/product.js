@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import $                    from 'jquery';
+import {connect}            from 'react-redux';
 import ProductSimpleInfo    from './product-simple-info.js';
 import ProductDetailsInfo   from './product-details-info.js';
-import $                    from 'jquery';
 import userMG               from '../../js/user.js';
 import productMG            from '../../js/product.js';
 import CartMG               from"../../js/cartmanager.js";
@@ -73,9 +74,12 @@ class ProductPage extends Component {
     }
 
     addProduct_Cart(){
-        console.log(this.state.productInfo);
-        
-        CartMG.newProduct(this.state.productInfo);
+        const sefl = this;
+        CartMG.newProduct(this.state.productInfo, data => {
+            console.log(data);
+            
+            sefl.props.dispatch({type: `CHANGE_CART_DATA`, value: [...data]});
+        });
     }
 
     updateData(data){
@@ -144,4 +148,8 @@ class ProductPage extends Component {
     }
 }
 
-export default ProductPage;
+export default connect(state => {
+    return{
+        cartData: state.cartData
+    }
+})(ProductPage);
