@@ -4,7 +4,6 @@ module.exports = router => {
     const multer          = require('multer');
     const imgurUploader   = require('imgur-uploader');
     const productDM       = require('../models/database-product.js');
-    var filename          = '';
     var _filename         = '';
 
     const multerCustom = {
@@ -15,7 +14,6 @@ module.exports = router => {
             var normalFileName = file.originalname.replace(" ", "") ;
             var uploadFileName = normalFileName + "_" + normalFileName.substr(normalFileName.indexOf('.'));
 
-            filename  = "/public/upload/"   + uploadFileName;
             _filename = "./server/public/upload/" + uploadFileName;
 
             return cb(false, uploadFileName);
@@ -138,7 +136,7 @@ module.exports = router => {
                             productBundle.name    = removeWordFromLastPosition(".", productBundle.name);
                             productBundle.reviews = JSON.stringify([]);
                             
-                            if(filename) { productBundle.image = data.link; }
+                            productBundle.image = data.link;
 
                             // Bỏ ký tử '.' khỏi chuỗi nếu ở ký tự ở cuối chuỗi;                    
                             productDM.newProduct(req.body, result => {
