@@ -26,7 +26,7 @@ module.exports = router => {
     
     router.get("/product-by-name/:name",     (req, res) => res.sendfile(path.resolve(__dirname, "../../", "build/index.html")));
     router.get("/all-product", (req, res) => {
-        productDM.getProducsList(result =>{
+        productDM.getProducsList((err, result) =>{
             return res.json(result)
         })
     })
@@ -40,66 +40,59 @@ module.exports = router => {
 
 
     router.get("/get-besell-products", (req, res) => {
-        productDM.getProducsList(result => {
-            if(result !== false){
-                for(var i = 0; i < result.length; i++) {
-                    for(var j = 0; j < result.length; j ++) {
-                        if(result[i].sell > result[j].sell) {
-                            var _single_result = result[i];
-                            result[i] = result[j];
-                            result[j] = _single_result;
-                        }
+        productDM.getProducsList((err, result) => {
+            if(err) return res.send(err);
+
+            for(var i = 0; i < result.length; i++) {
+                for(var j = 0; j < result.length; j ++) {
+                    if(result[i].sell > result[j].sell) {
+                        var _single_result = result[i];
+                        result[i] = result[j];
+                        result[j] = _single_result;
                     }
                 }
-
-                var _result = [];
-                for(var i = 0; i < result.length; i ++) {
-                    if(i < 4 && result[i]) _result.push(result[i]);
-                }
-
-                res.json(_result);
-            }else{
-                res.send('Khong co du lieu');
             }
+
+            var _result = [];
+            for(var i = 0; i < result.length; i ++) {
+                if(i < 4 && result[i]) _result.push(result[i]);
+            }
+
+            res.json(_result);
         })
     })
 
     router.get("/get-related-products", (req, res) => {
-        productDM.getProducsList(result => {
-                if(result !== false){
+        productDM.getProducsList((err, result) => {
+            if(err) return res.send(err);
 
-                for(var i = 0; i < result.length; i++){
-                    for(var j = 0; j < result.length; j++){
-                        if(Date.parse(result[i].date) > Date.parse(result[j].date)){
-                            var _single_result = result[i];
-                            result[i] = result[j];
-                            result[j] = _single_result;
-                        }
+            for(var i = 0; i < result.length; i++){
+                for(var j = 0; j < result.length; j++){
+                    if(Date.parse(result[i].date) > Date.parse(result[j].date)){
+                        var _single_result = result[i];
+                        result[i] = result[j];
+                        result[j] = _single_result;
                     }
                 }
-
-                res.send(result);
-            }else{
-                res.send("Khong co du lieu");
             }
+
+            res.send(result);
         })
     })
 
     router.get('/get-sale-products', (req, res) => {
-        productDM.getProducsList(result => {
-            if(result !== false){
-                var _result = [];
-                for(var i = 0; i < result.length; i++){
-                    if(result[i].status === 'new'){
-                        _result.push(result[i]);
-                        console.log("Get sale product: " + i);
-                    }
+        productDM.getProducsList((err, result) => {
+            if(err) return res.send(err);
+            
+            var _result = [];
+            for(var i = 0; i < result.length; i++){
+                if(result[i].status === 'new'){
+                    _result.push(result[i]);
+                    console.log("Get sale product: " + i);
                 }
-
-                res.json(_result);
-            }else{
-                res.send("Khong co du lieu");
             }
+
+            res.json(_result);
         })
     }) 
 
@@ -116,48 +109,38 @@ module.exports = router => {
 
 
     router.post('/add-new-product', (req, res) => {
-        if(req.isAuthenticated()) {
-            if(req.user.email === 'systemofpeter@gmail.com'){
-                upload(req, res, err => {
-                    if(err){
-                        return console.log("Error when upload image " + err);
-                    }
+        if(!req.isAuthenticated()) return res.send(`Not login`);
+        if(req.user.email !== 'systemofpeter@gmail.com') return res.send(`Not admin`);
+        
+        upload(req, res, err => {
+            if(err) return res.send("error");
 
-                    // After 2sec 
-                    setTimeout(() => {
-                        imgurUploader(fs.readFileSync(_filename), {title: 'product-image'}).then(data => {
-                            fs.unlink(_filename);
-                            console.log(`image link: ${data.link}`);
-                            // productBundle.id    = Date.now();
-                            var productBundle     = req.body;
-                            productBundle.date    = new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString();
-                            productBundle.sell    = 0;
-                            productBundle.name    = removeWordFromLastPosition(" ", productBundle.name);
-                            productBundle.name    = removeWordFromLastPosition(".", productBundle.name);
-                            productBundle.reviews = JSON.stringify([]);
-                            
-                            productBundle.image = data.link;
+            setTimeout(() => {
+                imgurUploader(fs.readFileSync(_filename), {title: 'product-image'}).then(data => {
+                    fs.unlink(_filename);
+                    console.log(`image link: ${data.link}`);
+                    var productBundle     = req.body;
+                    productBundle.date    = new Date().toLocaleString();
+                    productBundle.name    = removeWordFromLastPosition(" ", productBundle.name);
+                    productBundle.name    = removeWordFromLastPosition(".", productBundle.name);
+                    productBundle.reviews = JSON.stringify([]);
+                    productBundle.sell    = 0;
+                    
+                    productBundle.image = data.link;
 
-                            // Bỏ ký tử '.' khỏi chuỗi nếu ở ký tự ở cuối chuỗi;                    
-                            productDM.newProduct(req.body, result => {
-                                if(result === "err")     return res.send("Have error when handling value in server"); 
-                                if(result === "exists")  return res.send("Value is already exists in server ");;
-                                if(result === 'success') {
-                                    console.log(result)
-                                    console.log("Admin have just added new product: ")
-                                    console.log(req.body);
-                                    return res.redirect('/');
-                                }
-                            });
-                        })
-                    }, 2000);
+                    // Bỏ ký tử '.' khỏi chuỗi nếu ở ký tự ở cuối chuỗi;                    
+                    productDM.newProduct(req.body, result => {
+                        if(result === "err")     return res.send("Have error when handling value in server"); 
+                        if(result === "exists")  return res.send("Value is already exists in server ");;
+                        
+                        console.log(result)
+                        console.log("Admin have just added new product: ")
+                        console.log(req.body);
+                        return res.redirect('/');
+                    });
                 })
-            }else{
-                return res.send("Not admin");
-            }
-        }else{
-            return res.send("Not login");        
-        }
+            }, 2000);
+        })
     })
 
     router.post("/plus-product-sell/:name", (req, res) => {

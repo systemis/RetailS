@@ -93,16 +93,10 @@ class ProductDataManager{
 
     getProducsList(fn){
         connection.query("Select * from "+tableName+"", (err, result) => {
-            if(err) {
-                console.log(err);
-                return fn(false)
-            }else{
-                if(result){
-                    return fn(result);
-                }else{
-                    return fn(false);
-                }
-            }
+            if(err) { console.log(err); return fn(err, null) }
+            if(result.length < 0) return fn("Not data", null);
+            
+            return fn(null, result);
         })
     }
 
