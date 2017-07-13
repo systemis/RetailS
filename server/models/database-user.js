@@ -1,8 +1,8 @@
 const connection = require('../config/mainDB.js');
 const tableName  = "UserData";
 
-function UserDataManager(){
-    this.createTable = (fn) => {
+class UserDataManager{
+    constructor(){
         connection.query("CREATE TABLE IF NOT EXISTS UserData (`name` TEXT NOT NULL , `email` VARCHAR(200) NOT NULL , `password` TEXT NOT NULL , `andress` TEXT NOT NULL , `phonenumber` TEXT NOT NULL , PRIMARY KEY (`email`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci", (err, result) => {
             if(err) return console.log(err);
 
@@ -10,7 +10,7 @@ function UserDataManager(){
         })
     }
 
-    this.checkUser = (email, password, fn) => {
+    checkUser(email, password, fn){
         connection.query("SELECT * FROM UserData WHERE email = ?", [email], (err, result, field) => {
             if(err){
                 console.log(err);
@@ -27,7 +27,7 @@ function UserDataManager(){
         })
     }
 
-    this.getUserInformation = (email, fn) => {
+    getUserInformation(email, fn){
         connection.query("SELECT * FROM "+tableName+" WHERE email = ?", [email], (err, result) => {
             if(err){
                 console.log(err);
@@ -38,7 +38,7 @@ function UserDataManager(){
         })
     }
 
-    this.newUser = (name, email, password, fn) => {
+    newUser(name, email, password, fn){
         connection.query("INSERT INTO "+tableName+" SET ?", {name: name, email: email, password: password} , (err, result, field) => {
             if(err) {
                 console.log(err);
@@ -51,7 +51,7 @@ function UserDataManager(){
         });
     }
 
-    this.updateUserInfo = (email, name, andress, phonenumber, fn) => {
+    updateUserInfo(email, name, andress, phonenumber, fn){
         connection.query("UPDATE "+tableName+" SET name = ?, andress = ?, phonenumber = ? WHERE email = ?", [name, andress, phonenumber, email], (err) => {
             if(err) {
                 console.log(err);
@@ -62,7 +62,7 @@ function UserDataManager(){
         })
     }
 
-    this.changePasswordUser = (email, newPassword, fn) => {
+    changePasswordUser(email, newPassword, fn){
         connection.query("UPDATE "+tableName+" SET password = ? WHERE email = ?", [newPassword, email
         ], (err, result) => {
             if(err) {
@@ -74,9 +74,12 @@ function UserDataManager(){
         })
     }
     
-    this.dropTable = fn => {
+    dropTable(fn){
         connection.query("DROP TABLE "+tableName+"", err => {
-            if(err) console.log(err);
+            if(err) {
+                console.log(err);
+                return fn("error");
+            }
 
             fn("Drop table succsess!");
         })

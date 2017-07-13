@@ -1,20 +1,18 @@
 const connection = require('../config/mainDB.js');
 const tableName  = "ProductData";
 
-function ProductDataManager() {
-    this.createTable = (fn) => {
-        connection.query("CREATE TABLE IF NOT EXISTS `"+tableName+"` ( `id` INT NOT NULL AUTO_INCREMENT, `name` VARCHAR(200) NOT NULL , `image` TEXT NOT NULL , `category` TEXT NOT NULL , `description` TEXT NOT NULL , `price` TEXT NOT NULL , `weight` TEXT NULL , `height` TEXT NULL , `material` TEXT NULL, `reviews` TEXT NOT NULL , `status` TEXT(200) NULL, `sell` INT NULL, `date` TEXT NOT NULL, PRIMARY KEY (`id`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci", (err, result) => {
+class ProductDataManager{
+    constructor(){
+        connection.query("CREATE TABLE IF NOT EXISTS `"+tableName+"` ( `id` INT NOT NULL AUTO_INCREMENT, `name` VARCHAR(200) NOT NULL , `image` TEXT NOT NULL , `category` TEXT NOT NULL , `description` TEXT NOT NULL , `price` TEXT NOT NULL , `weight` TEXT NULL , `height` TEXT NULL , `material` TEXT NULL, `reviews` TEXT NOT NULL , `status` TEXT(200) NULL, `sell` INT NULL, `date` TEXT NOT NULL, `andress` TEXT NULL, PRIMARY KEY (`id`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci", (err, result) => {
             if(err) {
                 console.log(err);
-                return fn('err');
             }
 
             console.log(result);
-            return fn("Success");
         })
     }
 
-    this.newProduct = (bundle, fn) => {
+    newProduct(bundle, fn){
         if(this.checkIsExistsByName(bundle.name, result => {
             if(result){
                 connection.query("INSERT INTO "+tableName+" SET ?", bundle, (err, result, field) => {
@@ -32,7 +30,7 @@ function ProductDataManager() {
         }));
     }
 
-    this.getProductByName = (name, fn) => {
+    getProductByName(name, fn){
         connection.query("SELECT * FROM "+tableName+" WHERE name = ?", [name], (err, result) => {
             if(err) { return fn("Error"); }
             if(result.length <= 0) { return fn("Not products")};
@@ -42,7 +40,7 @@ function ProductDataManager() {
         })
     }
 
-    this.getProductsByCategory = (category, fn) => {
+    getProductsByCategory(category, fn){
         connection.query("SELECT * FROM "+tableName+" WHERE category = ?", [category], (err, result) => {
             if(err) {
                 return fn("Error");
@@ -53,7 +51,7 @@ function ProductDataManager() {
         })
     }
 
-    this.updateProduct = (bundle, fn) => {
+    updateProduct(bundle, fn){
         connection.query("UPDATE "+tableName+" SET name = ?, image = ?, category = ?, description = ?, price = ?, weight = ?, height = ?, reviews = ?, material = ?, status = ? WHERE id = ?", [bundle.name, bundle.image, bundle.category, bundle.description, bundle.price, bundle.weight, bundle.height, JSON.stringify(bundle.reviews), bundle.material, bundle.status, bundle.id], (err, result) => {
             if(err) {
                 return fn("Error");
@@ -64,7 +62,7 @@ function ProductDataManager() {
         })
     }
 
-    this.plusSell = (name, fn) => {
+    plusSell(name, fn){
         connection.query("SELECT * FROM "+tableName+" WHERE name = ?", [name], (_err, _result) => {
             if(_err) throw _err;
 
@@ -77,7 +75,7 @@ function ProductDataManager() {
         })
     }
 
-    this.deleteProductByName = (name, fn) => {
+    deleteProductByName(name, fn){
         connection.query("DELETE FROM "+tableName+" WHERE name = ?", [name], (err, result) => {
             if(err) return fn("Error");
 
@@ -85,7 +83,7 @@ function ProductDataManager() {
         })
     }
 
-    this.dropTable = fn => {
+    dropTable(fn){
         connection.query("DROP TABLE "+tableName+"", err => {
             if(err) console.log(err);
 
@@ -93,7 +91,7 @@ function ProductDataManager() {
         })
     }
 
-    this.getProducsList = fn => {
+    getProducsList(fn){
         connection.query("Select * from "+tableName+"", (err, result) => {
             if(err) {
                 console.log(err);
@@ -108,7 +106,7 @@ function ProductDataManager() {
         })
     }
 
-    this.checkIsExistsByName = (name, fn) => {
+    checkIsExistsByName(name, fn){
         connection.query("SELECT * FROM " + tableName + "", (err, result) => {
             if(err) console.log(err);
 
