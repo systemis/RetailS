@@ -46,9 +46,9 @@ class ProductPage extends Component {
             }
         }
 
+        this.updateProductReview = this.updateProductReview.bind(this);
         this.addProduct_Cart     = this.addProduct_Cart.bind(this);
         this.updateData          = this.updateData.bind(this);
-        this.updateProductReview = this.updateProductReview.bind(this);
     }
 
     getProductInfos() {
@@ -72,6 +72,7 @@ class ProductPage extends Component {
             error: err => console.log(err)
         });
     }
+
 
     addProduct_Cart(){
         const sefl = this;
